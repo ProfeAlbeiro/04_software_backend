@@ -7,7 +7,8 @@
 ||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
 ||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
-||| --  04. CÓDIGO DEL PROEYCTO                                                                                                                                        |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
 |||                                                                                                                                                                    |||
 ||| --  ANEXOS: TENER EN CUENTA                                                                                                                                        |||
 ||| --          AX_01.  Subir el Proyecto a Github                                                                                                                     |||
@@ -26,6 +27,16 @@
 ||| --      01.02.  Instalar Git                                                                                                                                       |||
 ||| --      01.03.  Crear cuenta en 'Github'                                                                                                                           |||
 ||| --      01.04.  Instalar XAMPP                                                                                                                                     |||
+||| --      01.05.  Instalar Postman                                                                                                                                   |||
+||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --  03. BASE DE DATOS                                                                                                                                              |||
+||| --      03.01.  Codificar la base de datos 'database/db.sql'                                                                                                       |||
+||| --      03.02.  Ejecutar la base de datos 'database/db.sql'                                                                                                        |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --      04.01.  Codificar el modelo de conexión 'config/DbConn.php'                                                                                                |||
+||| --      04.02.  Codificar el modelo de datos 'models/location.php'                                                                                                 |||
+||| --      04.03.  Codificar la API 'controllers/Locations.php'                                                                                                       |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
 |||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
@@ -88,6 +99,18 @@
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.05.  Instalar Postman: -------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Postman': https://www.postman.com/downloads/. Este programa nos sirve para realizar probar las peticiones HTTP.
+
+            02. Instalar Postman.
+            
+            03. Abrir Postman.
+
+
+
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
 |||------------------------------------------------------------------- 02. ESTRUCTURA DEL PROYECTO --------------------------------------------------------------------|||
@@ -116,7 +139,7 @@
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 03.01. Codificar la base de datos 'database/db.sql' -----------------------------------------------------------------------------------------------------------------|
+|-- 03.01. Codificar la base de datos 'database/db.sql': ----------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     01   CREATE DATABASE DB;
@@ -170,7 +193,7 @@
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 03.02. Ejecutar la base de datos 'database/db.sql' ------------------------------------------------------------------------------------------------------------------|
+|-- 03.02. Ejecutar la base de datos 'database/db.sql': -----------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Abrir el navegador y escribir http://localhost/phpmyadmin/
@@ -187,13 +210,13 @@
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
-|||--------------------------------------------------------------------- 03. CÓDIGO DEL PROEYCTO ----------------------------------------------------------------------|||
+|||--------------------------------------------------------------------- 04. CÓDIGO DEL PROEYCTO ----------------------------------------------------------------------|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 03.01. Codificar el modelo de conexión 'config/DbConn.php' ----------------------------------------------------------------------------------------------------------|
+|-- 04.01. Codificar el modelo de conexión 'config/DbConn.php': ---------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     01   <?php
@@ -217,193 +240,230 @@
                     19   ?>
 
 
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 03.02. Codificar el modelo de datos 'models/location.php' -----------------------------------------------------------------------------------------------------------|
+|-- 04.02. Codificar el modelo de datos 'models/location.php': ----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     01   <?php
-                    02     class Location {
-                    03       private $conn;
-                    04 
-                    05       public function __construct() {
-                    06         $this->conn = DbConn::connection();
-                    07       }
-                    08 
-                    09       public function getAllHousingLocations() {
-                    10         $stmt = $this->conn->query("SELECT * FROM locations");
-                    11         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    12       }
-                    13 
-                    14       public function getHousingLocationById($id) {
-                    15         $stmt = $this->conn->prepare("SELECT * FROM locations WHERE id = ?");
-                    16         $stmt->execute([$id]);
-                    17         return $stmt->fetch(PDO::FETCH_ASSOC);
-                    18       }
-                    19 
-                    20       public function createHousingLocation($name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
-                    21         $stmt = $this->conn->prepare("INSERT INTO locations (name, city, state, photo, availableUnits, wifi, laundry)
-                    22                                       VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    23         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry]);
-                    24       }
-                    25 
-                    26       public function updateHousingLocation($id, $name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
-                    27         $stmt = $this->conn->prepare("UPDATE locations SET name = ?, city = ?, state = ?, photo = ?, availableUnits = ?,
-                    28                 wifi = ?, laundry = ? WHERE id = ?");
-                    29         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry, $id]);
-                    30       }
-                    31 
-                    32       public function deleteHousingLocation($id) {
-                    33         $stmt = $this->conn->prepare("DELETE FROM locations WHERE id = ?");
-                    34         return $stmt->execute([$id]);
-                    35       }
-                    36     }
-                    37   ?>                    
+                    02
+                    03     class Location {
+                    04  
+                    05       private $conn;
+                    06 
+                    07       public function __construct() {
+                    08         $this->conn = DbConn::connection();
+                    09       }
+                    10 
+                    11       public function getAllHousingLocations() {
+                    12         $stmt = $this->conn->query("SELECT * FROM locations");
+                    13         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    14       }
+                    15 
+                    16       public function getHousingLocationById($id) {
+                    17         $stmt = $this->conn->prepare("SELECT * FROM locations WHERE id = ?");
+                    18         $stmt->execute([$id]);
+                    19         return $stmt->fetch(PDO::FETCH_ASSOC);
+                    20       }
+                    21 
+                    22       public function createHousingLocation($name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
+                    23         $stmt = $this->conn->prepare("INSERT INTO locations (name, city, state, photo, availableUnits, wifi, laundry)
+                    24                                       VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    25         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry]);
+                    26       }
+                    27 
+                    28       public function updateHousingLocation($id, $name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
+                    29         $stmt = $this->conn->prepare("UPDATE locations SET name = ?, city = ?, state = ?, photo = ?, availableUnits = ?,
+                    30                 wifi = ?, laundry = ? WHERE id = ?");
+                    31         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry, $id]);
+                    32       }
+                    33 
+                    34       public function deleteHousingLocation($id) {
+                    35         $stmt = $this->conn->prepare("DELETE FROM locations WHERE id = ?");
+                    36         return $stmt->execute([$id]);
+                    37       }
+                    38     }
+                    39
+                    40   ?>
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.03. Codificar la API 'controllers/Locations.php': ----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   <?php
+                    02 
+                    03     header("Access-Control-Allow-Origin: http://localhost:4200");
+                    04     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+                    05     header("Access-Control-Allow-Headers: Content-Type, Authorization");
+                    06     header('Content-Type: application/json');
+                    07 
+                    08     require_once "../config/DbConn.php";
+                    09     require_once("../models/Location.php");
+                    10 
+                    11     $location = new Location;
+                    12 
+                    13     function sendResponse($code, $message, $data = null) {
+                    14       http_response_code($code);
+                    15       echo json_encode(['message' => $message, 'datos' => $data]);
+                    16       exit;
+                    17     }
+                    18 
+                    19     $body = json_decode(file_get_contents("php://input"), true);
+                    20 
+                    21     $method = $_SERVER['REQUEST_METHOD'];
+                    22 
+                    23     switch ($method) {
+                    24       
+                    25       case 'GET':
+                    26         if (isset($_GET['id'])) {
+                    27           try {
+                    28             $data = $location->getHousingLocationById($_GET['id']);
+                    29             if ($data) {
+                    30                 sendResponse(200, "Ubicación de vivienda obtenida", $data);
+                    31             } else {
+                    32                 sendResponse(404, "Ubicación de vivienda no encontrada");
+                    33             }
+                    34           } catch (Exception $e) {
+                    35             sendResponse(500, "Error al obtener la vivienda: " . $e->getMessage());
+                    36           }
+                    37         } else {
+                    38           try {
+                    39             $data = $location->getAllHousingLocations();
+                    40             sendResponse(200, "Viviendas y ubicación obtenidas", $data);
+                    41           } catch (Exception $e) {
+                    42             sendResponse(500, "Error al obtener viviendas y ubicación: " . $e->getMessage());
+                    43           }
+                    44         }
+                    45         break;
+                    46 
+                    47       case 'POST':        
+                    48         try {
+                    49           if (empty($body['name']) ||
+                    50               empty($body['city']) ||
+                    51               empty($body['state']) ||
+                    52               empty($body['photo']) ||
+                    53               empty($body['availableUnits']) ||
+                    54               !isset($body['wifi']) ||
+                    55               !isset($body['laundry'])) {
+                    56             sendResponse(400, "Datos de entrada inválidos");
+                    57           }
+                    58           $data = $location->createHousingLocation(
+                    59             $body['name'],
+                    60             $body['city'],
+                    61             $body['state'],
+                    62             $body['photo'],
+                    63             $body['availableUnits'],
+                    64             $body['wifi'],
+                    65             $body['laundry']);
+                    66           sendResponse(201, "Vivienda  creada", $data);
+                    67         } catch (Exception $e) {
+                    68           sendResponse(500, "Error al crear la vivienda: " . $e->getMessage());
+                    69         }
+                    70         break;
+                    71 
+                    72       case 'PUT':
+                    73         try {
+                    74           if (empty($body['id']) ||
+                    75               empty($body['name']) ||
+                    76               empty($body['city']) ||
+                    77               empty($body['state']) ||
+                    78               empty($body['photo']) ||
+                    79               empty($body['availableUnits']) ||
+                    80               !isset($body['wifi']) ||
+                    81               !isset($body['laundry'])) {
+                    82             sendResponse(400, "Datos de entrada inválidos");
+                    83           }
+                    84           $data = $location->updateHousingLocation(
+                    85             $body['id'],
+                    86             $body['name'],
+                    87             $body['city'],
+                    88             $body['state'],
+                    89             $body['photo'],
+                    90             $body['availableUnits'],
+                    91             $body['wifi'],
+                    92             $body['laundry']);
+                    93           sendResponse(200, "Vivienda y ubicación actualizada", $data);
+                    94         } catch (Exception $e) {
+                    95           sendResponse(500, "Error al actualizar vivienda y ubicación: " . $e->getMessage());
+                    96         }
+                    97         break;
+                    98 
+                    99       case 'DELETE':
+                   100         try {
+                   101           if (empty($body['id'])) {
+                   102               sendResponse(400, "ID de vivienda inválido");
+                   103           }
+                   104
+                   105           $location->deleteHousingLocation($body['id']);
+                   106           sendResponse(200, "Vivienda eliminada");
+                   107         } catch (Exception $e) {
+                   108           sendResponse(500, "Error al eliminar vivienda: " . $e->getMessage());
+                   109         }
+                   110         break;
+                   111
+                   112       default:
+                   113         sendResponse(405, "Método no permitido");
+                   114         break;
+                   115     }
+                   116
+                   117   ?>                    
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||---------------------------------------------------------------- 05. PRUEBAS DE LA API CON POSTMAN -----------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 01.03. config/DbConn.php ----------------------------------------------------------------------------------------------------------------------------|
+|-- 05.01.  Crear una colección: ----------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-              01      <?php
-              02          class DbConn{
-              03              public static function connection(){
-              04                  try {
-              05                      $hostname = "localhost";
-              06                      $port = "3306";
-              07                      $database = "db";
-              08                      $username = "root";
-              09                      $password = "";
-              10                      $pdo = new PDO("mysql:host=$hostname;port=$port;dbname=$database;charset=utf8",$username,$password);
-              11                      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              12                      return $pdo;
-              13                  } catch (Exception $e) {
-              14                      print "¡Error BD!: "  $e->getMessage()  "<br/>";
-              15                      die();
-              16                  }
-              17              }
-              18          }
-              19      ?>
-
+            01. Dar click a 'New / Collection'
+            
+            02. Dar click a 'New Collection' y escribir 'LOCATIONS'
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 01.04. controllers/Locations.php --------------------------------------------------------------------------------------------------------------------|
+|-- 05.02.  Crear los métodos HTTP: ----------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-              01      <?php
-              02          header("Access-Control-Allow-Origin: http://localhost:4200");
-              03          header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-              04          header("Access-Control-Allow-Headers: Content-Type, Authorization");
-              05          header('Content-Type: application/json');
-              06
-              07          require_once "../config/DbConn.php";
-              08          require_once("../models/Location.php");
-              09
-              10          $location = new Location;
-              11
-              12          function sendResponse($code, $message, $data = null) {
-              13              http_response_code($code);
-              14              echo json_encode(['message' => $message, 'datos' => $data]);
-              15              exit;
-              16          }
-              17
-              18          $body = json_decode(file_get_contents("php://input"), true);
-              19
-              20          $method = $_SERVER['REQUEST_METHOD'];
-              21
-              22          switch ($method) {
-              23              case 'GET':
-              24                  if (isset($_GET['id'])) {
-              25                      try {
-              26                          $data = $location->getHousingLocationById($_GET['id']);
-              27                          if ($data) {
-              28                              sendResponse(200, "Ubicación de vivienda obtenida", $data);
-              29                          } else {
-              30                              sendResponse(404, "Ubicación de vivienda no encontrada");
-              31                          }
-              32                      } catch (Exception $e) {
-              33                          sendResponse(500, "Error al obtener la vivienda: " . $e->getMessage());
-              34                      }
-              35                  } else {
-              36                      try {
-              37                          $data = $location->getAllHousingLocations();
-              38                          sendResponse(200, "Viviendas y ubicación obtenidas", $data);
-              39                      } catch (Exception $e) {
-              40                          sendResponse(500, "Error al obtener viviendas y ubicación: " . $e->getMessage());
-              41                      }
-              42                  }
-              43                  break;
-              44
-              45              case 'POST':
-              46                  try {
-              47                      if (empty($body['name']) ||
-              48                          empty($body['city']) ||
-              49                          empty($body['state']) ||
-              50                          empty($body['photo']) ||
-              51                          empty($body['availableUnits']) ||
-              52                          !isset($body['wifi']) ||
-              53                          !isset($body['laundry'])) {
-              54                              sendResponse(400, "Datos de entrada inválidos");
-              55                      }
-              56                      $data = $location->createHousingLocation(
-              57                                  $body['name'],
-              58                                  $body['city'],
-              59                                  $body['state'],
-              60                                  $body['photo'],
-              61                                  $body['availableUnits'],
-              62                                  $body['wifi'],
-              63                                  $body['laundry']);
-              64                      sendResponse(201, "Vivienda  creada", $data);
-              65                  } catch (Exception $e) {
-              66                      sendResponse(500, "Error al crear la vivienda: " . $e->getMessage());
-              67                  }
-              68                  break;
-              69
-              70                case 'PUT':
-              71                  try {
-              72                      if (empty($body['id']) ||
-              73                          empty($body['name']) ||
-              74                          empty($body['city']) ||
-              75                          empty($body['state']) ||
-              76                          empty($body['photo']) ||
-              77                          empty($body['availableUnits']) ||
-              78                          !isset($body['wifi']) ||
-              79                          !isset($body['laundry'])) {
-              80                              sendResponse(400, "Datos de entrada inválidos");
-              81                      }
-              82
-              83                      $data = $location->updateHousingLocation(
-              84                                  $body['id'],
-              85                                  $body['name'],
-              86                                  $body['city'],
-              87                                  $body['state'],
-              88                                  $body['photo'],
-              89                                  $body['availableUnits'],
-              90                                  $body['wifi'],
-              91                                  $body['laundry']);
-              92                      sendResponse(200, "Vivienda y ubicación actualizada", $data);
-              93                  } catch (Exception $e) {
-              94                      sendResponse(500, "Error al actualizar vivienda y ubicación: " . $e->getMessage());
-              95                  }
-              96                  break;
-              97
-              98                  case 'DELETE':
-              99                      try {
-             100                          if (empty($body['id'])) {
-             101                              sendResponse(400, "ID de vivienda inválido");
-             102                          }
-             103
-             104                          $location->deleteHousingLocation($body['id']);
-             105                          sendResponse(200, "Vivienda eliminada");
-             106                      } catch (Exception $e) {
-             107                          sendResponse(500, "Error al eliminar vivienda: " . $e->getMessage());
-             108                      }
-             109                      break;
-             110
-             111              default:
-             112                  sendResponse(405, "Método no permitido");
-             113                  break;
-             114          }
-             115      ?>
+            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'LOCATIONS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            
+            02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'getAllLocations'
+            
+            03. Repetir los pasos 01 y 02 para los métodos: 'getLocationById', 'createLocation', 'updateLocation' y 'deleteLocation'
+            
+            04. Seleccione el método 'createLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            05. Seleccione el método 'updateLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
+            
+            06. Seleccione el método 'deleteLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
@@ -495,9 +555,9 @@
             07. Abrir el proyecto en Visual Studio Code.
 
 
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP': -------------------------------------------------------------------------------------------------|
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP': -----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                          
             01. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (httpd.conf)'.
             
@@ -515,9 +575,9 @@
                          http://localhost:8080/ej01_n_capas_php_sql_html/
             
 
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP': --------------------------------------------------------------------------------------------------|
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP': ------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. En el Panel de control de XAMPP y en la misma línea del servicio 'MySQL' dar click a 'Config / my.ini'.
 
@@ -550,9 +610,9 @@
                          http://localhost:8080/phpmyadmin/            
 
 
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- AX_05.  Puesta en marcha del proyecto: --------------------------------------------------------------------------------------------------------------|
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_05.  Puesta en marcha del proyecto: ------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Garantizar el ambiente de desarrollo (Ver apartado 04. AMBIENTE).
             
