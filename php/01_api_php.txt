@@ -179,7 +179,7 @@
             
             03. Dar click a 'Seleccionar archivo'
             
-            04. Seleccionar el archivo database/db.sql
+            04. Seleccionar el archivo 'C:\xampp\htdocs\proyecto\database\db.sql'
             
             05. Dar click a 'Importar'
 
@@ -193,71 +193,71 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 03.01. Codificar el modelo de conexión 'config/DbConn.php' ------------------------------------------------------------------------------------------|
+|-- 03.01. Codificar el modelo de conexión 'config/DbConn.php' ----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01      <?php
-                    02          class DbConn{
-                    03              public static function connection(){
-                    04                  try {
-                    05                      $hostname = "localhost";
-                    06                      $port = "3306";
-                    07                      $database = "db";
-                    08                      $username = "root";
-                    09                      $password = "";
-                    10                      $pdo = new PDO("mysql:host=$hostname;port=$port;dbname=$database;charset=utf8",$username,$password);
-                    11                      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    12                      return $pdo;
-                    13                  } catch (Exception $e) {
-                    14                      print "¡Error BD!: "  $e->getMessage()  "<br/>";
-                    15                      die();
-                    16                  }
-                    17              }
-                    18          }
-                    19      ?>
+                    01   <?php
+                    02     class DbConn{
+                    03       public static function connection(){
+                    04         try {
+                    05           $hostname = "localhost";
+                    06           $port = "3306";
+                    07           $database = "db";
+                    08           $username = "root";
+                    09           $password = "";
+                    10           $pdo = new PDO("mysql:host=$hostname;port=$port;dbname=$database;charset=utf8",$username,$password);
+                    11           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    12           return $pdo;
+                    13         } catch (Exception $e) {
+                    14           print "¡Error BD!: " . $e->getMessage() . "<br/>";
+                    15           die();
+                    16         }
+                    17       }
+                    18     }
+                    19   ?>
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 01.02. models/location.php -------------------------------------------------------------------------------------------------------------------------|
+|-- 03.02. Codificar el modelo de datos 'models/location.php' -----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-              01    <?php
-              02        class Location {
-              03            private $conn;
-              04
-              05            public function __construct() {
-              06               $this->conn = DbConn::connection();
-              07            }
-              08
-              09            public function getAllHousingLocations() {
-              10                $stmt = $this->conn->query("SELECT * FROM locations");
-              11                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-              12            }
-              13
-              14            public function getHousingLocationById($id) {
-              15                $stmt = $this->conn->prepare("SELECT * FROM locations WHERE id = ?");
-              16                $stmt->execute([$id]);
-              17                return $stmt->fetch(PDO::FETCH_ASSOC);
-              18            }
-              19
-              20            public function createHousingLocation($name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
-              21                $stmt = $this->conn->prepare("INSERT INTO locations (name, city, state, photo, availableUnits, wifi, laundry)
-              22                                                VALUES (?, ?, ?, ?, ?, ?, ?)");
-              23                return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry]);
-              24            }
-              25
-              26            public function updateHousingLocation($id, $name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
-              27                $stmt = $this->conn->prepare("UPDATE locations SET name = ?, city = ?, state = ?, photo = ?, availableUnits = ?,
-              28                        wifi = ?, laundry = ? WHERE id = ?");
-              29                return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry, $id]);
-              30            }
-              31
-              32            public function deleteHousingLocation($id) {
-              33                $stmt = $this->conn->prepare("DELETE FROM locations WHERE id = ?");
-              34                return $stmt->execute([$id]);
-              35            }
-              36        }
-              37    ?>
+                    01   <?php
+                    02     class Location {
+                    03       private $conn;
+                    04 
+                    05       public function __construct() {
+                    06         $this->conn = DbConn::connection();
+                    07       }
+                    08 
+                    09       public function getAllHousingLocations() {
+                    10         $stmt = $this->conn->query("SELECT * FROM locations");
+                    11         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    12       }
+                    13 
+                    14       public function getHousingLocationById($id) {
+                    15         $stmt = $this->conn->prepare("SELECT * FROM locations WHERE id = ?");
+                    16         $stmt->execute([$id]);
+                    17         return $stmt->fetch(PDO::FETCH_ASSOC);
+                    18       }
+                    19 
+                    20       public function createHousingLocation($name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
+                    21         $stmt = $this->conn->prepare("INSERT INTO locations (name, city, state, photo, availableUnits, wifi, laundry)
+                    22                                       VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    23         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry]);
+                    24       }
+                    25 
+                    26       public function updateHousingLocation($id, $name, $city, $state, $photo, $availableUnits, $wifi, $laundry) {
+                    27         $stmt = $this->conn->prepare("UPDATE locations SET name = ?, city = ?, state = ?, photo = ?, availableUnits = ?,
+                    28                 wifi = ?, laundry = ? WHERE id = ?");
+                    29         return $stmt->execute([$name, $city, $state, $photo, $availableUnits, $wifi, $laundry, $id]);
+                    30       }
+                    31 
+                    32       public function deleteHousingLocation($id) {
+                    33         $stmt = $this->conn->prepare("DELETE FROM locations WHERE id = ?");
+                    34         return $stmt->execute([$id]);
+                    35       }
+                    36     }
+                    37   ?>                    
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
