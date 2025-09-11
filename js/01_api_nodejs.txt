@@ -158,32 +158,38 @@
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.01.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
+                                                                                                                                                      
                                                                                                                                                       # C = Carpetas
-                                                                                                                                                      # A = Archivos                
+                                                                                                                                                      # A = Archivos
 
                         proyecto/                                                   # C. Backend y Frontend de un proyecto móvil.
-                        └── backend/                                                # C. Lógica del servidor Node.js para la gestión de datos y API.
-                            ├── config/                                             # C. Configuración del backend (base de datos, claves).
-                            │   ├── config.js                                       # A. Configuración principal del backend (variables de entorno, etc.).
-                            │   ├── keys.js                                         # A. Claves secretas para seguridad (JWT, servicios externos).
-                            │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
-                            ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
-                            │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
-                            ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
-                            │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
-            (NO CREAR)      ├── node_modules/                                       # C. Dependencias (librerías) instaladas para el backend.
-                            ├── routes/                                             # C. Endpoints (rutas) de la API del backend.
-                            │   └── userRoutes.js                                   # A. Define las rutas para las operaciones relacionadas con usuarios.
-            (NO CREAR)      ├── package-lock.json                                   # A. Versiones exactas de las dependencias del backend.
-            (NO CREAR)      ├── package.json                                        # A. Manifiesto del backend (nombre, dependencias, scripts, etcs).
-                            └── server.js                                           # A. Servidor node.js.
+                        ├── backend/                                                # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        │   ├── config/                                             # C. Configuración del backend (base de datos, claves).
+                        │   │   ├── config.js                                       # A. Configuración principal del backend (variables de entorno, etc.).
+                        │   │   ├── keys.js                                         # A. Claves secretas para seguridad (JWT, servicios externos).
+                        │   │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
+                        │   ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
+                        │   │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
+                        │   ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
+                        │   │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
+            (NO CREAR)  │   ├── node_modules/                                       # C. Dependencias (librerías) instaladas para el backend.
+                        │   ├── routes/                                             # C. Endpoints (rutas) de la API del backend.
+                        │   │   └── userRoutes.js                                   # A. Define las rutas para las operaciones relacionadas con usuarios.
+            (NO CREAR)  │   ├── package-lock.json                                   # A. Versiones exactas de las dependencias del backend.
+            (NO CREAR)  │   ├── package.json                                        # A. Manifiesto del backend (nombre, dependencias, scripts, etcs).
+                        │   └── server.js                                           # A. Servidor node.js.
+                        └── database/                                               # C. Lógica del servidor Node.js para la gestión de datos y API.
+                            └── db_node.sql                                         # A. Base de datos del proyecto
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.04.  Instalar dependencias en el 'backend/': ---------------------------------------------------------------------------------------------------------------------|
+|-- 02.02.  Crear el 'package.json': ------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Abrir una Terminal en 'Visual Studio Code' y digitar los siguientes comandos:
+            01.  Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
 
             02. Cambiar el nombre de la terminal a 'backend', seleccionándola en la parte inferior derecha y presionando F2 / Rename...
             
@@ -191,60 +197,128 @@
             
             04. En la Terminal de 'Visual Studio Code' digitar lo siguiente:
 
-                    PS C:\..\..> cd backend
-                    PS C:\..\backend> npm init
+                    ⦿   PS C:\..\..> cd backend
+                    ⦿   PS C:\..\backend> npm init
 
-                    This utility will walk you through creating a package.json file.
-                    It only covers the most common items, and tries to guess sensible defaults.
+                            This utility will walk you through creating a package.json file.
+                            It only covers the most common items, and tries to guess sensible defaults.
 
-                    See `npm help init` for definitive documentation on these fields
-                    and exactly what they do.
+                            See `npm help init` for definitive documentation on these fields
+                            and exactly what they do.
 
-                    Use `npm install <pkg>` afterwards to install a package and
-                    save it as a dependency in the package.json file.
+                            Use `npm install <pkg>` afterwards to install a package and
+                            save it as a dependency in the package.json file.
 
-                    Press ^C at any time to quit.
-                    package name: (backend) nodejs
-                    version: (1.0.0)
-                    description: Backend de la app móvil de react native
-                    entry point: (server.js) server.js
-                    test command:
-                    git repository:
-                    keywords: ReactNative NodeJs
-                    author: Albeiro Ramos
-                    license: (ISC) MIT
-                    About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
+                            Press ^C at any time to quit.
+                            package name: (backend) nodejs
+                            version: (1.0.0)
+                            description: API Backend
+                            entry point: (server.js) server.js
+                            test command:
+                            git repository:
+                            keywords: NodeJs
+                            author: Albeiro Ramos
+                            license: (ISC) MIT
+                            About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
 
-                    {
-                      "name": "nodejs",
-                      "version": "1.0.0",
-                      "description": "Backend de la app de prueba 'my-app' de React Native",
-                      "main": "server.js",
-                      "scripts": {
-                        "test": "echo \"Error: no test specified\" && exit 1"
-                      },
-                      "keywords": [
-                        "ReactNative",
-                        "NodeJs"
-                      ],
-                      "author": "Instructor Albeiro Ramos",
-                      "license": "MIT"
-                    }
+                            {
+                              "name": "nodejs",
+                              "version": "1.0.0",
+                              "description": "Backend de la app de prueba 'my-app' de React Native",
+                              "main": "server.js",
+                              "scripts": {
+                                "test": "echo \"Error: no test specified\" && exit 1"
+                              },
+                              "keywords": [
+                                "ReactNative",
+                                "NodeJs"
+                              ],
+                              "author": "Instructor Albeiro Ramos",
+                              "license": "MIT"
+                            }
 
-                    Is this OK? (yes) yes
+                            Is this OK? (yes) yes
 
-                    PS C:\..\backend> npm i express@4.21.2
-                    PS C:\..\backend> npm i http@0.0.1-security
-                    PS C:\..\backend> npm i cors@2.8.5
-                    PS C:\..\backend> npm i morgan@1.10.0
-                    PS C:\..\backend> npm i mysql@2.18.1
-                    PS C:\..\backend> npm i bcryptjs@3.0.2
-                    PS C:\..\backend> npm i passport@0.4.1
-                    PS C:\..\backend> npm i passport-jwt@4.0.1
-                    PS C:\..\backend> npm i jsonwebtoken@9.0.2
-            
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.05.  Modificar el archivo 'backend/config/config.js': --------------------------------------------------------------------------------------------|
+|-- 02.03.  Instalar dependencia al 'backend/': ------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    ⦿   PS C:\..\backend> npm i express@4.21.2
+                    ⦿   PS C:\..\backend> npm i http@0.0.1-security
+                    ⦿   PS C:\..\backend> npm i cors@2.8.5
+                    ⦿   PS C:\..\backend> npm i morgan@1.10.0
+                    ⦿   PS C:\..\backend> npm i mysql@2.18.1
+                    ⦿   PS C:\..\backend> npm i bcryptjs@3.0.2
+                    ⦿   PS C:\..\backend> npm i passport@0.4.1
+                    ⦿   PS C:\..\backend> npm i passport-jwt@4.0.1
+                    ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------ 03. BASE DE DATOS -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.01. Codificar la base de datos 'database/db_node.sql': -----------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
+                    02   USE db_node;
+                    03 
+                    04   CREATE TABLE users (
+                    05     id BIGINT NOT NULL AUTO_INCREMENT,
+                    06     email VARCHAR(180) NOT NULL UNIQUE,
+                    07     name VARCHAR(90) NOT NULL,
+                    08     lastname VARCHAR(90) NOT NULL,
+                    09     phone VARCHAR(90) NOT NULL UNIQUE,
+                    10     image VARCHAR(255) NULL,
+                    11     password VARCHAR(90) NOT NULL,
+                    12     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    13     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    14     PRIMARY KEY (id)
+                    15   ) ENGINE=InnoDB;
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.02. Ejecutar la base de datos 'database/db_node.sql': ------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir el navegador y escribir http://localhost/phpmyadmin/
+            
+            02. Dar click a 'Importar'
+            
+            03. Dar click a 'Seleccionar archivo'
+            
+            04. Seleccionar el archivo 'C:\xampp\htdocs\proyecto\database\db.sql'
+            
+            05. Dar click a 'Importar'
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------- 04. CÓDIGO DEL PROEYCTO ----------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.01.  Modificar el archivo 'backend/config/config.js': ------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     01   const mysql = require('mysql');
@@ -261,21 +335,22 @@
                     12   });
                     13   module.exports = db;
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.06.  Modificar el archivo 'backend/models/user.js': ----------------------------------------------------------------------------------------------|
+|-- 02.06.  Modificar el archivo 'backend/models/user.js': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     01   const db = require('../config/config');
@@ -348,21 +423,22 @@
                     68   }
                     69   module.exports = User;
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.07.  Modificar el archivo 'backend/config/keys.js': ----------------------------------------------------------------------------------------------|
+|-- 02.07.  Modificar el archivo 'backend/config/keys.js': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Ingrese a la siguiente página: https://www.vondy.com/random-key-generator--ZzGGMYgS?lc=5 (o en alguna página que genere códigos de 256
@@ -373,20 +449,21 @@
                     02     secretOrKey: 'e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1'
                     03   }
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
                     
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.08.  Modificar el archivo 'backend/config/passport.js': ------------------------------------------------------------------------------------------|
+|-- 02.08.  Modificar el archivo 'backend/config/passport.js': ------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                     
                     01   const JwtStrategy = require('passport-jwt').Strategy;
@@ -412,20 +489,21 @@
                     21     }));
                     22   }
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.09.  Modificar el archivo 'backend/controllers/userController.js': -------------------------------------------------------------------------------|
+|-- 02.09.  Modificar el archivo 'backend/controllers/userController.js': -------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                                         
                     01   const User = require('../models/user');
@@ -496,17 +574,18 @@
                     66     }
                     67   }
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -519,17 +598,18 @@
                     04     app.post('/api/users/login', userController.login);
                     05   }
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -578,17 +658,18 @@
                     31     res.status(err.status || 500).send(err.stack);
                     32   });
 
-                ┌ ------------------------------------------------------------------------------------------------------------------------------------ ┐
-                |                                                                                                                                      |
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
-                |--------------------------------------------------------------------------------------------------------------------------------------|
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                |                                                                                                                                      |
-                └ ------------------------------------------------------------------------------------------------------------------------------------ ┘
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

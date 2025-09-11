@@ -29,6 +29,7 @@
 ||| --      01.04.  Instalar XAMPP                                                                                                                                     |||
 ||| --      01.05.  Instalar Postman                                                                                                                                   |||
 ||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --      02.01.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
 ||| --      03.01.  Codificar la base de datos 'database/db.sql'                                                                                                       |||
 ||| --      03.02.  Ejecutar la base de datos 'database/db.sql'                                                                                                        |||
@@ -124,11 +125,16 @@
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.01.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
                                                                                                                                                       # C = Carpetas
                                                                                                                                                       # A = Archivos                
+
        C:\xampp\htdocs/                                                   # C. Carpeta de XAMPP donde se guardan los proyectos PHP
                 └── proyecto/                                             # C. Carpeta raíz del proyecto
-                    └── backend/                                          # C. Carpeta de la APIRESTFULL en PHP
+                    ├── backend/                                          # C. Carpeta de la APIRESTFULL en PHP
                     │   ├── config/                                       # C. Carpeta que contiene las configuraciones.
                     │   │   └── DbConn.php                                # A. Configuración de la conexión a la base de datos.
                     │   ├── controllers/                                  # C. Carpeta que contiene los controladores
@@ -136,7 +142,7 @@
                     │   └── models/                                       # C. Carpeta que contiene los modelos
                     │       └── Location.php                              # A. Modelo de Datos de 'Location'
                     └── database/                                         # C. Carpeta de la APIRESTFULL en PHP
-                        └── db.sql                                        # C. Modelo de Datos de 'Location'
+                        └── db.sql                                        # A. Base de Datos del proyecto
             
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
