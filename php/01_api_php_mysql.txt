@@ -14,8 +14,8 @@
 ||| --          AX_01.  Subir el Proyecto a Github                                                                                                                     |||
 ||| --          AX_02.  Clonar un proyecto de Github                                                                                                                   |||
 ||| --          AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP'                                                                                                     |||
-||| --          AX_04.  Puesta en Marcha del Proyecto                                                                                                                  |||
-||| --          AX_05.  Cambiar los puertos de 'MySQL' en 'XAMPP'                                                                                                      |||
+||| --          AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP'                                                                                                      |||
+||| --          AX_05.  Puesta en Marcha del Proyecto                                                                                                                  |||
 |||                                                                                                                                                                    |||
 ||| --  Bibliografía  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
 |||                   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
@@ -37,6 +37,13 @@
 ||| --      04.02.  Codificar el modelo de datos 'models/location.php'                                                                                                 |||
 ||| --      04.03.  Codificar la API 'controllers/Locations.php'                                                                                                       |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+||| --      05.01.  Crear la Colección 'LOCATIONS'                                                                                                                     |||
+||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'LOCATIONS'                                                                        |||
+||| --      05.03.  Configurar 'GET getAllLocations'                                                                                                                   |||
+||| --      05.04.  Configurar 'GET getLocationById'                                                                                                                   |||
+||| --      05.05.  Configurar 'POST createLocation'                                                                                                                   |||
+||| --      05.06.  Configurar 'PUT updateLocation'                                                                                                                    |||
+||| --      05.07.  Configurar 'DELETE deleteLocation'                                                                                                                 |||
 |||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
@@ -488,7 +495,7 @@
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://localhost/proyecto/backend/controllers/Locations.php'
 
-            03. Dar clic a 'Send'
+            03. Dar click a 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -517,7 +524,7 @@
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://localhost/proyecto/backend/controllers/Locations.php?id=1'. Se agrega '?id=1' para buscarlo en la base de datos.
 
-            03. Dar clic a 'Send'
+            03. Dar click a 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -544,7 +551,7 @@
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://localhost/proyecto/backend/controllers/Locations.php
 
-            03. Dar clic a 'Body / raw'
+            03. Dar click a 'Body / raw'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -559,7 +566,7 @@
                     09      "laundry": 0
                     10   }
             
-            05. Dar clic a 'Send'
+            05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -579,7 +586,7 @@
             02. Escribir en el control de texto (al frente de 'PUT   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://localhost/proyecto/backend/controllers/Locations.php
 
-            03. Dar clic a 'Body / raw'
+            03. Dar click a 'Body / raw'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -594,7 +601,7 @@
                     09      "laundry": 1
                     10   }
             
-            05. Dar clic a 'Send'
+            05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -614,7 +621,7 @@
             02. Escribir en el control de texto (al frente de 'DELETE   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://localhost/proyecto/backend/controllers/Locations.php
 
-            03. Dar clic a 'Body / raw'
+            03. Dar click a 'Body / raw'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -622,7 +629,7 @@
                     02      "id": 11
                     03   }
             
-            05. Dar clic a 'Send'
+            05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -646,24 +653,24 @@
 |-- AX_01.  Subir el proyecto a un repositorio 'Github': ----------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            Para evitar confusiones y seguir los pasos correctamente, la carpeta raíz del proyecto se llamará 'angular'.
+            Para evitar confusiones y seguir los pasos correctamente, la carpeta raíz del proyecto se llamará 'proyecto'.
             
-            01. Verificar que no haya una cuenta de 'Github' asociada al computador, para ello, debe abrir el 'Panel de Control', dar clic en 'Cuentas 
-                de usuario / Administrar credenciales de Windows'. Si hay una cuenta asociada 'git:https://github.com', dar clic sobre la cuenta y clic
+            01. Verificar que no haya una cuenta de 'Github' asociada al computador, para ello, debe abrir el 'Panel de Control', dar click en 'Cuentas 
+                de usuario / Administrar credenciales de Windows'. Si hay una cuenta asociada 'git:https://github.com', dar click sobre la cuenta y click
                 sobre la opción 'Quitar'. 
             
-            NOTA:   ⦿   De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
+                    ⦿   De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
                          siguiente comando:
 
                          PS C:\..\..> echo "protocol=https`nhost=github.com`n" | git credential-manager erase
             
-            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar clic al 'Nombre de su cuenta / Your Repositories'. Dar clic a 'New'.
-                En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'angular'. La carpeta raíz no debe 
-                tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar clic en 'Create Repository'.
+            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. Dar click a 'New'.
+                En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'proyecto'. La carpeta raíz no debe 
+                tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar click en 'Create Repository'.
 
-            NOTA:   ⦿   Si no tiene cuenta en 'GitHub', debe crear una.
+                    ⦿   Si no tiene cuenta en 'GitHub', debe crear una.
             
-            03. Clic derecho sobre la carpeta raíz (ejemplo, 'angular') y seleccionar la opción 'Open Git Bash here'; si no se 
+            03. Click derecho sobre la carpeta raíz (ejemplo, 'proyecto') y seleccionar la opción 'Open Git Bash here'; si no se 
                 encuentra la opción, hay que instalar 'Git'.
             
             04. En el 'Git Bash' escribir lo siguiente:
@@ -673,20 +680,20 @@
 
                     $ git init
                     $ git branch -M main
-                    $ git remote add origin https://github.com/SenaProfeAlbeiro/angular.git
+                    $ git remote add origin https://github.com/SenaProfeAlbeiro/proyecto.git
                     $ git add .
                     $ git commit -m "Subiendo Proyecto"
                     $ git push -u origin main
 
-            05. Va a aparecer una ventana denominada 'Connect to Github', dar clic en la opción 'Sign in with your browser', dar clic en 'Authentication 
-                Succeeded'. Verificar que se haya abierto en el navegador que tiene abierta la cuenta, de lo contrario hay que escribir nuevamente las
+            05. Va a aparecer una ventana denominada 'Connect to Github', dar click en la opción 'Sign in with your browser', dar click en 'Authentication 
+                Succeeded'. Verificar que se haya abierto en el navegador en donde tiene la cuenta activa, de lo contrario hay que escribir nuevamente las
                 credenciales de 'Github'. En el 'Git Bash' debe aparecer texto similar al siguiente:
 
                     Enumerating objects: 3, done.
                     Counting objects: 100% (3/3), done.
                     Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
                     Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-                    To https://github.com/SenaProfeAlbeiro/ej01_n_capas_php_sql_html.git
+                    To https://github.com/SenaProfeAlbeiro/proyecto.git
                     * [new branch]      main -> main
                     branch 'main' set up to track 'origin/main'.
             
@@ -702,24 +709,24 @@
 |-- AX_02.  Clonar un proyecto 'Github': --------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Abrir su cuenta de 'Github' y en la parte superior derecha, dar clic al 'Nombre de su cuenta / Your Repositories'. 
+            01. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. 
 
-            02. Dar click al proyecto que desea clonar, en el caso del ejemplo es 'angular'.
+            02. Dar click al proyecto que desea clonar, en el caso del ejemplo es 'proyecto'.
 
             03. Dar click a la opción '<> Code / Copy url to clipboard'.
 
-            04. Ir a una carpeta de Windows, por ejemplo, en el 'Escritorio' (en el caso del ejemplo, 'angular').
+            04. Ir a una carpeta de Windows, por ejemplo, en el 'C:\xampp\htdocs' (en el caso del ejemplo, 'proyecto').
 
             05. Click derecho sobre el área de trabajo y seleccionar la opción 'Open Git Bash here'; si no se encuentra la opción, hay que instalar 
                 'Git'.
  
             06. En el 'Git Bash' pegar el repositorio clonado de 'Github' con 'CTRL + INSERT', quedando como sigue:
 
-                    $ git clone https://github.com/SenaProfeAlbeiro/angular.git
+                         $ git clone https://github.com/SenaProfeAlbeiro/proyecto.git
 
-            NOTA:   ⦿   Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
+                    ⦿   Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
                     
-                    $ git pull
+                         $ git pull
             
             07. Abrir el proyecto en Visual Studio Code.
 
@@ -741,7 +748,7 @@
             
             06. Comprobar que quedó de la forma correcta a través del navegador, con el siguiente enlace:
 
-                         http://localhost:8080/ej01_n_capas_php_sql_html/
+                         http://localhost:8080/proyecto/
             
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -783,9 +790,9 @@
 |-- AX_05.  Puesta en marcha del proyecto: ------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Garantizar el ambiente de desarrollo (Ver apartado 04. AMBIENTE).
+            01. Garantizar el ambiente de desarrollo (Ver apartado 01. ENTORNO DE DESARROLLO).
             
-            02. Clonar el proyecto desde github en 'C:\xampp\htdocs' (Ver apartado 01.03. Clonar un proyecto 'Github').
+            02. Clonar el proyecto desde github en 'C:\xampp\htdocs' (Ver apartado AX_02. Clonar un proyecto 'Github').
             
             03. Abrir el proyecto en Visual Studio Code.
             
@@ -793,22 +800,21 @@
 
             05. Abrir un navegador (preferiblemente Google Chrome) a través de los siguientes enlaces:
             
-                    http://localhost/ej01_n_capas_php_sql_html/
+                    http://localhost/proyecto/
 
                     http://localhost/phpmyadmin/            
             
-            NOTA:   ⦿   Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado 01.04. 
+                    ⦿   Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
                          Cambiar los puertos de 'Apache' en 'XAMPP'); si no es posible, agregar el puerto al 'localhost', por ejemplo, si el puerto 
                          es '8080' entonces debería quedar así:
 
-                         http://localhost:8080/ej01_n_capas_php_sql_html/
+                         http://localhost:8080/proyecto/
 
                          http://localhost:8080/phpmyadmin/            
             
-                    ⦿   Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado 01.04. 
-                         Cambiar los puertos de 'MySQL' en 'XAMPP'); si no es posible, cambiar el puerto en la cadena de conexión (Ver apartado 06.03. 
-                         Codificar el Modelo de Conexión a la Base de Datos) 
+                    ⦿   Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
+                         Cambiar los puertos de 'MySQL' en 'XAMPP').
                                     
-            06. Subir la base de datos (Ver el apartado 04. BASE DE DATOS).
+            06. Subir la base de datos (Ver el apartado 03. BASE DE DATOS).
 
             07. Comprobar que se ejecute correctamente la aplicación.
