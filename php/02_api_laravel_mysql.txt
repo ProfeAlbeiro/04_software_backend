@@ -1,0 +1,577 @@
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||-------------------------------------------------------------------- APIREST EN PHP -> LARAVEL ---------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||                                                                                                                                                                    |||
+||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
+||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --  03. BASE DE DATOS                                                                                                                                              |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+|||                                                                                                                                                                    |||
+||| --  ANEXOS: TENER EN CUENTA                                                                                                                                        |||
+||| --          AX_01.  Subir el Proyecto a Github                                                                                                                     |||
+||| --          AX_02.  Clonar un proyecto de Github                                                                                                                   |||
+||| --          AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP'                                                                                                     |||
+||| --          AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP'                                                                                                      |||
+||| --          AX_05.  Puesta en Marcha del Proyecto                                                                                                                  |||
+|||                                                                                                                                                                    |||
+||| --  Bibliografía  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
+|||                   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
+|||                                                                                                                                                                    |||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||                                                                                                                                                                    |||
+||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
+||| --      01.01.  Instalar Visual Studio Code                                                                                                                        |||
+||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --      02.01.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
+||| --  03. BASE DE DATOS                                                                                                                                              |||
+||| --      03.01.  Codificar la base de datos 'database/db_node.sql'                                                                                                  |||
+||| --      03.02.  Ejecutar la base de datos 'database/db_node.sql'                                                                                                   |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --      04.01.  Codificar la cadena de conexión en 'backend/config/config.js'                                                                                      |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
+||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
+||| --      05.03.  Configurar 'GET raiz'                                                                                                                              |||
+||| --      05.04.  Configurar 'POST register'                                                                                                                         |||
+||| --      05.05.  Configurar 'POST login'                                                                                                                            |||
+|||                                                                                                                                                                    |||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||-------------------------------------------------------------------- 01. ENTORNO DE DESARROLLO ---------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.01.  Instalar Visual Studio Code: --------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Visual Studio Code': https://code.visualstudio.com/download.
+
+            02. Instalar Visual Studio Code.
+
+                    ⦿   En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.                    
+
+            03. Abrir Visual Studio Code.
+
+            04. Instalar las siguientes extensiones en Visual Studio Code:
+
+                    ⦿   Material Icon Theme                    
+                    ⦿   Live Server
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.02.  Instalar Git: -----------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Instalar Git.
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.03.  Crear cuenta en 'Github': -----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Seguir los pasos de creación de la cuenta.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.04.  Instalar XAMPP: ---------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Instalar XAMPP.
+
+            03. Abrir el 'XAMPP Control Panel' y ejecutar los servicios de 'Apache' y 'MySQL'.
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  NOTA:   
+                    
+                    ⦿   Verificar que los puertos sean: En Apache (:80) y de MySQL (:3306).
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.05.  Instalar Composer: ------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Composer': https://getcomposer.org/download/.
+
+            02. Instalar Composer.
+
+            03. Asegurar que PHP esté en el PATH
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.05.  Instalar Postman: -------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Postman': https://www.postman.com/downloads/. Este programa nos sirve para realizar probar las peticiones HTTP.
+
+            02. Instalar Postman.
+            
+            03. Abrir Postman.
+
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------- 02. ESTRUCTURA DEL PROYECTO --------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.01.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                                                                                                                                                      # C = Carpetas
+                                                                                                                                                      # A = Archivos                
+
+                        proyecto/                                                   # C. Backend y Frontend de un proyecto móvil.
+                        ├── backend/                                                # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        └── database/                                               # C. Lógica del servidor Node.js para la gestión de datos y API.
+            
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------ 03. BASE DE DATOS -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.01. Codificar la base de datos 'database/db.sql': ----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   CREATE DATABASE DB;
+
+
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.02. Ejecutar la base de datos 'database/xxxxx.sql': -----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir el navegador y escribir http://localhost/phpmyadmin/
+            
+            02. Dar click a 'Importar'
+            
+            03. Dar click a 'Seleccionar archivo'
+            
+            04. Seleccionar el archivo 'C:\..\..\proyecto\database\xxxxxx.sql'
+            
+            05. Dar click a 'Importar'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||---------------------------------------------------------------- 05. PRUEBAS DE LA API CON POSTMAN -----------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.01.  Crear la Colección 'LOCATIONS': -----------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click a 'New / Collection'
+            
+            02. Dar click a 'New Collection' y escribir 'LOCATIONS'
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'LOCATIONS': --------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'LOCATIONS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            
+            02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'getAllLocations'
+            
+            03. Repetir los pasos 01 y 02 para los métodos: 'getLocationById', 'createLocation', 'updateLocation' y 'deleteLocation'
+            
+            04. Seleccionar el método 'createLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            05. Seleccionar el método 'updateLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
+            
+            06. Seleccionar el método 'deleteLocation' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.03.  Configurar 'GET getAllLocations': ---------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET getAllLocations'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://localhost/proyecto/backend/controllers/Locations.php'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "message": "Viviendas y ubicación obtenidas",
+                    03       "datos": [
+                    04           {
+                    05               "id": 1,
+                    06               "name": "Acme Fresh Start Housing",
+                    07               "city": "Chicago",
+                    08               "state": "IL",
+                    09               "photo": "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                    10               "availableUnits": 4,
+                    11               "wifi": 1,
+                    12               "laundry": 1
+                    13           },
+                    14           }
+                    15 ........
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.04.  Configurar 'GET getLocationById': ---------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET getLocationById'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://localhost/proyecto/backend/controllers/Locations.php?id=1'. Se agrega '?id=1' para buscarlo en la base de datos.
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "message": "Ubicación de vivienda obtenida",
+                    03       "datos": {
+                    04           "id": 1,
+                    05           "name": "Acme Fresh Start Housing",
+                    06           "city": "Chicago",
+                    07           "state": "IL",
+                    08           "photo": "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                    09           "availableUnits": 4,
+                    10           "wifi": 1,
+                    11           "laundry": 1
+                    12       }
+                    13   }
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.05.  Configurar 'POST createLocation': ---------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'POST createLocations'
+            
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://localhost/proyecto/backend/controllers/Locations.php'
+
+            03. Dar click a 'Body / raw / JSON'
+            
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02      "id": null,
+                    03      "name": "Las Lomas",
+                    04      "city": "Bogotá",
+                    05      "state": "Cundinamarca",
+                    06      "photo": "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                    07      "availableUnits": 2,
+                    08      "wifi": 1,
+                    09      "laundry": 0
+                    10   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "message": "Vivienda  creada",
+                    03       "datos": true
+                    04   }
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db' (tabla 'locations'), se haya creado el registro
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.06.  Configurar 'PUT updateLocation': ----------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'PUT updateLocations'
+            
+            02. Escribir en el control de texto (al frente de 'PUT   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://localhost/proyecto/backend/controllers/Locations.php'
+
+            03. Dar click a 'Body / raw / JSON'
+            
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02      "id": 11,
+                    03      "name": "Las Brisas",
+                    04      "city": "Medellín",
+                    05      "state": "Antioquia",
+                    06      "photo": "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                    07      "availableUnits": 6,
+                    08      "wifi": 1,
+                    09      "laundry": 1
+                    10   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "message": "Vivienda y ubicación actualizada",
+                    03       "datos": true
+                    04   }
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db' (tabla 'locations'), se haya actualizado el registro
+            
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.07.  Configurar 'DELETE deleteLocation': -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+            01. Seleccionar el método 'DELETE deleteLocation'
+            
+            02. Escribir en el control de texto (al frente de 'DELETE   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://localhost/proyecto/backend/controllers/Locations.php'
+
+            03. Dar click a 'Body / raw / JSON'
+            
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02      "id": 11
+                    03   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "message": "Vivienda eliminada",
+                    03       "datos": null
+                    04   }                    
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db' (tabla 'locations'), se haya eliminado el registro
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------------ ANEXOS ------------------------------------------------------------------------------|||
+||| ------------------------------------------------------------------------- TENER EN CUENTA -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_01.  Subir el proyecto a un repositorio 'Github': ----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            Para evitar confusiones y seguir los pasos correctamente, la carpeta raíz del proyecto se llamará 'proyecto'.
+            
+            01. Verificar que no haya una cuenta de 'Github' asociada al computador, para ello, debe abrir el 'Panel de Control', dar click en 'Cuentas 
+                de usuario / Administrar credenciales de Windows'. Si hay una cuenta asociada 'git:https://github.com', dar click sobre la cuenta y click
+                sobre la opción 'Quitar'. 
+            
+                    ⦿   De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
+                         siguiente comando:
+
+                         PS C:\..\..> echo "protocol=https`nhost=github.com`n" | git credential-manager erase
+            
+            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. Dar click a 'New'.
+                En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'proyecto'. La carpeta raíz no debe 
+                tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar click en 'Create Repository'.
+
+                    ⦿   Si no tiene cuenta en 'GitHub', debe crear una.
+            
+            03. Click derecho sobre la carpeta raíz (ejemplo, 'proyecto') y seleccionar la opción 'Open Git Bash here'; si no se 
+                encuentra la opción, hay que instalar 'Git'.
+            
+            04. En el 'Git Bash' escribir lo siguiente:
+
+                    $ git config --global user.name "nombre de su cuenta"
+                    $ git config --global user.email "correo de su cuenta"
+
+                    $ git init
+                    $ git branch -M main
+                    $ git remote add origin https://github.com/SenaProfeAlbeiro/proyecto.git
+                    $ git add .
+                    $ git commit -m "Subiendo Proyecto"
+                    $ git push -u origin main
+
+            05. Va a aparecer una ventana denominada 'Connect to Github', dar click en la opción 'Sign in with your browser', dar click en 'Authentication 
+                Succeeded'. Verificar que se haya abierto en el navegador en donde tiene la cuenta activa, de lo contrario hay que escribir nuevamente las
+                credenciales de 'Github'. En el 'Git Bash' debe aparecer texto similar al siguiente:
+
+                    Enumerating objects: 3, done.
+                    Counting objects: 100% (3/3), done.
+                    Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+                    Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+                    To https://github.com/SenaProfeAlbeiro/proyecto.git
+                    * [new branch]      main -> main
+                    branch 'main' set up to track 'origin/main'.
+            
+            06. Actualizar la ventana del navegador donde se encuentra abierta su cuenta de 'Github'
+            
+            07. Para actualizar la información del proyecto en 'Github', en el 'Git bash' escribir los siguientes comandos:
+
+                    $ git add .
+                    $ git commit -m "Comentario del cambio"
+                    $ git push
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_02.  Clonar un proyecto 'Github': --------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. 
+
+            02. Dar click al proyecto que desea clonar, en el caso del ejemplo es 'proyecto'.
+
+            03. Dar click a la opción '<> Code / Copy url to clipboard'.
+
+            04. Ir a una carpeta de Windows, por ejemplo, en el 'C:\xampp\htdocs' (en el caso del ejemplo, 'proyecto').
+
+            05. Click derecho sobre el área de trabajo y seleccionar la opción 'Open Git Bash here'; si no se encuentra la opción, hay que instalar 
+                'Git'.
+ 
+            06. En el 'Git Bash' pegar el repositorio clonado de 'Github' con 'CTRL + INSERT', quedando como sigue:
+
+                         $ git clone https://github.com/SenaProfeAlbeiro/proyecto.git
+
+                    ⦿   Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
+                    
+                         $ git pull
+            
+            07. Abrir el proyecto en Visual Studio Code.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP': -----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                         
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (httpd.conf)'.
+            
+            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '80' y dar click a 'Buscar siguiente'.
+            
+            04. Reemplazar todos los valores donde se encentre el puerto '80' con el puerto nuevo de trabajo, por ejemplo, '8080'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+
+            05. En el Panel de control de XAMPP dar click en 'start' de 'Apache' para iniciar el servicio.
+            
+            06. Comprobar que quedó de la forma correcta a través del navegador, con el siguiente enlace:
+
+                         http://localhost:8080/proyecto/
+            
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP': ------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'MySQL' dar click a 'Config / my.ini'.
+
+            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+
+            04. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+
+            05. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (php.ini)'.
+
+            06. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+
+            07. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+
+            08. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+        
+            09. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / phpMyAdmin (config.inc.php)'.
+
+            10. Buscar la línea '$cfg['Servers'][$i]['host'] = '127.0.0.1;' y agregar el puerto nuevo '3308' de la siguiente forma:
+                         
+                         $cfg['Servers'][$i]['host'] = '127.0.0.1:3308';
+
+            11. En el Panel de control de XAMPP dar click en 'start' de 'MySQL' para iniciar el servicio.
+
+            12. Comprobar que quedó de la forma correcta a través del navegador, con el siguiente enlace:
+
+                         http://localhost:8080/phpmyadmin/            
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_05.  Puesta en marcha del proyecto: ------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Garantizar el ambiente de desarrollo (Ver apartado 01. ENTORNO DE DESARROLLO).
+            
+            02. Clonar el proyecto desde github en 'C:\xampp\htdocs' (Ver apartado AX_02. Clonar un proyecto 'Github').
+            
+            03. Abrir el proyecto en Visual Studio Code.
+            
+            04. Abrir 'XAMPP' y ejecutar los servicios de 'Apache' y 'MySQL'.
+
+            05. Abrir un navegador (preferiblemente Google Chrome) a través de los siguientes enlaces:
+            
+                    http://localhost/proyecto/
+
+                    http://localhost/phpmyadmin/            
+            
+                    ⦿   Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
+                         Cambiar los puertos de 'Apache' en 'XAMPP'); si no es posible, agregar el puerto al 'localhost', por ejemplo, si el puerto 
+                         es '8080' entonces debería quedar así:
+
+                         http://localhost:8080/proyecto/
+
+                         http://localhost:8080/phpmyadmin/            
+            
+                    ⦿   Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
+                         Cambiar los puertos de 'MySQL' en 'XAMPP').
+                                    
+            06. Subir la base de datos (Ver el apartado 03. BASE DE DATOS).
+
+            07. Comprobar que se ejecute correctamente la aplicación.
