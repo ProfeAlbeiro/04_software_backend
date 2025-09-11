@@ -310,7 +310,7 @@
             
             03. Dar click a 'Seleccionar archivo'
             
-            04. Seleccionar el archivo 'C:\xampp\htdocs\proyecto\database\db.sql'
+            04. Seleccionar el archivo 'C:\..\..\proyecto\database\db_node.sql'
             
             05. Dar click a 'Importar'
 
@@ -332,7 +332,7 @@
                     03     host: 'localhost',
                     04     user: 'root',
                     05     password: '',
-                    06     database: 'db_node_react',
+                    06     database: 'db_node',
                     07     port: 3306
                     08   });
                     09   db.connect(function(err) {
@@ -712,7 +712,7 @@
 |-- 05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS': ---------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'LOCATIONS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
             
             02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
             
@@ -726,7 +726,7 @@
 |-- 05.03.  Configurar 'GET raiz': --------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Seleccionar el método 'GET getAllLocations'
+            01. Seleccionar el método 'GET raiz'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
                 'http://192.168.1.77:3000/'
