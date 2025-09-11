@@ -555,9 +555,9 @@
             01. Seleccionar el método 'POST createLocations'
             
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
-                'http://localhost/proyecto/backend/controllers/Locations.php
+                'http://localhost/proyecto/backend/controllers/Locations.php'
 
-            03. Dar click a 'Body / raw'
+            03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -590,9 +590,9 @@
             01. Seleccionar el método 'PUT updateLocations'
             
             02. Escribir en el control de texto (al frente de 'PUT   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
-                'http://localhost/proyecto/backend/controllers/Locations.php
+                'http://localhost/proyecto/backend/controllers/Locations.php'
 
-            03. Dar click a 'Body / raw'
+            03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -625,9 +625,9 @@
             01. Seleccionar el método 'DELETE deleteLocation'
             
             02. Escribir en el control de texto (al frente de 'DELETE   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
-                'http://localhost/proyecto/backend/controllers/Locations.php
+                'http://localhost/proyecto/backend/controllers/Locations.php'
 
-            03. Dar click a 'Body / raw'
+            03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
