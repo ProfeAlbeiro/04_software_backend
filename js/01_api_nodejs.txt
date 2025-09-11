@@ -33,20 +33,23 @@
 ||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
 ||| --      02.01.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
-||| --      03.01.  Codificar la base de datos 'database/db.sql'                                                                                                       |||
-||| --      03.02.  Ejecutar la base de datos 'database/db.sql'                                                                                                        |||
+||| --      03.01.  Codificar la base de datos 'database/db_node.sql'                                                                                                  |||
+||| --      03.02.  Ejecutar la base de datos 'database/db_node.sql'                                                                                                   |||
 ||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
-||| --      04.01.  Codificar el modelo de conexión 'config/DbConn.php'                                                                                                |||
-||| --      04.02.  Codificar el modelo de datos 'models/location.php'                                                                                                 |||
-||| --      04.03.  Codificar la API 'controllers/Locations.php'                                                                                                       |||
+||| --      04.01.  Codificar la cadena de conexión en 'backend/config/config.js'                                                                                      |||
+||| --      04.02.  Codificar el modelo usuarios en 'backend/models/user.js'                                                                                           |||
+||| --      04.03.  Codificar la key en 'backend/config/keys.js'                                                                                                       |||
+||| --      04.04.  Codificar el Jason Web Token con la key en 'backend/config/passport.js'                                                                            |||
+||| --      04.05.  Codificar la API de usuarios en 'backend/controllers/userController.js'                                                                            |||
+||| --      04.06.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js'                                                                                     |||
+||| --      04.07.  Codificar el servidor en 'backend/server.js'                                                                                                       |||
+||| --      04.08.  Ejecutar el Servidor 'server.js'                                                                                                                   |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
-||| --      05.01.  Crear la Colección 'LOCATIONS'                                                                                                                     |||
-||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'LOCATIONS'                                                                        |||
-||| --      05.03.  Configurar 'GET getAllLocations'                                                                                                                   |||
-||| --      05.04.  Configurar 'GET getLocationById'                                                                                                                   |||
-||| --      05.05.  Configurar 'POST createLocation'                                                                                                                   |||
-||| --      05.06.  Configurar 'PUT updateLocation'                                                                                                                    |||
-||| --      05.07.  Configurar 'DELETE deleteLocation'                                                                                                                 |||
+||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
+||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
+||| --      05.03.  Configurar 'GET raiz'                                                                                                                              |||
+||| --      05.04.  Configurar 'POST register'                                                                                                                         |||
+||| --      05.05.  Configurar 'POST login'                                                                                                                            |||
 |||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
@@ -440,7 +443,7 @@
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.03.  Codificar la key en 'backend/config/keys.js': -----------------------------------------------------------------------------------------------------|
+|-- 04.03.  Codificar la key en 'backend/config/keys.js': ---------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Ingrese a la siguiente página: https://www.vondy.com/random-key-generator--ZzGGMYgS?lc=5 (o en alguna página que genere códigos de 256
@@ -591,7 +594,7 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.06.  Codificar los endpoints de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------|
+|-- 04.06.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                     
                     01   const userController = require('../controllers/userController');
@@ -777,45 +780,42 @@
             07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.03.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.05.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'POST login'
             
-            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
-                'http://192.168.1.77:3000/'
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: Locations.php): 'http://192.168.1.77:3000/api/users/login'
 
             03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
                     01   {
-                    02      "id": null,
-                    03      "name": "Las Lomas",
-                    04      "city": "Bogotá",
-                    05      "state": "Cundinamarca",
-                    06      "photo": "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
-                    07      "availableUnits": 2,
-                    08      "wifi": 1,
-                    09      "laundry": 0
-                    10   }
+                    02     "email": "micorreo@gmail.com",
+                    03     "password": "9876546"
+                    04   }
             
             05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
                     01   {
-                    02       "message": "Vivienda  creada",
-                    03       "datos": true
-                    04   }
-
-            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
-
-
-
-
-
-
+                    02       "success": true,
+                    03       "message": "Usuario autenticado ",
+                    04       "data": {
+                    05           "id": 1,
+                    06           "email": "micorreo@gmail.com",
+                    07           "name": "Pedro Nel",
+                    08           "lastname": "Dominguez",
+                    09           "image": "yyyy",
+                    10           "phone": "741852",
+                    11           "session_token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                                    eyJpZCI6MSwiZW1haWwiOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3NTc2MDkwNTR9.
+                                    -HS8TwWsPTlYZDddsvVjH7JTLuvTYPgn5AGNH2Xpf0k"
+                    12       }
+                    13   }
 
 
 
