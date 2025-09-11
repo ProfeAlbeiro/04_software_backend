@@ -716,11 +716,17 @@
             
             02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
             
-            03. Repetir los pasos 01 y 02 para el método: 'register' y 'login'
-            
-            04. Seleccionar el método 'register' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            03. Repetir los pasos 01 y 02 para el método: 'userCreate', 'login', 'usersAll', 'userById', 'userCreate', 'userUpdate' y 'userDelete'
+
+            04. Seleccionar el método 'userCreate' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
             
             05. Seleccionar el método 'login' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            06. Seleccionar el método 'userUpdate' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
+            
+            07. Seleccionar el método 'userDelete' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
+           
+            
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.03.  Configurar 'GET raiz': --------------------------------------------------------------------------------------------------------------------------------------|
@@ -738,10 +744,10 @@
                     01   Ruta raíz del Backend
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.04.  Configurar 'POST register': ---------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.04.  Configurar 'POST userCreate': -------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Seleccionar el método 'POST register'
+            01. Seleccionar el método 'POST userCreate'
             
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users/create): 'http://192.168.1.77:3000/api/users/create'
@@ -786,7 +792,7 @@
             01. Seleccionar el método 'POST login'
             
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: Locations.php): 'http://192.168.1.77:3000/api/users/login'
+                (ENDPOINT: /api/users/login): 'http://192.168.1.77:3000/api/users/login'
 
             03. Dar click a 'Body / raw / JSON'
             
@@ -817,6 +823,138 @@
                     12       }
                     13   }
 
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.06.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET usersAll'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users): 'http://192.168.56.1:3000/api/users'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Lista de usuarios",
+                    04       "data": [
+                    05           {
+                    06               "id": 1,
+                    07               "email": "micorreo@gmail.com",
+                    08               "name": "Pedro Nel",
+                    09               "lastname": "Dominguez",
+                    10               "phone": "741852",
+                    11               "image": "yyyy",
+                    12               "created_at": "2025-09-11T23:23:37.000Z",
+                    13               "updated_at": "2025-09-11T23:23:37.000Z"
+                    14           },
+                    15           {
+                    16   ......  
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.07.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET userById'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/:id): 'http://192.168.56.1:3000/api/users/1'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario encontrado",
+                    04       "data": {
+                    05           "id": 1,
+                    06           "email": "micorreo@gmail.com",
+                    07           "name": "Pedro Nel",
+                    08           "lastname": "Dominguez",
+                    09           "image": "yyyy",
+                    10           "password": "$2b$10$tGV1SOghgYWFQGvIUI45ou1Gn0IExm9JxJadAbrnV5sSrYC1tpmQO"
+                    11       }
+                    12   }                    
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.08.  Configurar 'POST userUpdate': -------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'POST userUpdates'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/update): 'http://192.168.56.1:3000/api/users/update'
+
+            03. Dar click a 'Body / raw / JSON'
+
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02     "id": "1",
+                    03     "email": "pepito@perez.com",
+                    04     "name": "Pepe",
+                    05     "lastname": "Perez",
+                    06     "phone": "3203203210",
+                    07     "image": "yyyy",
+                    08     "password": "12345"
+                    09   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario actualizado",
+                    04       "data": {
+                    05           "id": "1",
+                    06           "email": "pepito@perez.com",
+                    07           "name": "Pepe",
+                    08           "lastname": "Perez",
+                    09           "phone": "3203203210",
+                    10           "image": "yyyy",
+                    11           "password": "12345"
+                    12       }
+                    13   }
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.09.  Configurar 'DELETE userDelete': -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+            01. Seleccionar el método 'DELETE userDelete'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/delete/:id): 'http://192.168.56.1:3000/api/users/delete/1'
+
+
+            03. Dar click a 'Body / raw / JSON'
+
+            04. Dar click a 'Send'
+            
+            05. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario eliminado",
+                    04       "data": {
+                    05           "fieldCount": 0,
+                    06           "affectedRows": 1,
+                    07           "insertId": 0,
+                    08           "serverStatus": 2,
+                    09           "warningCount": 0,
+                    10           "message": "",
+                    11           "protocol41": true,
+                    12           "changedRows": 0
+                    13       }
+                    14   }
+
+            06. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya eliminado el registro
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
