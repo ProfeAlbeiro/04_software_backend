@@ -48,8 +48,12 @@
 ||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
 ||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
 ||| --      05.03.  Configurar 'GET raiz'                                                                                                                              |||
-||| --      05.04.  Configurar 'POST register'                                                                                                                         |||
+||| --      05.04.  Configurar 'POST userCreate'                                                                                                                       |||
 ||| --      05.05.  Configurar 'POST login'                                                                                                                            |||
+||| --      05.06.  Configurar 'GET usersAll'                                                                                                                          |||
+||| --      05.07.  Configurar 'GET userById'                                                                                                                          |||
+||| --      05.08.  Configurar 'POST userUpdate'                                                                                                                       |||
+||| --      05.09.  Configurar 'DELETE userDelete'                                                                                                                     |||
 |||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
@@ -362,72 +366,144 @@
                     01   const db = require('../config/config');
                     02   const bcrypt = require('bcryptjs');
                     03   const User = {};
-                    04   User.findById = (id, result) => {
-                    05     const sql = `SELECT id, email, name, lastname, image, password FROM users WHERE id = ?`;
-                    06     db.query(sql,
-                    07       [id], (err, user) => {
-                    08         if (err) {
-                    09           console.log('Error al consultar: ', err);
-                    10           result(err, null);
-                    11         }
-                    12         else {
-                    13           console.log('Usuario consultado: ',  user[0] );
-                    14           result(null, user[0]);
-                    15         }
-                    16       }
-                    17     );
-                    18   }
-                    19   User.findByEmail = (email, result) => {
-                    20     const sql = `SELECT id, email, name, lastname, image, phone, password FROM users WHERE email = ?`;
-                    21     db.query(
-                    22       sql,
-                    23       [email], 
-                    24       (err, user) => {
-                    25         if (err) {
-                    26           console.log('Error al consultar: ', err);
-                    27           result(err, null);
-                    28         }
-                    29         else {
-                    30           console.log('Usuario consultado: ',  user[0] );
-                    31           result(null, user[0]);
-                    32         }
-                    33       }
-                    34     );
-                    35   }
-                    36   User.create = async (user, result) => {
-                    37     const hash = await bcrypt.hash(user.password, 10)
-                    38     const sql = `INSERT INTO USERS(
-                    39                   email, 
-                    40                   name, 
-                    41                   lastname,
-                    42                   phone,
-                    43                   image,
-                    44                   password,
-                    45                   created_at,
-                    46                   updated_at
-                    47                 ) VALUES (?,?,?,?,?,?,?,?)`;
-                    48     db.query(sql,
-                    49       [
-                    50         user.email,
-                    51         user.name,
-                    52         user.lastname,
-                    53         user.phone,
-                    54         user.image,
-                    55         hash,
-                    56         new Date(),
-                    57         new Date()
-                    58       ], (err, res) => {
-                    59         if (err) {
-                    60           console.log('Error al crear al Usuario: ', err);
-                    61           result(err, null);
-                    62         } else {
-                    63           console.log('Usuario creado: ', {id: res.insertId, ...user});
-                    64           result(null, {id: res.insertId, ...user});
-                    65         }
-                    66       }
-                    67     );
-                    68   }
-                    69   module.exports = User;
+                    04   User.findAll = (result) => {
+                    05     const sql = `SELECT id, email, name, lastname, phone, image, created_at, updated_at FROM users`;
+                    06     db.query(sql, (err, users) => {
+                    07       if (err) {
+                    08         console.log('Error al listar usuarios: ', err);
+                    09         result(err, null);
+                    10       } else {
+                    11         console.log('Usuarios encontrados: ', users.length);
+                    12         result(null, users);
+                    13       }
+                    14     });
+                    15   };
+                    16   User.findById = (id, result) => {
+                    17     const sql = `SELECT id, email, name, lastname, image, password FROM users WHERE id = ?`;
+                    18     db.query(sql,
+                    19       [id], (err, user) => {
+                    20         if (err) {
+                    21           console.log('Error al consultar: ', err);
+                    22           result(err, null);
+                    23         }
+                    24         else {
+                    25           console.log('Usuario consultado: ',  user[0] );
+                    26           result(null, user[0]);
+                    27         }
+                    28       }
+                    29     );
+                    30   };
+                    31   User.findByEmail = (email, result) => {
+                    32     const sql = `SELECT id, email, name, lastname, image, phone, password FROM users WHERE email = ?`;
+                    33     db.query(
+                    34       sql,
+                    35       [email], 
+                    36       (err, user) => {
+                    37         if (err) {
+                    38           console.log('Error al consultar: ', err);
+                    39           result(err, null);
+                    40         }
+                    41         else {
+                    42           console.log('Usuario consultado: ',  user[0] );
+                    43           result(null, user[0]);
+                    44         }
+                    45       }
+                    46     );
+                    47   };
+                    48   User.create = async (user, result) => {
+                    49     const hash = await bcrypt.hash(user.password, 10)
+                    50     const sql = `INSERT INTO USERS(
+                    51                   email, 
+                    52                   name, 
+                    53                   lastname,
+                    54                   phone,
+                    55                   image,
+                    56                   password,
+                    57                   created_at,
+                    58                   updated_at
+                    59                 ) VALUES (?,?,?,?,?,?,?,?)`;
+                    60     db.query(sql,
+                    61       [
+                    62         user.email,
+                    63         user.name,
+                    64         user.lastname,
+                    65         user.phone,
+                    66         user.image,
+                    67         hash,
+                    68         new Date(),
+                    69         new Date()
+                    70       ], (err, res) => {
+                    71         if (err) {
+                    72           console.log('Error al crear al Usuario: ', err);
+                    73           result(err, null);
+                    74         } else {
+                    75           console.log('Usuario creado: ', {id: res.insertId, ...user});
+                    76           result(null, {id: res.insertId, ...user});
+                    77         }
+                    78       }
+                    79     );
+                    80   };
+                    81   User.update = async (user, result) => {
+                    82     let fields = [];
+                    83     let values = [];
+                    84 
+                    85     // Si viene contraseña, la hasheamos
+                    86     if (user.password) {
+                    87       const hash = await bcrypt.hash(user.password, 10);
+                    88       fields.push("password = ?");
+                    89       values.push(hash);
+                    90     }
+                    91 
+                    92     if (user.email) {
+                    93       fields.push("email = ?");
+                    94       values.push(user.email);
+                    95     }
+                    96     if (user.name) {
+                    97       fields.push("name = ?");
+                    98       values.push(user.name);
+                    99     }
+                   100     if (user.lastname) {
+                   101       fields.push("lastname = ?");
+                   102       values.push(user.lastname);
+                   103     }
+                   104     if (user.phone) {
+                   105       fields.push("phone = ?");
+                   106       values.push(user.phone);
+                   107     }
+                   108     if (user.image) {
+                   109       fields.push("image = ?");
+                   110       values.push(user.image);
+                   111     }
+                   112
+                   113     fields.push("updated_at = ?");
+                   114     values.push(new Date());
+                   115
+                   116     const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+                   117     values.push(user.id);
+                   118 
+                   119     db.query(sql, values, (err, res) => {
+                   120       if (err) {
+                   121         console.log('Error al actualizar usuario: ', err);
+                   122         result(err, null);
+                   123       } else {
+                   124         console.log('Usuario actualizado: ', { id: user.id, ...user });
+                   125         result(null, { id: user.id, ...user });
+                   126       }
+                   127     });
+                   128   };
+                   129   User.delete = (id, result) => {
+                   130     const sql = `DELETE FROM users WHERE id = ?`;
+                   131     db.query(sql, [id], (err, res) => {
+                   132       if (err) {
+                   133         console.log('Error al eliminar usuario: ', err);
+                   134         result(err, null);
+                   135       } else {
+                   136         console.log('Usuario eliminado con id: ', id);
+                   137         result(null, res);
+                   138       }
+                   139     });
+                   140   };
+                   141   module.exports = User;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -510,7 +586,7 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 04.05.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        
+
                     01   const User = require('../models/user');
                     02   const bcrypt = require('bcryptjs');
                     03   const jwt = require('jsonwebtoken');
@@ -559,25 +635,98 @@
                     46         }
                     47       });
                     48     },
-                    49     register(req, res) {
-                    50       const user = req.body;
-                    51       User.create(user, (err, data) => {
-                    52         if (err) {
-                    53           return res.status(501).json ({
-                    54             success: false,
-                    55             message: 'Error al crear al usuario',
-                    56             error: err
-                    57           });
-                    58         } else {
-                    59           return res.status(201).json({
-                    60             success: true,
-                    61             message: 'Creado el Usuario',
-                    62             data: data
-                    63           });
-                    64         }
-                    65       });
-                    66     }
-                    67   }
+                    49     getAllUsers(req, res) {
+                    50       User.findAll((err, users) => {
+                    51         if (err) {
+                    52           return res.status(501).json({
+                    53             success: false,
+                    54             message: 'Error al listar usuarios',
+                    55             error: err
+                    56           });
+                    57         }
+                    58         return res.status(200).json({
+                    59           success: true,
+                    60           message: 'Lista de usuarios',
+                    61           data: users
+                    62         });
+                    63       });
+                    64     },
+                    65     getUserById(req, res) {
+                    66       const id = req.params.id;
+                    67       User.findById(id, (err, user) => {
+                    68         if (err) {
+                    69           return res.status(501).json({
+                    70             success: false,
+                    71             message: 'Error al consultar el usuario',
+                    72             error: err
+                    73           });
+                    74         }
+                    75         if (!user) {
+                    76           return res.status(404).json({
+                    77             success: false,
+                    78             message: 'Usuario no encontrado'
+                    79           });
+                    80         }
+                    81         return res.status(200).json({
+                    82           success: true,
+                    83           message: 'Usuario encontrado',
+                    84           data: user
+                    85         });
+                    86       });
+                    87     },
+                    88     register(req, res) {
+                    89       const user = req.body;
+                    90       User.create(user, (err, data) => {
+                    91         if (err) {
+                    92           return res.status(501).json ({
+                    93             success: false,
+                    94             message: 'Error al crear al usuario',
+                    95             error: err
+                    96           });
+                    97         } else {
+                    98           return res.status(201).json({
+                    99             success: true,
+                   100             message: 'Creado el Usuario',
+                   101             data: data
+                   102           });
+                   103         }
+                   104       });
+                   105     },
+                   106     getUserUpdate(req, res) {
+                   107       const user = req.body;
+                   108       User.update(user, (err, data) => {
+                   109         if (err) {
+                   110           return res.status(501).json({
+                   111             success: false,
+                   112             message: 'Error al actualizar el usuario',
+                   113             error: err
+                   114           });
+                   115         }
+                   116         return res.status(200).json({
+                   117           success: true,
+                   118           message: 'Usuario actualizado',
+                   119           data: data
+                   120         });
+                   121       });
+                   122     },
+                   123     getUserDelete(req, res) {
+                   124       const id = req.params.id;
+                   125       User.delete(id, (err, data) => {
+                   126         if (err) {
+                   127           return res.status(501).json({
+                   128             success: false,
+                   129             message: 'Error al eliminar el usuario',
+                   130             error: err
+                   131           });
+                   132         }
+                   133         return res.status(200).json({
+                   134           success: true,
+                   135           message: 'Usuario eliminado',
+                   136           data: data
+                   137         });
+                   138       });
+                   139     }
+                   140   }
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -599,9 +748,13 @@
                     
                     01   const userController = require('../controllers/userController');
                     02   module.exports = (app) => {
-                    03     app.post('/api/users/create', userController.register);
-                    04     app.post('/api/users/login', userController.login);
-                    05   }
+                    03     app.get('/api/users', userController.getAllUsers);
+                    04     app.get('/api/users/:id', userController.getUserById);
+                    05     app.post('/api/users/create', userController.register);
+                    06     app.put('/api/users/update', userController.getUserUpdate);
+                    07     app.delete('/api/users/delete/:id', userController.getUserDelete);
+                    08     app.post('/api/users/login', userController.login);
+                    09   }
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
