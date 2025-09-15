@@ -183,6 +183,8 @@
                         │   │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
                         │   ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
                         │   │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
+                        │   ├── middleware/                                         # C. 
+                        │   │   └── authMiddleware.js                               # A. 
                         │   ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
                         │   │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
             (NO CREAR)  │   ├── node_modules/                                       # C. Dependencias (librerías) instaladas para el backend.
