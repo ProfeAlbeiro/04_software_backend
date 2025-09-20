@@ -185,7 +185,7 @@
                         │   │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
                         │   ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
                         │   │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
-                        │   ├── middleware/                                         # C. 
+                        │   ├── middlewares/                                        # C. 
                         │   │   └── authMiddleware.js                               # A. 
                         │   ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
                         │   │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
@@ -989,7 +989,7 @@
             01. Seleccionar el método 'GET usersAll'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users): 'http://192.168.56.1:3000/api/users'
+                (ENDPOINT: /api/users): 'http://192.168.1.77:3000/api/users'
 
             03. Dar click a 'Send'
             
@@ -1020,7 +1020,7 @@
             01. Seleccionar el método 'GET userById'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/:id): 'http://192.168.56.1:3000/api/users/1'
+                (ENDPOINT: /api/users/:id): 'http://192.168.1.77:3000/api/users/1'
 
             03. Dar click a 'Send'
             
@@ -1046,7 +1046,7 @@
             01. Seleccionar el método 'POST userUpdates'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/update): 'http://192.168.56.1:3000/api/users/update'
+                (ENDPOINT: /api/users/update): 'http://192.168.1.77:3000/api/users/update'
 
             03. Dar click a 'Body / raw / JSON'
 
@@ -1088,7 +1088,7 @@
             01. Seleccionar el método 'DELETE userDelete'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/delete/:id): 'http://192.168.56.1:3000/api/users/delete/1'
+                (ENDPOINT: /api/users/delete/:id): 'http://192.168.1.77:3000/api/users/delete/1'
 
 
             03. Dar click a 'Body / raw / JSON'

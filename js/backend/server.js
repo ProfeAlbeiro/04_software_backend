@@ -1,31 +1,49 @@
 const express = require('express');
-const passport = require('passport');
-const app = express();
 const http = require('http');
-const server = http.createServer(app);
 const logger = require('morgan');
 const cors = require('cors');
 const usersRoutes = require('./routes/userRoutes');
+
+const app = express();
+const server = http.createServer(app);
+
 const port = process.env.PORT || 3000;
+
+// Middlewares globales
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
-require('./config/passport')(passport);
+
+// Rutas
+app.use('/api/users', usersRoutes);
+
+// Configuración extra
 app.disable('x-powered-by');
 app.set('port', port);
-usersRoutes(app);
-server.listen(3000, '192.168.1.77' || 'localhost', function(){
-  console.log('App node.js ' + process.pid + ' ejecutando en ' + server.address().address + ':' + server.address().port);
+
+// Servidor
+server.listen(port, '192.168.1.77' || 'localhost', function () {
+  console.log(
+    'App node.js ' +
+      process.pid +
+      ' ejecutando en ' +
+      server.address().address +
+      ':' +
+      server.address().port
+  );
 });
+
+// Endpoints de prueba
 app.get('/', (req, res) => {
   res.send('Ruta raíz del Backend');
 });
+
 app.get('/test', (req, res) => {
   res.send('Ruta TEST');
 });
+
+// Manejo de errores
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(err.status || 500).send(err.stack);
