@@ -11,7 +11,6 @@ function verifyToken(req, res, next) {
     });
   }
 
-  // El token viene como: "JWT <token>" o "Bearer <token>"
   const token = authHeader.split(' ')[1];
   if (!token) {
     return res.status(403).json({
@@ -28,7 +27,7 @@ function verifyToken(req, res, next) {
         error: err
       });
     }
-    req.user = decoded; // Aquí estará { id, email }
+    req.user = decoded;
     next();
   });
 }
