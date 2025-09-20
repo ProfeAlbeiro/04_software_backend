@@ -266,6 +266,9 @@
                     ⦿   PS C:\..\backend> npm i passport@0.4.1
                     ⦿   PS C:\..\backend> npm i passport-jwt@4.0.1
                     ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
+                    ⦿   PS C:\..\backend> npm i dotenv
+                    ⦿   PS C:\..\backend> npm audit fix
+                    ⦿   PS C:\..\backend> npm audit fix --force
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
