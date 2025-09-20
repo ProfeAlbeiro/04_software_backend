@@ -64,7 +64,7 @@ User.create = async (user, result) => {
       hash,
       user.phone,
       user.image,
-      user.role || 'user', // 👈 rol por defecto
+      user.role || 'user',
       new Date(),
       new Date()
     ], (err, res) => {
