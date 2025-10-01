@@ -177,26 +177,27 @@
                                                                                                                                                       # C = Carpetas
                                                                                                                                                       # A = Archivos
 
-                        proyecto/                                                   # C. Backend y Frontend de un proyecto móvil.
-                        ├── backend/                                                # C. Lógica del servidor Node.js para la gestión de datos y API.
-                        │   ├── config/                                             # C. Configuración del backend (base de datos, claves).
-                        │   │   ├── config.js                                       # A. Configuración principal del backend (variables de entorno, etc.).
-                        │   │   ├── keys.js                                         # A. Claves secretas para seguridad (JWT, servicios externos).
-                        │   │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
-                        │   ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
-                        │   │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
-                        │   ├── middlewares/                                        # C. 
-                        │   │   └── authMiddleware.js                               # A. 
-                        │   ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
-                        │   │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
-            (NO CREAR)  │   ├── node_modules/                                       # C. Dependencias (librerías) instaladas para el backend.
-                        │   ├── routes/                                             # C. Endpoints (rutas) de la API del backend.
-                        │   │   └── userRoutes.js                                   # A. Define las rutas para las operaciones relacionadas con usuarios.
-            (NO CREAR)  │   ├── package-lock.json                                   # A. Versiones exactas de las dependencias del backend.
-            (NO CREAR)  │   ├── package.json                                        # A. Manifiesto del backend (nombre, dependencias, scripts, etcs).
-                        │   └── server.js                                           # A. Servidor node.js.
-                        └── database/                                               # C. Lógica del servidor Node.js para la gestión de datos y API.
-                            └── db_node.sql                                         # A. Base de datos del proyecto
+                        proyecto/                                             # C. Backend y Frontend de un proyecto software (web o móvil).
+                        ├── backend/                                          # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        │   ├── config/                                       # C. Configuración del backend (base de datos, claves, autenticación).
+                        │   │   ├── config.js                                 # A. Configuración principal del backend (variables de entorno, BD, etc.).
+                        │   │   ├── keys.js                                   # A. Claves secretas para seguridad (JWT, OAuth, servicios externos).
+                        │   │   └── passport.js                               # A. Configuración de la estrategia de autenticación con Passport.js.
+                        │   ├── controllers/                                  # C. Manejan la lógica de negocio y conexión entre rutas y modelos.
+                        │   │   └── userController.js                         # A. Controlador para las operaciones relacionadas con los usuarios (CRUD, login).
+                        │   ├── middlewares/                                  # C. Funciones que interceptan las peticiones HTTP (autenticación, validaciones).
+                        │   │   └── authMiddleware.js                         # A. Middleware para verificar autenticación/autorización de usuarios.
+                        │   ├── models/                                       # C. Definición de modelos de datos que representan tablas en la base de datos.
+                        │   │   └── user.js                                   # A. Esquema del modelo de usuario (campos, validaciones, consultas SQL).
+            (NO CREAR)  │   ├── node_modules/                                 # C. Dependencias externas instaladas vía NPM.
+                        │   ├── routes/                                       # C. Define las rutas de la API que conectan con los controladores.
+                        │   │   └── userRoutes.js                             # A. Endpoints relacionados con usuarios (registro, login, CRUD).
+            (NO CREAR)  │   ├── index.js                                      # A.  Punto principal de entrada del backend. Carga 'server.js' y arranca la app.
+            (NO CREAR)  │   ├── package-lock.json                             # A. Versiones exactas de las dependencias instaladas.
+            (NO CREAR)  │   ├── package.json                                  # A. Manifest del backend (nombre del proyecto, scripts, dependencias).
+                        │   └── server.js                                     # A. Configuración del servidor Express (middlewares, rutas, DB, etc.).
+                        └── database/                                         # C. Archivos relacionados con la base de datos.
+                            └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -257,16 +258,16 @@
 |-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
+                    ⦿   PS C:\..\backend> npm i bcryptjs@3.0.2
+                    ⦿   PS C:\..\backend> npm i cors@2.8.5
+                    ⦿   PS C:\..\backend> npm i dotenv
                     ⦿   PS C:\..\backend> npm i express@4.21.2
                     ⦿   PS C:\..\backend> npm i http@0.0.1-security
-                    ⦿   PS C:\..\backend> npm i cors@2.8.5
+                    ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
                     ⦿   PS C:\..\backend> npm i morgan@1.10.0
                     ⦿   PS C:\..\backend> npm i mysql@2.18.1
-                    ⦿   PS C:\..\backend> npm i bcryptjs@3.0.2
                     ⦿   PS C:\..\backend> npm i passport@0.4.1
                     ⦿   PS C:\..\backend> npm i passport-jwt@4.0.1
-                    ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
-                    ⦿   PS C:\..\backend> npm i dotenv
                     ⦿   PS C:\..\backend> npm audit fix
                     ⦿   PS C:\..\backend> npm audit fix --force
 
