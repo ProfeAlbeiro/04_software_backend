@@ -31,7 +31,7 @@ function verifyToken(req, res, next) {
   });
 }
 
-// Middleware para autorizar uno o varios roles
+
 function authorizeRoles(roles) {
   return (req, res, next) => {
     if (!req.user || !roles.includes(req.user.role)) {

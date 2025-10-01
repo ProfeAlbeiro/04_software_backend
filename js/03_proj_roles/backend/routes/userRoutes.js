@@ -3,8 +3,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
 
-router.post('/login', userController.login);
+// Rutas públicas
 router.post('/create', userController.register);
+router.post('/login', userController.login);
 
 // Rutas protegidas
 router.get('/', verifyToken, authorizeRoles(['admin', 'seller']), userController.getAllUsers);
