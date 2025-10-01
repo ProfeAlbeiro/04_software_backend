@@ -111,7 +111,7 @@ User.update = async (user, result) => {
     fields.push("image = ?");
     values.push(user.image);
   }
-  if (user.role) {  // 👈 permitir actualizar rol
+  if (user.role) {
     fields.push("role = ?");
     values.push(user.role);
   }

@@ -510,7 +510,7 @@
                    111       fields.push("image = ?");
                    112       values.push(user.image);
                    113     }
-                   114     if (user.role) {  // 👈 permitir actualizar rol
+                   114     if (user.role) {
                    115       fields.push("role = ?");
                    116       values.push(user.role);
                    117     }
@@ -588,29 +588,33 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 04.05.  Codificar el Jason Web Token con la key en 'backend/config/passport.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                    
+
                     01   const JwtStrategy = require('passport-jwt').Strategy;
                     02   const ExtractJwt = require('passport-jwt').ExtractJwt;
-                    03   const Keys = require('./keys');
-                    04   const User = require('../models/user');
-                    05   module.exports = (passport) => {
-                    06     let opts = {};
-                    07     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-                    08     opts.secretOrKey = Keys.secretOrKey;
-                    09     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-                    10       User.findById(jwt_payload.id, (err, user) => {
-                    11         if (err) {
-                    12           return done(err, false);
-                    13         }
-                    14         if (user) {
-                    15           return done(null, user);
-                    16         }
-                    17         else{
-                    18           return done(null, false);
-                    19         }
-                    20       });
-                    21     }));
-                    22   }
+                    03   const passport = require('passport');
+                    04   const Keys = require('./keys');
+                    05   const User = require('../models/user');
+                    06 
+                    07   const opts = {
+                    08     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+                    09     secretOrKey: Keys.secretOrKey
+                    10   };
+                    11     
+                    12   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+                    13     User.findById(jwt_payload.id, (err, user) => {
+                    14       if (err) {
+                    15         return done(err, false);
+                    16       }
+                    17       if (user) {
+                    18         return done(null, user);
+                    19       }
+                    20       else{
+                    21         return done(null, false);
+                    22       }
+                    23     });
+                    24   }));
+                    25 
+                    26   module.exports = passport; 
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
