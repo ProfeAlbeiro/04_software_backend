@@ -292,7 +292,7 @@
                     09     password VARCHAR(255) NOT NULL,
                     10     phone VARCHAR(20),
                     11     image VARCHAR(255),  
-                    12     role ENUM('admin', 'vendedor', 'user') NOT NULL DEFAULT 'user',
+                    12     role ENUM('admin', 'seller', 'customer', 'user') NOT NULL DEFAULT 'user',
                     13     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     14     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                     15   ) ENGINE=InnoDB;
