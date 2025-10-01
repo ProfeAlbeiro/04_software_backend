@@ -8,8 +8,8 @@ CREATE TABLE users (
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   phone VARCHAR(20),
-  image VARCHAR(255),  
-  role ENUM('admin', 'seller', 'customer', 'user') NOT NULL DEFAULT 'user',
+  image VARCHAR(255),
+  role VARCHAR(20),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;

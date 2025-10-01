@@ -291,8 +291,8 @@
                     08     email VARCHAR(150) NOT NULL UNIQUE,
                     09     password VARCHAR(255) NOT NULL,
                     10     phone VARCHAR(20),
-                    11     image VARCHAR(255),  
-                    12     role ENUM('admin', 'seller', 'customer', 'user') NOT NULL DEFAULT 'user',
+                    11     image VARCHAR(255),
+                    12     role VARCHAR(20),
                     13     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     14     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                     15   ) ENGINE=InnoDB;
