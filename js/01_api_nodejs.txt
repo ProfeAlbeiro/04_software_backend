@@ -235,7 +235,6 @@
                         Is this OK? (yes) yes
 
             05. Modificar el archivo 'package.json' y modificar la línea 8, quedando así:
-
                       1    {
                       2      "name": "mi-api-node",
                       3      "version": "1.0.0",
@@ -301,98 +300,6 @@
                             └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
 
 
-<<<<<<< HEAD
-=======
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.02.  Crear el 'package.json': ------------------------------------------------------------------------------------------------------------------------------------|
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-            01. Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
-
-            02. Cambiar el nombre de la terminal a 'backend', seleccionándola en la parte inferior derecha y presionando F2 / Rename...
-            
-            03. Cambiar el color de la terminal 'backend', dando click derecho / Chage Color... / Seleccionar el color
-            
-            04. En la Terminal de 'Visual Studio Code' digitar lo siguiente:
-
-                    ⦿  PS C:\..\..> cd backend
-                    ⦿  PS C:\..\backend> npm init
-
-                        This utility will walk you through creating a package.json file.
-                        It only covers the most common items, and tries to guess sensible defaults.
-
-                        See `npm help init` for definitive documentation on these fields
-                        and exactly what they do.
-
-                        Use `npm install <pkg>` afterwards to install a package and
-                        save it as a dependency in the package.json file.
-
-                        Press ^C at any time to quit.
-                        package name: (backend) mi-api-node
-                        version: (1.0.0)
-                        description: API en Node.js con Express y JWT
-                        entry point: (index.js)
-                        test command:
-                        git repository:
-                        keywords: NodeJs
-                        author: Albeiro Ramos
-                        license: (ISC) MIT
-                        About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
-
-                        {
-                          "name": "mi-api-node",
-                          "version": "1.0.0",
-                          "description": "API en Node.js con Express y JWT",
-                          "main": "index.js",
-                          "scripts": {
-                            "test": "echo \"Error: no test specified\" && exit 1"
-                          },
-                          "keywords": [
-                            "NodeJs"
-                          ],
-                          "author": "Instructor Albeiro Ramos",
-                          "license": "MIT"
-                        }
-
-                        Is this OK? (yes) yes
-
-            05. Modificar el archivo 'package.json' y modificar la línea 8, quedando así:
-
-                      1    {
-                      2      "name": "mi-api-node",
-                      3      "version": "1.0.0",
-                      4      "description": "API en Node.js con Express y JWT",
-                      5      "main": "index.js",
-                      6      "scripts": {
-                      7        "test": "echo \"Error: no test specified\" && exit 1",
-                      8        "start": "node index.js"
-                      9      },
-                     10      "keywords": [
-                     11        "NodeJs"
-                     12      ],
-                     13      "author": "Albeiro Ramos",
-                     14      "license": "MIT"
-                     15    }
-
-
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-                    ⦿  PS C:\..\backend> npm i bcryptjs@3.0.2
-                    ⦿  PS C:\..\backend> npm i cors@2.8.5
-                    ⦿  PS C:\..\backend> npm i dotenv
-                    ⦿  PS C:\..\backend> npm i express@4.21.2
-                    ⦿  PS C:\..\backend> npm i http@0.0.1-security
-                    ⦿  PS C:\..\backend> npm i jsonwebtoken@9.0.2
-                    ⦿  PS C:\..\backend> npm i morgan@1.10.0
-                    ⦿  PS C:\..\backend> npm i mysql@2.18.1
-                    ⦿  PS C:\..\backend> npm i passport@0.4.1
-                    ⦿  PS C:\..\backend> npm i passport-jwt@4.0.1
-                    ⦿  PS C:\..\backend> npm audit fix
-                    ⦿  PS C:\..\backend> npm audit fix --force
-
->>>>>>> 08e8d2fe5d95108ff75dfbc70d2dfa9b766642b1
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
