@@ -28,9 +28,10 @@
 ||| --      01.06.  Instalar XAMPP                                                                                                                                     |||
 ||| --      01.07.  Instalar Postman                                                                                                                                   |||
 ||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
-||| --      02.01.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
-||| --      02.02.  Crear el 'package.json'                                                                                                                            |||
-||| --      02.03.  Instalar dependencias al 'backend/'                                                                                                                |||
+||| --      02.01.  Crear la carpeta raíz del proeycto                                                                                                                 |||
+||| --      02.02.  Crear el archivo para manejar las dependencias 'package.json'                                                                                      |||
+||| --      02.03.  Instalar dependencias en el 'backend/'                                                                                                             |||
+||| --      02.04.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
 ||| --      03.01.  Codificar la base de datos 'database/db_node.sql'                                                                                                  |||
 ||| --      03.02.  Ejecutar la base de datos 'database/db_node.sql'                                                                                                   |||
@@ -171,38 +172,17 @@
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.01.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
-                                                                                                                                                      
-                                                                                                                                                      # C = Carpetas
-                                                                                                                                                      # A = Archivos
+|-- 02.01.  Crear la carpeta raíz del proeycto: -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                        proyecto/                                             # C. Backend y Frontend de un proyecto software (web o móvil).
-                        ├── backend/                                          # C. Lógica del servidor Node.js para la gestión de datos y API.
-                        │   ├── config/                                       # C. Configuración del backend (base de datos, claves, autenticación).
-                        │   │   ├── config.js                                 # A. Configuración principal del backend (variables de entorno, BD, etc.).
-                        │   │   ├── keys.js                                   # A. Claves secretas para seguridad (JWT, OAuth, servicios externos).
-                        │   │   └── passport.js                               # A. Configuración de la estrategia de autenticación con Passport.js.
-                        │   ├── controllers/                                  # C. Manejan la lógica de negocio y conexión entre rutas y modelos.
-                        │   │   └── userController.js                         # A. Controlador para las operaciones relacionadas con los usuarios (CRUD, login).
-                        │   ├── middlewares/                                  # C. Funciones que interceptan las peticiones HTTP (autenticación, validaciones).
-                        │   │   └── authMiddleware.js                         # A. Middleware para verificar autenticación/autorización de usuarios.
-                        │   ├── models/                                       # C. Definición de modelos de datos que representan tablas en la base de datos.
-                        │   │   └── user.js                                   # A. Esquema del modelo de usuario (campos, validaciones, consultas SQL).
-            (NO CREAR)  │   ├── node_modules/                                 # C. Dependencias externas instaladas vía NPM.
-                        │   ├── routes/                                       # C. Define las rutas de la API que conectan con los controladores.
-                        │   │   └── userRoutes.js                             # A. Endpoints relacionados con usuarios (registro, login, CRUD).
-                        │   ├── .env                                          # A. Cadena de conexión a la base de datos.
-                        │   ├── index.js                                      # A. Punto principal de entrada del backend. Carga 'server.js' y arranca la app.
-            (NO CREAR)  │   ├── package-lock.json                             # A. Versiones exactas de las dependencias instaladas.
-            (NO CREAR)  │   ├── package.json                                  # A. Manifest del backend (nombre del proyecto, scripts, dependencias).
-                        │   └── server.js                                     # A. Configuración del servidor Express (middlewares, rutas, DB, etc.).
-                        └── database/                                         # C. Archivos relacionados con la base de datos.
-                            └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
-
+            01. En cualquier parte del computador (Se sugiere en el Escritorio de Windows), crear la carpeta 'proyecto'
+            
+            02. En el interior de la carpeta 'proyecto', crear dos más 'backend' y 'database'
+            
+            03. Abrir la carpeta 'proyecto' con 'Visual Studio Code'
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.02.  Crear el 'package.json': ------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.02.  Crear el archivo para manejar las dependencias 'package.json': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
@@ -274,7 +254,7 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
+|-- 02.03.  Instalar dependencias en el 'backend/': ---------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                     ⦿  PS C:\..\backend> npm i bcryptjs@3.0.2
@@ -289,6 +269,37 @@
                     ⦿  PS C:\..\backend> npm i passport-jwt@4.0.1
                     ⦿  PS C:\..\backend> npm audit fix
                     ⦿  PS C:\..\backend> npm audit fix --force
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.04.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
+                                                                                                                                                      
+                                                                                                                                                      # C = Carpetas
+                                                                                                                                                      # A = Archivos
+
+                        proyecto/                                             # C. Backend y Frontend de un proyecto software (web o móvil).
+                        ├── backend/                                          # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        │   ├── config/                                       # C. Configuración del backend (base de datos, claves, autenticación).
+                        │   │   ├── config.js                                 # A. Configuración principal del backend (variables de entorno, BD, etc.).
+                        │   │   ├── keys.js                                   # A. Claves secretas para seguridad (JWT, OAuth, servicios externos).
+                        │   │   └── passport.js                               # A. Configuración de la estrategia de autenticación con Passport.js.
+                        │   ├── controllers/                                  # C. Manejan la lógica de negocio y conexión entre rutas y modelos.
+                        │   │   └── userController.js                         # A. Controlador para las operaciones relacionadas con los usuarios (CRUD, login).
+                        │   ├── middlewares/                                  # C. Funciones que interceptan las peticiones HTTP (autenticación, validaciones).
+                        │   │   └── authMiddleware.js                         # A. Middleware para verificar autenticación/autorización de usuarios.
+                        │   ├── models/                                       # C. Definición de modelos de datos que representan tablas en la base de datos.
+                        │   │   └── user.js                                   # A. Esquema del modelo de usuario (campos, validaciones, consultas SQL).
+            (NO CREAR)  │   ├── node_modules/                                 # C. Dependencias externas instaladas vía NPM.
+                        │   ├── routes/                                       # C. Define las rutas de la API que conectan con los controladores.
+                        │   │   └── userRoutes.js                             # A. Endpoints relacionados con usuarios (registro, login, CRUD).
+                        │   ├── .env                                          # A. Cadena de conexión a la base de datos.
+                        │   ├── index.js                                      # A. Punto principal de entrada del backend. Carga 'server.js' y arranca la app.
+            (NO CREAR)  │   ├── package-lock.json                             # A. Versiones exactas de las dependencias instaladas.
+            (NO CREAR)  │   ├── package.json                                  # A. Manifest del backend (nombre del proyecto, scripts, dependencias).
+                        │   └── server.js                                     # A. Configuración del servidor Express (middlewares, rutas, DB, etc.).
+                        └── database/                                         # C. Archivos relacionados con la base de datos.
+                            └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
+
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
