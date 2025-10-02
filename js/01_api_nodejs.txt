@@ -1086,7 +1086,7 @@
                       2     "email": "user@sistema.com",
                       3     "name": "Usuario",
                       4     "lastname": "Sistema",
-                      5     "phone": "3113113111",
+                      5     "phone": "3103103101",
                       6     "image": "yyyy",
                       7     "password": "12345"
                       8   }
@@ -1118,7 +1118,7 @@
                       2        "email": "customer@sistema.com",
                       3        "name": "Customer",
                       4        "lastname": "Sistema",
-                      5        "phone": "3103103101",
+                      5        "phone": "3113113111",
                       6        "image": "yyyy",
                       7        "role": "customer",
                       8        "password": "12345"
@@ -1134,7 +1134,7 @@
                       6            "email": "customer@sistema.com",
                       7            "name": "Customer",
                       8            "lastname": "Sistema",
-                      9            "phone": "3103103101",
+                      9            "phone": "3113113111",
                      10            "image": "yyyy",
                      11            "role": "customer",
                      12            "password": "12345"
@@ -1147,7 +1147,7 @@
                       2        "email": "seller@sistema.com",
                       3        "name": "Seller",
                       4        "lastname": "Sistema",
-                      5        "phone": "3103103101",
+                      5        "phone": "3123123121",
                       6        "image": "yyyy",
                       7        "role": "seller",
                       8        "password": "12345"
@@ -1163,7 +1163,7 @@
                       6            "email": "seller@sistema.com",
                       7            "name": "Seller",
                       8            "lastname": "Sistema",
-                      9            "phone": "3103103101",
+                      9            "phone": "3123123121",
                      10            "image": "yyyy",
                      11            "role": "seller",
                      12            "password": "12345"
@@ -1176,7 +1176,7 @@
                       2        "email": "admin@sistema.com",
                       3        "name": "Admin",
                       4        "lastname": "Sistema",
-                      5        "phone": "3103103101",
+                      5        "phone": "3133133131",
                       6        "image": "yyyy",
                       7        "role": "admin",
                       8        "password": "12345"
@@ -1192,7 +1192,7 @@
                       6            "email": "admin@sistema.com",
                       7            "name": "Admin",
                       8            "lastname": "Sistema",
-                      9            "phone": "3103103101",
+                      9            "phone": "3133133131",
                      10            "image": "yyyy",
                      11            "role": "admin",
                      12            "password": "12345"
@@ -1205,7 +1205,7 @@
                       2        "email": "other@sistema.com",
                       3        "name": "Other",
                       4        "lastname": "Sistema",
-                      5        "phone": "3103103101",
+                      5        "phone": "3143143141",
                       6        "image": "yyyy",
                       7        "role": "other",
                       8        "password": "12345"
@@ -1217,13 +1217,13 @@
                       2        "success": true,
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
-                      5            "id": 4,
+                      5            "id": 5,
                       6            "email": "other@sistema.com",
                       7            "name": "Other",
                       8            "lastname": "Sistema",
-                      9            "phone": "3103103101",
+                      9            "phone": "3143143141",
                      10            "image": "yyyy",
-                     11            "role": "user",
+                     11            "role": "other",
                      12            "password": "12345"
                      13        }
                      14    }
