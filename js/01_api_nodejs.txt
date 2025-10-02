@@ -1323,7 +1323,7 @@
                       3        "message": "Acceso denegado: se requiere rol admin o seller"
                       4    }
 
-            10. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'customer':
+            10. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'seller':
 
                       1    {
                       2        "email": "seller@sistema.com",
@@ -1398,8 +1398,8 @@
                 |                                                                                                                                         |
                   NOTA:   
                     
-                    ⦿  Como puede notar, solo el 'seller' y el 'admin' pueden obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que 
-                        en 'backend/routes/userRoutes.js' en la línea 11, se está validando que únicamente los roles autorizados para esta acción sean:
+                    ⦿  Como puede notar, solo el 'seller' puede obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que en
+                        'backend/routes/userRoutes.js' en la línea 11, se está validando que únicamente los roles autorizados para esta acción sean:
                         'admin' o 'seller'
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
