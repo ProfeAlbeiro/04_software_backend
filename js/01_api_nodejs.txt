@@ -77,14 +77,14 @@
 
             02. Instalar Visual Studio Code.
 
-                    ⦿   En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.                    
+                    ⦿  En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.                    
 
             03. Abrir Visual Studio Code.
 
             04. Instalar las siguientes extensiones en Visual Studio Code:
 
-                    ⦿   Material Icon Theme                    
-                    ⦿   Live Server  
+                    ⦿  Material Icon Theme                    
+                    ⦿  Live Server  
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 01.02.  Instalar Node Js: -------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,21 +103,21 @@
             
             02. Ejecutar el siguiente comando
 
-                    ⦿   PS C:\..\..> Get-ExecutionPolicy
-                    ⦿   Restricted
+                    ⦿  PS C:\..\..> Get-ExecutionPolicy
+                    ⦿  Restricted
 
             03. Si aparece 'Restricted', hay que cambiarla a 'Unrestricted' de la siguiente forma:
 
-                    ⦿   PS C:\..\..> Set-ExecutionPolicy -Scope CurrentUser
+                    ⦿  PS C:\..\..> Set-ExecutionPolicy -Scope CurrentUser
 
-                          cmdlet Set-ExecutionPolicy en la posición 1 de la canalización de comandos
-                          Proporcione valores para los parámetros siguientes:
-                          ExecutionPolicy: Unrestricted
+                        cmdlet Set-ExecutionPolicy en la posición 1 de la canalización de comandos
+                        Proporcione valores para los parámetros siguientes:
+                        ExecutionPolicy: Unrestricted
 
             04. Verificar la versión de 'node' y 'npm':
 
-                    ⦿   PS C:\..\..> node --version
-                    ⦿   PS C:\..\..> npm --version
+                    ⦿  PS C:\..\..> node --version
+                    ⦿  PS C:\..\..> npm --version
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 01.04.  Instalar Git: -----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -150,7 +150,7 @@
                 |                                                                                                                                         |
                   NOTA:   
                     
-                    ⦿   Verificar que los puertos sean: En Apache (:80) y de MySQL (:3306).
+                    ⦿  Verificar que los puertos sean: En Apache (:80) y de MySQL (:3306).
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -215,64 +215,63 @@
             
             04. En la Terminal de 'Visual Studio Code' digitar lo siguiente:
 
-                    ⦿   PS C:\..\..> cd backend
-                    ⦿   PS C:\..\backend> npm init
+                    ⦿  PS C:\..\..> cd backend
+                    ⦿  PS C:\..\backend> npm init
 
-                            This utility will walk you through creating a package.json file.
-                            It only covers the most common items, and tries to guess sensible defaults.
+                        This utility will walk you through creating a package.json file.
+                        It only covers the most common items, and tries to guess sensible defaults.
 
-                            See `npm help init` for definitive documentation on these fields
-                            and exactly what they do.
+                        See `npm help init` for definitive documentation on these fields
+                        and exactly what they do.
 
-                            Use `npm install <pkg>` afterwards to install a package and
-                            save it as a dependency in the package.json file.
+                        Use `npm install <pkg>` afterwards to install a package and
+                        save it as a dependency in the package.json file.
 
-                            Press ^C at any time to quit.
-                            package name: (backend) nodejs
-                            version: (1.0.0)
-                            description: API Backend
-                            entry point: (server.js) server.js
-                            test command:
-                            git repository:
-                            keywords: NodeJs
-                            author: Albeiro Ramos
-                            license: (ISC) MIT
-                            About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
+                        Press ^C at any time to quit.
+                        package name: (backend) mi-api-node
+                        version: (1.0.0)
+                        description: API en Node.js con Express y JWT
+                        entry point: (server.js) index.js
+                        test command:
+                        git repository:
+                        keywords: NodeJs
+                        author: Albeiro Ramos
+                        license: (ISC) MIT
+                        About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
 
-                            {
-                              "name": "nodejs",
-                              "version": "1.0.0",
-                              "description": "Backend de la app de prueba 'my-app' de React Native",
-                              "main": "server.js",
-                              "scripts": {
-                                "test": "echo \"Error: no test specified\" && exit 1"
-                              },
-                              "keywords": [
-                                "ReactNative",
-                                "NodeJs"
-                              ],
-                              "author": "Instructor Albeiro Ramos",
-                              "license": "MIT"
-                            }
+                        {
+                          "name": "mi-api-node",
+                          "version": "1.0.0",
+                          "description": "API en Node.js con Express y JWT",
+                          "main": "index.js",
+                          "scripts": {
+                            "test": "echo \"Error: no test specified\" && exit 1"
+                          },
+                          "keywords": [
+                            "NodeJs"
+                          ],
+                          "author": "Instructor Albeiro Ramos",
+                          "license": "MIT"
+                        }
 
-                            Is this OK? (yes) yes
+                        Is this OK? (yes) yes
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    ⦿   PS C:\..\backend> npm i bcryptjs@3.0.2
-                    ⦿   PS C:\..\backend> npm i cors@2.8.5
-                    ⦿   PS C:\..\backend> npm i dotenv
-                    ⦿   PS C:\..\backend> npm i express@4.21.2
-                    ⦿   PS C:\..\backend> npm i http@0.0.1-security
-                    ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
-                    ⦿   PS C:\..\backend> npm i morgan@1.10.0
-                    ⦿   PS C:\..\backend> npm i mysql@2.18.1
-                    ⦿   PS C:\..\backend> npm i passport@0.4.1
-                    ⦿   PS C:\..\backend> npm i passport-jwt@4.0.1
-                    ⦿   PS C:\..\backend> npm audit fix
-                    ⦿   PS C:\..\backend> npm audit fix --force
+                    ⦿  PS C:\..\backend> npm i bcryptjs@3.0.2
+                    ⦿  PS C:\..\backend> npm i cors@2.8.5
+                    ⦿  PS C:\..\backend> npm i dotenv
+                    ⦿  PS C:\..\backend> npm i express@4.21.2
+                    ⦿  PS C:\..\backend> npm i http@0.0.1-security
+                    ⦿  PS C:\..\backend> npm i jsonwebtoken@9.0.2
+                    ⦿  PS C:\..\backend> npm i morgan@1.10.0
+                    ⦿  PS C:\..\backend> npm i mysql@2.18.1
+                    ⦿  PS C:\..\backend> npm i passport@0.4.1
+                    ⦿  PS C:\..\backend> npm i passport-jwt@4.0.1
+                    ⦿  PS C:\..\backend> npm audit fix
+                    ⦿  PS C:\..\backend> npm audit fix --force
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
@@ -285,27 +284,27 @@
 |-- 03.01. Codificar la base de datos 'database/db_node.sql': -----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
-                    002     USE db_node;
-                    003
-                    004     CREATE TABLE users (
-                    005         id INT AUTO_INCREMENT PRIMARY KEY,
-                    006         name VARCHAR(100) NOT NULL,
-                    007         lastname VARCHAR(100) NOT NULL,
-                    008         email VARCHAR(150) NOT NULL UNIQUE,
-                    009         password VARCHAR(255) NOT NULL,
-                    010         phone VARCHAR(20),
-                    011         image VARCHAR(255),
-                    012         role VARCHAR(20),
-                    013         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    014         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                    015     ) ENGINE=InnoDB;
+                      1     CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
+                      2     USE db_node;
+                      3
+                      4     CREATE TABLE users (
+                      5         id INT AUTO_INCREMENT PRIMARY KEY,
+                      6         name VARCHAR(1  ) NOT NULL,
+                      7         lastname VARCHAR(1  ) NOT NULL,
+                      8         email VARCHAR(150) NOT NULL UNIQUE,
+                      9         password VARCHAR(255) NOT NULL,
+                     10         phone VARCHAR(20),
+                     11         image VARCHAR(255),
+                     12         role VARCHAR(20),
+                     13         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                     14         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                     15     ) ENGINE=InnoDB;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -342,19 +341,19 @@
 |-- 04.01.  Codificar los valores de la cadena de conexión a la base de datos en 'backend/.env': ------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     DB_HOST=localhost
-                    002     DB_USER=root
-                    003     DB_PASSWORD=
-                    004     DB_NAME=db_node
-                    005     DB_PORT=3306
-                    006
-                    007     JWT_SECRET=e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1
+                      1     DB_HOST=localhost
+                      2     DB_USER=root
+                      3     DB_PASSWORD=
+                      4     DB_NAME=db_node
+                      5     DB_PORT=3306
+                      6
+                      7     JWT_SECRET=e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -367,26 +366,26 @@
 |-- 04.02.  Codificar la cadena de conexión en 'backend/config/config.js': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     require('dotenv').config();
-                    002     const mysql = require('mysql');
-                    003     const db = mysql.createConnection({
-                    004         host: process.env.DB_HOST,
-                    005         user: process.env.DB_USER,
-                    006         password: process.env.DB_PASSWORD,
-                    007         database: process.env.DB_NAME,
-                    008         port: process.env.DB_PORT
-                    009     });
-                    010     db.connect(function(err) {
-                    011         if (err) throw err;
-                    012         console.log('Base de datos conectada')
-                    013     });
-                    014     module.exports = db;
+                      1     require('dotenv').config();
+                      2     const mysql = require('mysql');
+                      3     const db = mysql.createConnection({
+                      4         host: process.env.DB_HOST,
+                      5         user: process.env.DB_USER,
+                      6         password: process.env.DB_PASSWORD,
+                      7         database: process.env.DB_NAME,
+                      8         port: process.env.DB_PORT
+                      9     });
+                     10     db.connect(function(err) {
+                     11         if (err) throw err;
+                     12         console.log('Base de datos conectada')
+                     13     });
+                     14     module.exports = db;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -400,105 +399,105 @@
 |-- 04.03.  Codificar el modelo usuarios en 'backend/models/user.js': ---------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     const db = require('../config/config');
-                    002     const bcrypt = require('bcryptjs');
-                    003     const User = {};
-                    004
-                    005     User.findAll = (result) => {
-                    006         const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
-                    007         db.query(sql, (err, users) => {
-                    008             if (err) {
-                    009                 console.log('Error al listar usuarios: ', err);
-                    010                 result(err, null);
-                    011             } else {
-                    012                 console.log('Usuarios encontrados: ', users.length);
-                    013                 result(null, users);
-                    014             }
-                    015         });
-                    016     };
-                    017
-                    018     User.findById = (id, result) => {
-                    019         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
-                    020         db.query(sql, [id], (err, user) => {
-                    021             if (err) {
-                    022                 console.log('Error al consultar: ', err);
-                    023                 result(err, null);
-                    024             }
-                    025             else {
-                    026                 console.log('Usuario consultado: ',  user[0] );
-                    027                 result(null, user[0]);
-                    028             }
-                    029         });
-                    030     };
-                    031
-                    032     User.findByEmail = (email, result) => {
-                    033         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
-                    034         db.query(sql, [email], (err, user) => {
-                    035             if (err) {
-                    036                 console.log('Error al consultar: ', err);
-                    037                 result(err, null);
-                    038             }
-                    039             else {
-                    040                 console.log('Usuario consultado: ',  user[0] );
-                    041                 result(null, user[0]);
-                    042             }
-                    043         });
-                    044     };
-                    045
-                    046     User.create = async (user, result) => {
-                    047         const hash = await bcrypt.hash(user.password, 10)  
-                    048         const validRoles = ['admin', 'seller', 'customer', 'user'];
-                    049         const role = validRoles.includes(user.role) ? user.role : 'user';
-                    050         const sql = `INSERT INTO users(
-                    051                         name, 
-                    052                         lastname,
-                    053                         email, 
-                    054                         password,
-                    055                         phone,
-                    056                         image,
-                    057                         role,
-                    058                         created_at,
-                    059                         updated_at
-                    060                     ) VALUES (?,?,?,?,?,?,?,?,?)`;
-                    061         db.query(sql,
-                    062             [
-                    063                 user.name,
-                    064                 user.lastname,
-                    065                 user.email,
-                    066                 hash,
-                    067                 user.phone,
-                    068                 user.image,
-                    069                 role,
-                    070                 new Date(),
-                    071                 new Date()
-                    072             ], (err, res) => {
-                    073                 if (err) {
-                    074                     console.log('Error al crear al Usuario: ', err);
-                    075                     result(err, null);
-                    076                 } else {
-                    077                     console.log('Usuario creado: ', {id: res.insertId, ...user});
-                    078                     result(null, {id: res.insertId, ...user});
-                    079                 }
-                    080             }
-                    081         );
-                    082     };
-                    083
-                    084     User.update = async (user, result) => {
-                    085         let fields = [];
-                    086         let values = [];
-                    087
-                    088         if (user.password) {
-                    089             const hash = await bcrypt.hash(user.password, 10);
-                    090             fields.push("password = ?");
-                    091             values.push(hash);
-                    092         }
-                    093
-                    094         if (user.email) {
-                    095             fields.push("email = ?");
-                    096             values.push(user.email);
-                    097         }
-                    098         if (user.name) {
-                    099             fields.push("name = ?");
+                      1     const db = require('../config/config');
+                      2     const bcrypt = require('bcryptjs');
+                      3     const User = {};
+                      4
+                      5     User.findAll = (result) => {
+                      6         const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
+                      7         db.query(sql, (err, users) => {
+                      8             if (err) {
+                      9                 console.log('Error al listar usuarios: ', err);
+                     10                 result(err, null);
+                     11             } else {
+                     12                 console.log('Usuarios encontrados: ', users.length);
+                     13                 result(null, users);
+                     14             }
+                     15         });
+                     16     };
+                     17
+                     18     User.findById = (id, result) => {
+                     19         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
+                     20         db.query(sql, [id], (err, user) => {
+                     21             if (err) {
+                     22                 console.log('Error al consultar: ', err);
+                     23                 result(err, null);
+                     24             }
+                     25             else {
+                     26                 console.log('Usuario consultado: ',  user[0] );
+                     27                 result(null, user[0]);
+                     28             }
+                     29         });
+                     30     };
+                     31
+                     32     User.findByEmail = (email, result) => {
+                     33         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
+                     34         db.query(sql, [email], (err, user) => {
+                     35             if (err) {
+                     36                 console.log('Error al consultar: ', err);
+                     37                 result(err, null);
+                     38             }
+                     39             else {
+                     40                 console.log('Usuario consultado: ',  user[0] );
+                     41                 result(null, user[0]);
+                     42             }
+                     43         });
+                     44     };
+                     45
+                     46     User.create = async (user, result) => {
+                     47         const hash = await bcrypt.hash(user.password, 10)  
+                     48         const validRoles = ['admin', 'seller', 'customer', 'user'];
+                     49         const role = validRoles.includes(user.role) ? user.role : 'user';
+                     50         const sql = `INSERT INTO users(
+                     51                         name, 
+                     52                         lastname,
+                     53                         email, 
+                     54                         password,
+                     55                         phone,
+                     56                         image,
+                     57                         role,
+                     58                         created_at,
+                     59                         updated_at
+                     60                     ) VALUES (?,?,?,?,?,?,?,?,?)`;
+                     61         db.query(sql,
+                     62             [
+                     63                 user.name,
+                     64                 user.lastname,
+                     65                 user.email,
+                     66                 hash,
+                     67                 user.phone,
+                     68                 user.image,
+                     69                 role,
+                     70                 new Date(),
+                     71                 new Date()
+                     72             ], (err, res) => {
+                     73                 if (err) {
+                     74                     console.log('Error al crear al Usuario: ', err);
+                     75                     result(err, null);
+                     76                 } else {
+                     77                     console.log('Usuario creado: ', {id: res.insertId, ...user});
+                     78                     result(null, {id: res.insertId, ...user});
+                     79                 }
+                     80             }
+                     81         );
+                     82     };
+                     83
+                     84     User.update = async (user, result) => {
+                     85         let fields = [];
+                     86         let values = [];
+                     87
+                     88         if (user.password) {
+                     89             const hash = await bcrypt.hash(user.password, 10);
+                     90             fields.push("password = ?");
+                     91             values.push(hash);
+                     92         }
+                     93
+                     94         if (user.email) {
+                     95             fields.push("email = ?");
+                     96             values.push(user.email);
+                     97         }
+                     98         if (user.name) {
+                     99             fields.push("name = ?");
                     100             values.push(user.name);
                     101         }
                     102         if (user.lastname) {
@@ -554,7 +553,7 @@
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -571,17 +570,17 @@
                 bit de forma aleatoria) para generar una clave de 256 bits; cópiela y péguela en el archivo 'backend/config/keys.js', quedando de la 
                 siguiente forma:
 
-                    001     require('dotenv').config();
-                    002
-                    003     module.exports = {
-                    004         secretOrKey: process.env.JWT_SECRET
-                    005     };
+                      1     require('dotenv').config();
+                      2
+                      3     module.exports = {
+                      4         secretOrKey: process.env.JWT_SECRET
+                      5     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -594,38 +593,38 @@
 |-- 04.05.  Codificar el Jason Web Token con la key en 'backend/config/passport.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     const JwtStrategy = require('passport-jwt').Strategy;
-                    002     const ExtractJwt = require('passport-jwt').ExtractJwt;
-                    003     const passport = require('passport');
-                    004     const Keys = require('./keys');
-                    005     const User = require('../models/user');
-                    006
-                    007     const opts = {
-                    008         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                    009         secretOrKey: Keys.secretOrKey
-                    010     };
-                    011
-                    012     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-                    013         User.findById(jwt_payload.id, (err, user) => {
-                    014             if (err) {
-                    015                 return done(err, false);
-                    016             }
-                    017             if (user) {
-                    018                 return done(null, user);
-                    019             }
-                    020             else{
-                    021                 return done(null, false);
-                    022             }
-                    023         });
-                    024     }));
-                    025
-                    026     module.exports = passport;
+                      1     const JwtStrategy = require('passport-jwt').Strategy;
+                      2     const ExtractJwt = require('passport-jwt').ExtractJwt;
+                      3     const passport = require('passport');
+                      4     const Keys = require('./keys');
+                      5     const User = require('../models/user');
+                      6
+                      7     const opts = {
+                      8         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+                      9         secretOrKey: Keys.secretOrKey
+                     10     };
+                     11
+                     12     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+                     13         User.findById(jwt_payload.id, (err, user) => {
+                     14             if (err) {
+                     15                 return done(err, false);
+                     16             }
+                     17             if (user) {
+                     18                 return done(null, user);
+                     19             }
+                     20             else{
+                     21                 return done(null, false);
+                     22             }
+                     23         });
+                     24     }));
+                     25
+                     26     module.exports = passport;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -638,105 +637,105 @@
 |-- 04.06.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     const User = require('../models/user');
-                    002     const bcrypt = require('bcryptjs');
-                    003     const jwt = require('jsonwebtoken');
-                    004     const keys = require('../config/keys');
-                    005
-                    006     module.exports = {
-                    007         login(req, res) {
-                    008             const email = req.body.email;
-                    009             const password = req.body.password;
-                    010
-                    011             User.findByEmail(email, async (err, myUser) => {
-                    012                 if (err) {
-                    013                     return res.status(501).json({
-                    014                         success: false,
-                    015                         message: 'Error al consultar el usuario',
-                    016                         error: err
-                    017                     });
-                    018                 }
-                    019
-                    020                 if (!myUser) {
-                    021                     return res.status(401).json({
-                    022                         success: false,
-                    023                         message: 'El email no existe en la base de datos'
-                    024                     });
-                    025                 }
-                    026
-                    027                 const isPasswordValid = await bcrypt.compare(password, myUser.password);
-                    028
-                    029                 if (isPasswordValid) {
-                    030                     const token = jwt.sign(
-                    031                         { id: myUser.id, email: myUser.email, role: myUser.role },
-                    032                         keys.secretOrKey,
-                    033                         { expiresIn: '1h' }
-                    034                     );
-                    035
-                    036                     const data = {
-                    037                         id: myUser.id,
-                    038                         email: myUser.email,
-                    039                         name: myUser.name,
-                    040                         lastname: myUser.lastname,
-                    041                         image: myUser.image,
-                    042                         phone: myUser.phone,
-                    043                         role: myUser.role,
-                    044                         session_token: `JWT ${token}`
-                    045                     };
-                    046
-                    047                     return res.status(201).json({
-                    048                         success: true,
-                    049                         message: 'Usuario autenticado',
-                    050                         data: data
-                    051                     });
-                    052                 } else {
-                    053                     return res.status(401).json({
-                    054                         success: false,
-                    055                         message: 'Contraseña o correo incorrecto'
-                    056                     });
-                    057                 }
-                    058             });
-                    059         },
-                    060
-                    061         getAllUsers(req, res) {
-                    062             User.findAll((err, users) => {
-                    063                 if (err) {
-                    064                     return res.status(501).json({
-                    065                         success: false,
-                    066                         message: 'Error al listar usuarios',
-                    067                         error: err
-                    068                     });
-                    069                 }
-                    070                 return res.status(200).json({
-                    071                     success: true,
-                    072                     message: 'Lista de usuarios',
-                    073                     data: users
-                    074                 });
-                    075             });
-                    076         },
-                    077
-                    078         getUserById(req, res) {
-                    079             const id = req.params.id;
-                    080             User.findById(id, (err, user) => {
-                    081                 if (err) {
-                    082                     return res.status(501).json({
-                    083                         success: false,
-                    084                         message: 'Error al consultar el usuario',
-                    085                         error: err
-                    086                     });
-                    087                 }
-                    088                 if (!user) {
-                    089                     return res.status(404).json({
-                    090                         success: false,
-                    091                         message: 'Usuario no encontrado'
-                    092                     });
-                    093                 }
-                    094                 return res.status(200).json({
-                    095                     success: true,
-                    096                     message: 'Usuario encontrado',
-                    097                     data: user
-                    098                 });
-                    099             });
+                      1     const User = require('../models/user');
+                      2     const bcrypt = require('bcryptjs');
+                      3     const jwt = require('jsonwebtoken');
+                      4     const keys = require('../config/keys');
+                      5
+                      6     module.exports = {
+                      7         login(req, res) {
+                      8             const email = req.body.email;
+                      9             const password = req.body.password;
+                     10
+                     11             User.findByEmail(email, async (err, myUser) => {
+                     12                 if (err) {
+                     13                     return res.status(501).json({
+                     14                         success: false,
+                     15                         message: 'Error al consultar el usuario',
+                     16                         error: err
+                     17                     });
+                     18                 }
+                     19
+                     20                 if (!myUser) {
+                     21                     return res.status(401).json({
+                     22                         success: false,
+                     23                         message: 'El email no existe en la base de datos'
+                     24                     });
+                     25                 }
+                     26
+                     27                 const isPasswordValid = await bcrypt.compare(password, myUser.password);
+                     28
+                     29                 if (isPasswordValid) {
+                     30                     const token = jwt.sign(
+                     31                         { id: myUser.id, email: myUser.email, role: myUser.role },
+                     32                         keys.secretOrKey,
+                     33                         { expiresIn: '1h' }
+                     34                     );
+                     35
+                     36                     const data = {
+                     37                         id: myUser.id,
+                     38                         email: myUser.email,
+                     39                         name: myUser.name,
+                     40                         lastname: myUser.lastname,
+                     41                         image: myUser.image,
+                     42                         phone: myUser.phone,
+                     43                         role: myUser.role,
+                     44                         session_token: `JWT ${token}`
+                     45                     };
+                     46
+                     47                     return res.status(201).json({
+                     48                         success: true,
+                     49                         message: 'Usuario autenticado',
+                     50                         data: data
+                     51                     });
+                     52                 } else {
+                     53                     return res.status(401).json({
+                     54                         success: false,
+                     55                         message: 'Contraseña o correo incorrecto'
+                     56                     });
+                     57                 }
+                     58             });
+                     59         },
+                     60
+                     61         getAllUsers(req, res) {
+                     62             User.findAll((err, users) => {
+                     63                 if (err) {
+                     64                     return res.status(501).json({
+                     65                         success: false,
+                     66                         message: 'Error al listar usuarios',
+                     67                         error: err
+                     68                     });
+                     69                 }
+                     70                 return res.status(200).json({
+                     71                     success: true,
+                     72                     message: 'Lista de usuarios',
+                     73                     data: users
+                     74                 });
+                     75             });
+                     76         },
+                     77
+                     78         getUserById(req, res) {
+                     79             const id = req.params.id;
+                     80             User.findById(id, (err, user) => {
+                     81                 if (err) {
+                     82                     return res.status(501).json({
+                     83                         success: false,
+                     84                         message: 'Error al consultar el usuario',
+                     85                         error: err
+                     86                     });
+                     87                 }
+                     88                 if (!user) {
+                     89                     return res.status(404).json({
+                     90                         success: false,
+                     91                         message: 'Usuario no encontrado'
+                     92                     });
+                     93                 }
+                     94                 return res.status(200).json({
+                     95                     success: true,
+                     96                     message: 'Usuario encontrado',
+                     97                     data: user
+                     98                 });
+                     99             });
                     100         },
                     101
                     102         register(req, res) {
@@ -804,7 +803,7 @@
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -818,61 +817,61 @@
 |-- 04.07.  Codificar la autenticación por JWT y Roles en 'backend/middlewares/authMiddleware.js': ----------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     const jwt = require('jsonwebtoken');
-                    002     const keys = require('../config/keys');
-                    003
-                    004     function verifyToken(req, res, next) {
-                    005         const authHeader = req.headers['authorization'];
-                    006         if (!authHeader) {
-                    007             return res.status(403).json({
-                    008                 success: false,
-                    009                 message: 'No se proporcionó un token'
-                    010             });
-                    011         }
-                    012
-                    013         const token = authHeader.split(' ')[1];
-                    014         if (!token) {
-                    015             return res.status(403).json({
-                    016                 success: false,
-                    017                 message: 'Formato de token inválido'
-                    018             });
-                    019         }
-                    020
-                    021         jwt.verify(token, keys.secretOrKey, (err, decoded) => {
-                    022             if (err) {
-                    023                 return res.status(401).json({
-                    024                     success: false,
-                    025                     message: 'Token inválido o expirado',
-                    026                     error: err
-                    027                 });
-                    028             }
-                    029             req.user = decoded;
-                    030             next();
-                    031         });
-                    032     }
-                    033
-                    034     function authorizeRoles(roles) {
-                    035         return (req, res, next) => {
-                    036             if (!req.user || !roles.includes(req.user.role)) {
-                    037                 return res.status(403).json({
-                    038                     success: false,
-                    039                     message: `Acceso denegado: se requiere rol ${roles.join(' o ')}`
-                    040                 });
-                    041             }
-                    042             next();
-                    043         };
-                    044     }
-                    045
-                    046     module.exports = {
-                    047         verifyToken,
-                    048         authorizeRoles
-                    049     };
+                      1     const jwt = require('jsonwebtoken');
+                      2     const keys = require('../config/keys');
+                      3
+                      4     function verifyToken(req, res, next) {
+                      5         const authHeader = req.headers['authorization'];
+                      6         if (!authHeader) {
+                      7             return res.status(403).json({
+                      8                 success: false,
+                      9                 message: 'No se proporcionó un token'
+                     10             });
+                     11         }
+                     12
+                     13         const token = authHeader.split(' ')[1];
+                     14         if (!token) {
+                     15             return res.status(403).json({
+                     16                 success: false,
+                     17                 message: 'Formato de token inválido'
+                     18             });
+                     19         }
+                     20
+                     21         jwt.verify(token, keys.secretOrKey, (err, decoded) => {
+                     22             if (err) {
+                     23                 return res.status(401).json({
+                     24                     success: false,
+                     25                     message: 'Token inválido o expirado',
+                     26                     error: err
+                     27                 });
+                     28             }
+                     29             req.user = decoded;
+                     30             next();
+                     31         });
+                     32     }
+                     33
+                     34     function authorizeRoles(roles) {
+                     35         return (req, res, next) => {
+                     36             if (!req.user || !roles.includes(req.user.role)) {
+                     37                 return res.status(403).json({
+                     38                     success: false,
+                     39                     message: `Acceso denegado: se requiere rol ${roles.join(' o ')}`
+                     40                 });
+                     41             }
+                     42             next();
+                     43         };
+                     44     }
+                     45
+                     46     module.exports = {
+                     47         verifyToken,
+                     48         authorizeRoles
+                     49     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -885,28 +884,28 @@
 |-- 04.08.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     const express = require('express');
-                    002     const router = express.Router();
-                    003     const userController = require('../controllers/userController');
-                    004     const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
-                    005
-                    006     // Rutas públicas
-                    007     router.post('/create', userController.register);
-                    008     router.post('/login', userController.login);
-                    009
-                    010     // Rutas protegidas
-                    011     router.get('/', verifyToken, authorizeRoles(['admin', 'seller']), userController.getAllUsers);
-                    012     router.get('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserById);
-                    013     router.put('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserUpdate);
-                    014     router.delete('/delete/:id', verifyToken, authorizeRoles(['admin']), userController.getUserDelete);
-                    015
-                    016     module.exports = router;
+                      1     const express = require('express');
+                      2     const router = express.Router();
+                      3     const userController = require('../controllers/userController');
+                      4     const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
+                      5
+                      6     // Rutas públicas
+                      7     router.post('/create', userController.register);
+                      8     router.post('/login', userController.login);
+                      9
+                     10     // Rutas protegidas
+                     11     router.get('/', verifyToken, authorizeRoles(['admin', 'seller']), userController.getAllUsers);
+                     12     router.get('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserById);
+                     13     router.put('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserUpdate);
+                     14     router.delete('/delete/:id', verifyToken, authorizeRoles(['admin']), userController.getUserDelete);
+                     15
+                     16     module.exports = router;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -919,46 +918,77 @@
 |-- 04.09.  Codificar el servidor en 'backend/server.js': ---------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001     // server.js
-                    002     const express = require('express');
-                    003     const logger = require('morgan');
-                    004     const cors = require('cors');
-                    005     const usersRoutes = require('./routes/userRoutes');
-                    006
-                    007     const app = express();
-                    008
-                    009     // Middlewares globales
-                    010     app.use(logger('dev'));
-                    011     app.use(express.json());
-                    012     app.use(express.urlencoded({ extended: true }));
-                    013     app.use(cors());
-                    014
-                    015     // Rutas
-                    016     app.use('/api/users', usersRoutes);
-                    017
-                    018     // Endpoints de prueba
-                    019     app.get('/', (req, res) => {
-                    020         res.send('Ruta raíz del Backend');
-                    021     });
-                    022
-                    023     app.get('/test', (req, res) => {
-                    024         res.send('Ruta TEST');
-                    025     });
-                    026
-                    027     // Manejo de errores
-                    028     app.use((err, req, res, next) => {
-                    029         console.log(err);
-                    030         res.status(err.status || 500).send(err.stack);
-                    031     });
-                    032
-                    033     // Exportamos la app para que la use index.js
-                    034     module.exports = app;
+                      1     // server.js
+                      2     const express = require('express');
+                      3     const logger = require('morgan');
+                      4     const cors = require('cors');
+                      5     const usersRoutes = require('./routes/userRoutes');
+                      6
+                      7     const app = express();
+                      8
+                      9     // Middlewares globales
+                     10     app.use(logger('dev'));
+                     11     app.use(express.json());
+                     12     app.use(express.urlencoded({ extended: true }));
+                     13     app.use(cors());
+                     14
+                     15     // Rutas
+                     16     app.use('/api/users', usersRoutes);
+                     17
+                     18     // Endpoints de prueba
+                     19     app.get('/', (req, res) => {
+                     20         res.send('Ruta raíz del Backend');
+                     21     });
+                     22
+                     23     app.get('/test', (req, res) => {
+                     24         res.send('Ruta TEST');
+                     25     });
+                     26
+                     27     // Manejo de errores
+                     28     app.use((err, req, res, next) => {
+                     29         console.log(err);
+                     30         res.status(err.status || 500).send(err.stack);
+                     31     });
+                     32
+                     33     // Exportamos la app para que la use index.js
+                     34     module.exports = app;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
                     
-                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.10.  Codificar el inicio del backend en 'backend/index.js': ------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                      1     const http = require('http');
+                      2     const app = require('./server');
+                      3     
+                      4     const port = process.env.PORT || 3000;
+                      5     const host = process.env.HOST || 'localhost';
+                      6     
+                      7     app.set('port', port);
+                      8     
+                      9     const server = http.createServer(app);
+                     10     
+                     11     server.listen(port, host, () => {
+                     12       console.log(`Servidor corriendo en http://${host}:${port}`);
+                     13     });
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
@@ -969,19 +999,21 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.09.  Ejecutar el Servidor 'server.js': ---------------------------------------------------------------------------------------------------------------------------|
+|-- 04.09.  Ejecutar el backend: ----------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Iniciar el servidor 'backend' desde la terminal de Visual Studio Code.
 
-                    ⦿   PS C:\..\backend> node server.js
+                    ⦿  PS C:\..\backend> node index.js
             
             02. Debe aparecer en la terminal, texto similar a lo siguiente:
             
-                    App node.js 14124 ejecutando en 192.168.1.77:3000
-                    Base de datos conectada
+                        [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+                        [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+                        Servidor corriendo en http://localhost:3000
+                        Base de datos conectada
 
-                    ⦿   Para detener el servidor, ubíquese en la terminal de Visual Studio Code y presione 'CTRL + C'.
+                    ⦿  Para detener el servidor, ubíquese en la terminal de Visual Studio Code y presione 'CTRL + C'.
 
 
 
@@ -1026,14 +1058,13 @@
 
             01. Seleccionar el método 'GET raiz'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
-                'http://192.168.1.77:3000/'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API: 'localhost:3000'
 
             03. Dar click a 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
-                    01   Ruta raíz del Backend
+                      1   Ruta raíz del Backend
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.04.  Configurar 'POST userCreate': -------------------------------------------------------------------------------------------------------------------------------|
@@ -1042,40 +1073,41 @@
             01. Seleccionar el método 'POST userCreate'
             
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/create): 'http://192.168.1.77:3000/api/users/create'
+                (ENDPOINT: /api/users/create): 'localhost:3000/api/users/create'
 
             03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
-                    01   {
-                    02     "email": "micorreo@gmail.com",
-                    03     "name": "Pedro Nel",
-                    04     "lastname": "Dominguez",
-                    05     "phone": "741852",
-                    06     "image": "yyyy",
-                    07     "password": "9876546"
-                    08   }
+                      1   {
+                      2     "email": "user@gmail.com",
+                      3     "name": "Usuario",
+                      4     "lastname": "Sistema",
+                      5     "phone": "3103103101",
+                      6     "image": "yyyy",
+                      7     "password": "12345"
+                      8   }
             
             05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Creado el Usuario",
-                    04       "data": {
-                    05           "id": 1,
-                    06           "email": "micorreo@gmail.com",
-                    07           "name": "Pedro Nel",
-                    08           "lastname": "Dominguez",
-                    09           "phone": "741852",
-                    10           "image": "yyyy",
-                    11           "password": "9876546"
-                    12       }
-                    13   }
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario creado correctamente",
+                      4        "data": {
+                      5            "id": 1,
+                      6            "email": "user@gmail.com",
+                      7            "name": "Usuario",
+                      8            "lastname": "Sistema",
+                      9            "phone": "3103103101",
+                     10            "image": "yyyy",
+                     11            "password": "12345",
+                     12            "role": "user"
+                     13        }
+                     14    }
 
-            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
+              7. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.05.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
@@ -1084,37 +1116,39 @@
             01. Seleccionar el método 'POST login'
             
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/login): 'http://192.168.1.77:3000/api/users/login'
+                (ENDPOINT: /api/users/login): 'localhost:3000/api/users/login'
 
             03. Dar click a 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
-                    01   {
-                    02     "email": "micorreo@gmail.com",
-                    03     "password": "9876546"
-                    04   }
+                      1    {
+                      2        "email": "user@gmail.com",
+                      3        "password": "12345"
+                      4    }
             
             05. Dar click a 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Usuario autenticado ",
-                    04       "data": {
-                    05           "id": 1,
-                    06           "email": "micorreo@gmail.com",
-                    07           "name": "Pedro Nel",
-                    08           "lastname": "Dominguez",
-                    09           "image": "yyyy",
-                    10           "phone": "741852",
-                    11           "session_token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-                                    eyJpZCI6MSwiZW1haWwiOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3NTc2MDkwNTR9.
-                                    -HS8TwWsPTlYZDddsvVjH7JTLuvTYPgn5AGNH2Xpf0k"
-                    12       }
-                    13   }
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario autenticado",
+                      4        "data": {
+                      5            "id": 1,
+                      6            "email": "user@gmail.com",
+                      7            "name": "Usuario",
+                      8            "lastname": "Sistema",
+                      9            "image": "yyyy",
+                     10            "phone": "3103103101",
+                     11            "role": "user",
+                     12            "session_token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                                                     eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU5MzcwNTE4LCJleHAiOjE3NTkzNzQxMTh9.
+                                                     2oJDO0HIsol2TKHD4JBzsrRuXFeCv76e7eqJCzKOpEY"
+                     13        }
+                     14    }
 
+            07. Copiar todo el código que está entre comillas del "session_token"
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.06.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
@@ -1123,28 +1157,16 @@
             01. Seleccionar el método 'GET usersAll'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users): 'http://192.168.1.77:3000/api/users'
+                (ENDPOINT: /api/users): 'localhost:3000/api/users'
 
             03. Dar click a 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Lista de usuarios",
-                    04       "data": [
-                    05           {
-                    06               "id": 1,
-                    07               "email": "micorreo@gmail.com",
-                    08               "name": "Pedro Nel",
-                    09               "lastname": "Dominguez",
-                    10               "phone": "741852",
-                    11               "image": "yyyy",
-                    12               "created_at": "2025-09-11T23:23:37.000Z",
-                    13               "updated_at": "2025-09-11T23:23:37.000Z"
-                    14           },
-                    15           {
-                    16   ......  
+                      1    {
+                      2        "success": false,
+                      3        "message": "No se proporcionó un token"
+                      4    }
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1266,7 +1288,7 @@
                 de usuario / Administrar credenciales de Windows'. Si hay una cuenta asociada 'git:https://github.com', dar click sobre la cuenta y click
                 sobre la opción 'Quitar'. 
             
-                    ⦿   De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
+                    ⦿  De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
                          siguiente comando:
 
                          PS C:\..\..> echo "protocol=https`nhost=github.com`n" | git credential-manager erase
@@ -1275,7 +1297,7 @@
                 En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'proyecto'. La carpeta raíz no debe 
                 tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar click en 'Create Repository'.
 
-                    ⦿   Si no tiene cuenta en 'GitHub', debe crear una.
+                    ⦿  Si no tiene cuenta en 'GitHub', debe crear una.
             
             03. Click derecho sobre la carpeta raíz (ejemplo, 'proyecto') y seleccionar la opción 'Open Git Bash here'; si no se 
                 encuentra la opción, hay que instalar 'Git'.
@@ -1331,7 +1353,7 @@
 
                          $ git clone https://github.com/SenaProfeAlbeiro/proyecto.git
 
-                    ⦿   Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
+                    ⦿  Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
                     
                          $ git pull
             
@@ -1411,7 +1433,7 @@
 
                     http://localhost/phpmyadmin/            
             
-                    ⦿   Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
+                    ⦿  Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
                          Cambiar los puertos de 'Apache' en 'XAMPP'); si no es posible, agregar el puerto al 'localhost', por ejemplo, si el puerto 
                          es '8080' entonces debería quedar así:
 
@@ -1419,7 +1441,7 @@
 
                          http://localhost:8080/phpmyadmin/            
             
-                    ⦿   Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
+                    ⦿  Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
                          Cambiar los puertos de 'MySQL' en 'XAMPP').
                                     
             06. Subir la base de datos (Ver el apartado 03. BASE DE DATOS).
