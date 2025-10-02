@@ -17,9 +17,6 @@
 ||| --          AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP'                                                                                                      |||
 ||| --          AX_05.  Puesta en Marcha del Proyecto                                                                                                                  |||
 |||                                                                                                                                                                    |||
-||| --  Bibliografía  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
-|||                   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
-|||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||                                                                                                                                                                    |||
 ||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
@@ -1298,7 +1295,7 @@
                       3        "message": "No se proporcionó un token"
                       4    }
 
-            05. Dar click en 'Headers' y en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+            05. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
 
             06. Dar click en 'Send'
 
@@ -1398,7 +1395,7 @@
                 |                                                                                                                                         |
                   NOTA:   
                     
-                    ⦿  Como puede notar, solo el 'seller' puede obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que en
+                    ⦿  Como puede notar, el 'seller' puede obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que en
                         'backend/routes/userRoutes.js' en la línea 11, se está validando que únicamente los roles autorizados para esta acción sean:
                         'admin' o 'seller'
                 |                                                                                                                                         |
@@ -1412,24 +1409,31 @@
             01. Seleccionar el método 'GET userById'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/:id): 'http://192.168.1.77:3000/api/users/1'
+                (ENDPOINT: /api/users/:id): 'localhost:3000/api/users/2'
 
-            03. Dar click en 'Send'
+            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
             
-            04. Verificar que la parte inferior aparezca el siguiente código:
+            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Usuario encontrado",
-                    04       "data": {
-                    05           "id": 1,
-                    06           "email": "micorreo@gmail.com",
-                    07           "name": "Pedro Nel",
-                    08           "lastname": "Dominguez",
-                    09           "image": "yyyy",
-                    10           "password": "$2b$10$tGV1SOghgYWFQGvIUI45ou1Gn0IExm9JxJadAbrnV5sSrYC1tpmQO"
-                    11       }
-                    12   }                    
+            05. Dar click en 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario encontrado",
+                      4        "data": {
+                      5            "id": 2,
+                      6            "email": "customer@sistema.com",
+                      7            "name": "Customer",
+                      8            "lastname": "Sistema",
+                      9            "image": "yyyy",
+                     10            "phone": "3113113111",
+                     11            "role": "customer",
+                     12            "password": "$2b$10$lW6ZqX.R8wlHkyYUFQmx8.ElOhbnyfm4HOVf3P6MUB3LCknjUFG8m"
+                     13        }
+                     14    }
+
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.08.  Configurar 'POST userUpdate': -------------------------------------------------------------------------------------------------------------------------------|
@@ -1438,73 +1442,94 @@
             01. Seleccionar el método 'POST userUpdates'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/update): 'http://192.168.1.77:3000/api/users/update'
+                (ENDPOINT: /api/users/update): 'localhost:3000/api/users/update'
 
-            03. Dar click en 'Body / raw / JSON'
-
-            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
-
-                    01   {
-                    02     "id": "1",
-                    03     "email": "pepito@perez.com",
-                    04     "name": "Pepe",
-                    05     "lastname": "Perez",
-                    06     "phone": "3203203210",
-                    07     "image": "yyyy",
-                    08     "password": "12345"
-                    09   }
+            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
             
-            05. Dar click en 'Send'
+            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+
+            05. Dar click en 'Body / raw / JSON'
+
+            06. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                      1    {
+                      2      "id": "2",
+                      3      "email": "customer_modified@modificado.com",
+                      4      "name": "Customer",
+                      5      "lastname": "Modified",
+                      6      "phone": "3163163161",
+                      7      "image": "yyyy",
+                      8      "password": "12345"
+                      9    }
             
-            06. Verificar que la parte inferior aparezca el siguiente código:
+            07. Dar click en 'Send'
+            
+            08. Verificar que la parte inferior aparezca el siguiente código:
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Usuario actualizado",
-                    04       "data": {
-                    05           "id": "1",
-                    06           "email": "pepito@perez.com",
-                    07           "name": "Pepe",
-                    08           "lastname": "Perez",
-                    09           "phone": "3203203210",
-                    10           "image": "yyyy",
-                    11           "password": "12345"
-                    12       }
-                    13   }
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario actualizado",
+                      4        "data": {
+                      5            "id": "2",
+                      6            "email": "customer_modified@modificado.com",
+                      7            "name": "Customer",
+                      8            "lastname": "Modified",
+                      9            "phone": "3163163161",
+                     10            "image": "yyyy",
+                     11            "password": "12345"
+                     12        }
+                     13    }
 
-            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
+            09. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.09.  Configurar 'DELETE userDelete': -------------------------------------------------------------------------------------------------------------------------|
+|-- 05.09.  Configurar 'DELETE userDelete': -----------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+            
             01. Seleccionar el método 'DELETE userDelete'
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/delete/:id): 'http://192.168.1.77:3000/api/users/delete/1'
+                (ENDPOINT: /api/users/delete/:id): 'localhost:3000/api/users/delete/5'
 
-
-            03. Dar click en 'Body / raw / JSON'
-
-            04. Dar click en 'Send'
+            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
             
-            05. Verificar que la parte inferior aparezca el siguiente código:
+            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
 
-                    01   {
-                    02       "success": true,
-                    03       "message": "Usuario eliminado",
-                    04       "data": {
-                    05           "fieldCount": 0,
-                    06           "affectedRows": 1,
-                    07           "insertId": 0,
-                    08           "serverStatus": 2,
-                    09           "warningCount": 0,
-                    10           "message": "",
-                    11           "protocol41": true,
-                    12           "changedRows": 0
-                    13       }
-                    14   }
+            05. Dar click en 'Send'
+            
+            07. En la parte inferior aparece el siguiente código:
 
-            06. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya eliminado el registro
+                      1    {
+                      2        "success": false,
+                      3        "message": "Acceso denegado: se requiere rol admin"
+                      4    }
+
+            07. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'admin':
+
+                      1    {
+                      2        "email": "admin@sistema.com",
+                      3        "password": "12345"
+                      4    }
+            
+            08. Repetir los pasos 3, 4 y 5 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario eliminado",
+                      4        "data": {
+                      5            "fieldCount": 0,
+                      6            "affectedRows": 1,
+                      7            "insertId": 0,
+                      8            "serverStatus": 2,
+                      9            "warningCount": 0,
+                     10            "message": "",
+                     11            "protocol41": true,
+                     12            "changedRows": 0
+                     13        }
+                     14    }
+
+
+            09. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya eliminado el registro
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
