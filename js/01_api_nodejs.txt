@@ -44,9 +44,10 @@
 ||| --      04.04.  Codificar la key en 'backend/config/keys.js'                                                                                                       |||
 ||| --      04.05.  Codificar el Jason Web Token con la key en 'backend/config/passport.js'                                                                            |||
 ||| --      04.06.  Codificar la API de usuarios en 'backend/controllers/userController.js'                                                                            |||
-||| --      04.07.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js'                                                                                     |||
-||| --      04.08.  Codificar el servidor en 'backend/server.js'                                                                                                       |||
-||| --      04.09.  Ejecutar el Servidor 'server.js'                                                                                                                   |||
+||| --      04.07.  Codificar la autenticación por JWT y Roles en 'backend/middlewares/authMiddleware.js'                                                              |||
+||| --      04.08.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js'                                                                                     |||
+||| --      04.09.  Codificar el servidor en 'backend/server.js'                                                                                                       |||
+||| --      04.10.  Ejecutar el Servidor 'server.js'                                                                                                                   |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
 ||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
 ||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
@@ -637,167 +638,167 @@
 |-- 04.06.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    001 const User = require('../models/user');
-                    002 const bcrypt = require('bcryptjs');
-                    003 const jwt = require('jsonwebtoken');
-                    004 const keys = require('../config/keys');
+                    001     const User = require('../models/user');
+                    002     const bcrypt = require('bcryptjs');
+                    003     const jwt = require('jsonwebtoken');
+                    004     const keys = require('../config/keys');
                     005
-                    006 module.exports = {
-                    007   login(req, res) {
-                    008     const email = req.body.email;
-                    009     const password = req.body.password;
+                    006     module.exports = {
+                    007         login(req, res) {
+                    008             const email = req.body.email;
+                    009             const password = req.body.password;
                     010
-                    011     User.findByEmail(email, async (err, myUser) => {
-                    012       if (err) {
-                    013         return res.status(501).json({
-                    014           success: false,
-                    015           message: 'Error al consultar el usuario',
-                    016           error: err
-                    017         });
-                    018       }
+                    011             User.findByEmail(email, async (err, myUser) => {
+                    012                 if (err) {
+                    013                     return res.status(501).json({
+                    014                         success: false,
+                    015                         message: 'Error al consultar el usuario',
+                    016                         error: err
+                    017                     });
+                    018                 }
                     019
-                    020       if (!myUser) {
-                    021         return res.status(401).json({
-                    022           success: false,
-                    023           message: 'El email no existe en la base de datos'
-                    024         });
-                    025       }
+                    020                 if (!myUser) {
+                    021                     return res.status(401).json({
+                    022                         success: false,
+                    023                         message: 'El email no existe en la base de datos'
+                    024                     });
+                    025                 }
                     026
-                    027       const isPasswordValid = await bcrypt.compare(password, myUser.password);
+                    027                 const isPasswordValid = await bcrypt.compare(password, myUser.password);
                     028
-                    029       if (isPasswordValid) {
-                    030         const token = jwt.sign(
-                    031           { id: myUser.id, email: myUser.email, role: myUser.role },
-                    032           keys.secretOrKey,
-                    033           { expiresIn: '1h' }
-                    034         );
+                    029                 if (isPasswordValid) {
+                    030                     const token = jwt.sign(
+                    031                         { id: myUser.id, email: myUser.email, role: myUser.role },
+                    032                         keys.secretOrKey,
+                    033                         { expiresIn: '1h' }
+                    034                     );
                     035
-                    036         const data = {
-                    037           id: myUser.id,
-                    038           email: myUser.email,
-                    039           name: myUser.name,
-                    040           lastname: myUser.lastname,
-                    041           image: myUser.image,
-                    042           phone: myUser.phone,
-                    043           role: myUser.role,
-                    044           session_token: `JWT ${token}`
-                    045         };
+                    036                     const data = {
+                    037                         id: myUser.id,
+                    038                         email: myUser.email,
+                    039                         name: myUser.name,
+                    040                         lastname: myUser.lastname,
+                    041                         image: myUser.image,
+                    042                         phone: myUser.phone,
+                    043                         role: myUser.role,
+                    044                         session_token: `JWT ${token}`
+                    045                     };
                     046
-                    047         return res.status(201).json({
-                    048           success: true,
-                    049           message: 'Usuario autenticado',
-                    050           data: data
-                    051         });
-                    052       } else {
-                    053         return res.status(401).json({
-                    054           success: false,
-                    055           message: 'Contraseña o correo incorrecto'
-                    056         });
-                    057       }
-                    058     });
-                    059   },
+                    047                     return res.status(201).json({
+                    048                         success: true,
+                    049                         message: 'Usuario autenticado',
+                    050                         data: data
+                    051                     });
+                    052                 } else {
+                    053                     return res.status(401).json({
+                    054                         success: false,
+                    055                         message: 'Contraseña o correo incorrecto'
+                    056                     });
+                    057                 }
+                    058             });
+                    059         },
                     060
-                    061   getAllUsers(req, res) {
-                    062     User.findAll((err, users) => {
-                    063       if (err) {
-                    064         return res.status(501).json({
-                    065           success: false,
-                    066           message: 'Error al listar usuarios',
-                    067           error: err
-                    068         });
-                    069       }
-                    070       return res.status(200).json({
-                    071         success: true,
-                    072         message: 'Lista de usuarios',
-                    073         data: users
-                    074       });
-                    075     });
-                    076   },
+                    061         getAllUsers(req, res) {
+                    062             User.findAll((err, users) => {
+                    063                 if (err) {
+                    064                     return res.status(501).json({
+                    065                         success: false,
+                    066                         message: 'Error al listar usuarios',
+                    067                         error: err
+                    068                     });
+                    069                 }
+                    070                 return res.status(200).json({
+                    071                     success: true,
+                    072                     message: 'Lista de usuarios',
+                    073                     data: users
+                    074                 });
+                    075             });
+                    076         },
                     077
-                    078   getUserById(req, res) {
-                    079     const id = req.params.id;
-                    080     User.findById(id, (err, user) => {
-                    081       if (err) {
-                    082         return res.status(501).json({
-                    083           success: false,
-                    084           message: 'Error al consultar el usuario',
-                    085           error: err
-                    086         });
-                    087       }
-                    088       if (!user) {
-                    089         return res.status(404).json({
-                    090           success: false,
-                    091           message: 'Usuario no encontrado'
-                    092         });
-                    093       }
-                    094       return res.status(200).json({
-                    095         success: true,
-                    096         message: 'Usuario encontrado',
-                    097         data: user
-                    098       });
-                    099     });
-                    100   },
+                    078         getUserById(req, res) {
+                    079             const id = req.params.id;
+                    080             User.findById(id, (err, user) => {
+                    081                 if (err) {
+                    082                     return res.status(501).json({
+                    083                         success: false,
+                    084                         message: 'Error al consultar el usuario',
+                    085                         error: err
+                    086                     });
+                    087                 }
+                    088                 if (!user) {
+                    089                     return res.status(404).json({
+                    090                         success: false,
+                    091                         message: 'Usuario no encontrado'
+                    092                     });
+                    093                 }
+                    094                 return res.status(200).json({
+                    095                     success: true,
+                    096                     message: 'Usuario encontrado',
+                    097                     data: user
+                    098                 });
+                    099             });
+                    100         },
                     101
-                    102   register(req, res) {
-                    103     const user = req.body;
+                    102         register(req, res) {
+                    103             const user = req.body;
                     104
-                    105     if (!user.role) {
-                    106       user.role = 'user';
-                    107     }
+                    105             if (!user.role) {
+                    106                 user.role = 'user';
+                    107             }
                     108
-                    109     User.create(user, (err, data) => {
-                    110       if (err) {
-                    111         return res.status(501).json({
-                    112           success: false,
-                    113           message: 'Error al crear al usuario',
-                    114           error: err
-                    115         });
-                    116       } else {
-                    117         return res.status(201).json({
-                    118           success: true,
-                    119           message: 'Usuario creado correctamente',
-                    120           data: data
-                    121         });
-                    122       }
-                    123     });
-                    124   },
+                    109             User.create(user, (err, data) => {
+                    110                 if (err) {
+                    111                     return res.status(501).json({
+                    112                         success: false,
+                    113                         message: 'Error al crear al usuario',
+                    114                         error: err
+                    115                     });
+                    116                 } else {
+                    117                     return res.status(201).json({
+                    118                         success: true,
+                    119                         message: 'Usuario creado correctamente',
+                    120                         data: data
+                    121                     });
+                    122                 }
+                    123             });
+                    124         },
                     125
-                    126   getUserUpdate(req, res) {
-                    127     const user = req.body;
-                    128     User.update(user, (err, data) => {
-                    129       if (err) {
-                    130         return res.status(501).json({
-                    131           success: false,
-                    132           message: 'Error al actualizar el usuario',
-                    133           error: err
-                    134         });
-                    135       }
-                    136       return res.status(200).json({
-                    137         success: true,
-                    138         message: 'Usuario actualizado',
-                    139         data: data
-                    140       });
-                    141     });
-                    142   },
+                    126         getUserUpdate(req, res) {
+                    127             const user = req.body;
+                    128             User.update(user, (err, data) => {
+                    129                 if (err) {
+                    130                     return res.status(501).json({
+                    131                         success: false,
+                    132                         message: 'Error al actualizar el usuario',
+                    133                         error: err
+                    134                     });
+                    135                 }
+                    136                 return res.status(200).json({
+                    137                     success: true,
+                    138                     message: 'Usuario actualizado',
+                    139                     data: data
+                    140                 });
+                    141             });
+                    142         },
                     143
-                    144   getUserDelete(req, res) {
-                    145     const id = req.params.id;
-                    146     User.delete(id, (err, data) => {
-                    147       if (err) {
-                    148         return res.status(501).json({
-                    149           success: false,
-                    150           message: 'Error al eliminar el usuario',
-                    151           error: err
-                    152         });
-                    153       }
-                    154       return res.status(200).json({
-                    155         success: true,
-                    156         message: 'Usuario eliminado',
-                    157         data: data
-                    158       });
-                    159     });
-                    160   }
-                    161 };
+                    144         getUserDelete(req, res) {
+                    145             const id = req.params.id;
+                    146             User.delete(id, (err, data) => {
+                    147                 if (err) {
+                    148                     return res.status(501).json({
+                    149                         success: false,
+                    150                         message: 'Error al eliminar el usuario',
+                    151                         error: err
+                    152                     });
+                    153                 }
+                    154                 return res.status(200).json({
+                    155                     success: true,
+                    156                     message: 'Usuario eliminado',
+                    157                     data: data
+                    158                 });
+                    159             });
+                    160         }
+                    161     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -814,18 +815,58 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.07.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------------|
+|-- 04.07.  Codificar la autenticación por JWT y Roles en 'backend/middlewares/authMiddleware.js': ----------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                    
-                    01   const userController = require('../controllers/userController');
-                    02   module.exports = (app) => {
-                    03     app.get('/api/users', userController.getAllUsers);
-                    04     app.get('/api/users/:id', userController.getUserById);
-                    05     app.post('/api/users/create', userController.register);
-                    06     app.put('/api/users/update', userController.getUserUpdate);
-                    07     app.delete('/api/users/delete/:id', userController.getUserDelete);
-                    08     app.post('/api/users/login', userController.login);
-                    09   }
+
+                    001     const jwt = require('jsonwebtoken');
+                    002     const keys = require('../config/keys');
+                    003
+                    004     function verifyToken(req, res, next) {
+                    005         const authHeader = req.headers['authorization'];
+                    006         if (!authHeader) {
+                    007             return res.status(403).json({
+                    008                 success: false,
+                    009                 message: 'No se proporcionó un token'
+                    010             });
+                    011         }
+                    012
+                    013         const token = authHeader.split(' ')[1];
+                    014         if (!token) {
+                    015             return res.status(403).json({
+                    016                 success: false,
+                    017                 message: 'Formato de token inválido'
+                    018             });
+                    019         }
+                    020
+                    021         jwt.verify(token, keys.secretOrKey, (err, decoded) => {
+                    022             if (err) {
+                    023                 return res.status(401).json({
+                    024                     success: false,
+                    025                     message: 'Token inválido o expirado',
+                    026                     error: err
+                    027                 });
+                    028             }
+                    029             req.user = decoded;
+                    030             next();
+                    031         });
+                    032     }
+                    033
+                    034     function authorizeRoles(roles) {
+                    035         return (req, res, next) => {
+                    036             if (!req.user || !roles.includes(req.user.role)) {
+                    037                 return res.status(403).json({
+                    038                     success: false,
+                    039                     message: `Acceso denegado: se requiere rol ${roles.join(' o ')}`
+                    040                 });
+                    041             }
+                    042             next();
+                    043         };
+                    044     }
+                    045
+                    046     module.exports = {
+                    047         verifyToken,
+                    048         authorizeRoles
+                    049     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -840,51 +881,78 @@
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
-
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.08.  Codificar el servidor en 'backend/server.js': ---------------------------------------------------------------------------------------------------------------|
+|-- 04.08.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Verificar la dirección IPv4 del dispositivo. Abra una nueva terminal en 'Visual Studio Code' y ejecutar los siguientes comandos:
-            
-                    ⦿   C:\..\backend> ipconfig
+                    001     const express = require('express');
+                    002     const router = express.Router();
+                    003     const userController = require('../controllers/userController');
+                    004     const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
+                    005
+                    006     // Rutas públicas
+                    007     router.post('/create', userController.register);
+                    008     router.post('/login', userController.login);
+                    009
+                    010     // Rutas protegidas
+                    011     router.get('/', verifyToken, authorizeRoles(['admin', 'seller']), userController.getAllUsers);
+                    012     router.get('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserById);
+                    013     router.put('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserUpdate);
+                    014     router.delete('/delete/:id', verifyToken, authorizeRoles(['admin']), userController.getUserDelete);
+                    015
+                    016     module.exports = router;
 
-                            Dirección IPv4. . . . . . . . . . . . . . : 192.168.1.77
-
-            02. En la línea 20 del archivo 'backend/server.js', escribir la dirección IPv4 encontrada, quedando de la siguiente forma:                    
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
                     
-                    01   const express = require('express');
-                    02   const passport = require('passport');
-                    03   const app = express();
-                    04   const http = require('http');
-                    05   const server = http.createServer(app);
-                    06   const logger = require('morgan');
-                    07   const cors = require('cors');
-                    08   const usersRoutes = require('./routes/userRoutes');
-                    09   const port = process.env.PORT || 3000;
-                    10   app.use(logger('dev'));
-                    11   app.use(express.json());
-                    12   app.use(express.urlencoded({ extended: true }));
-                    13   app.use(cors());
-                    14   app.use(passport.initialize());
-                    15   app.use(passport.session());
-                    16   require('./config/passport')(passport);
-                    17   app.disable('x-powered-by');
-                    18   app.set('port', port);
-                    19   usersRoutes(app);
-                    20   server.listen(3000, '192.168.1.77' || 'localhost', function(){
-                    21     console.log('App node.js ' + process.pid + ' ejecutando en ' + server.address().address + ':' + server.address().port);
-                    22   });
-                    23   app.get('/', (req, res) => {
-                    24     res.send('Ruta raíz del Backend');
-                    25   });
-                    26   app.get('/test', (req, res) => {
-                    27     res.send('Ruta TEST');
-                    28   });
-                    29   app.use((err, req, res, next) => {
-                    30     console.log(err);
-                    31     res.status(err.status || 500).send(err.stack);
-                    32   });
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.09.  Codificar el servidor en 'backend/server.js': ---------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    001     // server.js
+                    002     const express = require('express');
+                    003     const logger = require('morgan');
+                    004     const cors = require('cors');
+                    005     const usersRoutes = require('./routes/userRoutes');
+                    006
+                    007     const app = express();
+                    008
+                    009     // Middlewares globales
+                    010     app.use(logger('dev'));
+                    011     app.use(express.json());
+                    012     app.use(express.urlencoded({ extended: true }));
+                    013     app.use(cors());
+                    014
+                    015     // Rutas
+                    016     app.use('/api/users', usersRoutes);
+                    017
+                    018     // Endpoints de prueba
+                    019     app.get('/', (req, res) => {
+                    020         res.send('Ruta raíz del Backend');
+                    021     });
+                    022
+                    023     app.get('/test', (req, res) => {
+                    024         res.send('Ruta TEST');
+                    025     });
+                    026
+                    027     // Manejo de errores
+                    028     app.use((err, req, res, next) => {
+                    029         console.log(err);
+                    030         res.status(err.status || 500).send(err.stack);
+                    031     });
+                    032
+                    033     // Exportamos la app para que la use index.js
+                    034     module.exports = app;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |

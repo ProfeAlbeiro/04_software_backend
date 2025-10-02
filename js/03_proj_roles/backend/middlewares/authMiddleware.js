@@ -31,7 +31,6 @@ function verifyToken(req, res, next) {
   });
 }
 
-
 function authorizeRoles(roles) {
   return (req, res, next) => {
     if (!req.user || !roles.includes(req.user.role)) {
