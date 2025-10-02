@@ -284,21 +284,21 @@
 |-- 03.01. Codificar la base de datos 'database/db_node.sql': -----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
-                    02   USE db_node;
-                    03 
-                    04   CREATE TABLE users (
-                    05     id INT AUTO_INCREMENT PRIMARY KEY,
-                    06     name VARCHAR(100) NOT NULL,
-                    07     lastname VARCHAR(100) NOT NULL,
-                    08     email VARCHAR(150) NOT NULL UNIQUE,
-                    09     password VARCHAR(255) NOT NULL,
-                    10     phone VARCHAR(20),
-                    11     image VARCHAR(255),
-                    12     role VARCHAR(20),
-                    13     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    14     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                    15   ) ENGINE=InnoDB;
+                    001     CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
+                    002     USE db_node;
+                    003
+                    004     CREATE TABLE users (
+                    005         id INT AUTO_INCREMENT PRIMARY KEY,
+                    006         name VARCHAR(100) NOT NULL,
+                    007         lastname VARCHAR(100) NOT NULL,
+                    008         email VARCHAR(150) NOT NULL UNIQUE,
+                    009         password VARCHAR(255) NOT NULL,
+                    010         phone VARCHAR(20),
+                    011         image VARCHAR(255),
+                    012         role VARCHAR(20),
+                    013         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    014         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                    015     ) ENGINE=InnoDB;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -341,13 +341,14 @@
 |-- 04.01.  Codificar los valores de la cadena de conexión a la base de datos en 'backend/.env': ------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   DB_HOST=localhost
-                    02   DB_USER=root
-                    03   DB_PASSWORD=
-                    04   DB_NAME=db_node
-                    05   DB_PORT=3306
-                    06 
-                    07   JWT_SECRET=e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1
+                    001     DB_HOST=localhost
+                    002     DB_USER=root
+                    003     DB_PASSWORD=
+                    004     DB_NAME=db_node
+                    005     DB_PORT=3306
+                    006
+                    007     JWT_SECRET=e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1
+
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
                   EXPLICACIÓN:   
@@ -569,9 +570,11 @@
                 bit de forma aleatoria) para generar una clave de 256 bits; cópiela y péguela en el archivo 'backend/config/keys.js', quedando de la 
                 siguiente forma:
 
-                    01   module.exports = {
-                    02     secretOrKey: 'e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1'
-                    03   }
+                    01   require('dotenv').config();
+                    02 
+                    03   module.exports = {
+                    04     secretOrKey: process.env.JWT_SECRET
+                    05   };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -634,146 +637,167 @@
 |-- 04.06.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   const User = require('../models/user');
-                    02   const bcrypt = require('bcryptjs');
-                    03   const jwt = require('jsonwebtoken');
-                    04   const keys = require('../config/keys');
-                    05   module.exports = {
-                    06     login(req, res) {
-                    07       const email = req.body.email;
-                    08       const password = req.body.password;
-                    09       User.findByEmail(email, async (err, myUser) => {
-                    10         if (err) {
-                    11           return res.status(501).json({
-                    12             success: false,
-                    13             message: 'Error al consultar el usuario',
-                    14             error: err
-                    15           });
-                    16         }
-                    17         if (!myUser) {
-                    18           return res.status(401).json({
-                    19             success: false,
-                    20             message: 'El email no existe en la base de datos'
-                    21           });
-                    22         }
-                    23         const isPasswordValid = await bcrypt.compare(password, myUser.password);
-                    24         if (isPasswordValid) {
-                    25           const token = jwt.sign({ id: myUser.id, email: myUser.email }, keys.secretOrKey, {});
-                    26           const data = {
-                    27             id: myUser.id,
-                    28             email: myUser.email,
-                    29             name: myUser.name,
-                    30             lastname: myUser.lastname,
-                    31             image: myUser.image,
-                    32             phone: myUser.phone,
-                    33             session_token: `JWT ${token}`
-                    34           }
-                    35           return res.status(201).json({
-                    36             success: true,
-                    37             message: 'Usuario autenticado ',
-                    38             data: data
-                    39           });
-                    40         }
-                    41         else {
-                    42           return res.status(401).json({
-                    43             success: false,
-                    44             message: 'Contraseña o correo incorrecto'
-                    45           });
-                    46         }
-                    47       });
-                    48     },
-                    49     getAllUsers(req, res) {
-                    50       User.findAll((err, users) => {
-                    51         if (err) {
-                    52           return res.status(501).json({
-                    53             success: false,
-                    54             message: 'Error al listar usuarios',
-                    55             error: err
-                    56           });
-                    57         }
-                    58         return res.status(200).json({
-                    59           success: true,
-                    60           message: 'Lista de usuarios',
-                    61           data: users
-                    62         });
-                    63       });
-                    64     },
-                    65     getUserById(req, res) {
-                    66       const id = req.params.id;
-                    67       User.findById(id, (err, user) => {
-                    68         if (err) {
-                    69           return res.status(501).json({
-                    70             success: false,
-                    71             message: 'Error al consultar el usuario',
-                    72             error: err
-                    73           });
-                    74         }
-                    75         if (!user) {
-                    76           return res.status(404).json({
-                    77             success: false,
-                    78             message: 'Usuario no encontrado'
-                    79           });
-                    80         }
-                    81         return res.status(200).json({
-                    82           success: true,
-                    83           message: 'Usuario encontrado',
-                    84           data: user
-                    85         });
-                    86       });
-                    87     },
-                    88     register(req, res) {
-                    89       const user = req.body;
-                    90       User.create(user, (err, data) => {
-                    91         if (err) {
-                    92           return res.status(501).json ({
-                    93             success: false,
-                    94             message: 'Error al crear al usuario',
-                    95             error: err
-                    96           });
-                    97         } else {
-                    98           return res.status(201).json({
-                    99             success: true,
-                   100             message: 'Creado el Usuario',
-                   101             data: data
-                   102           });
-                   103         }
-                   104       });
-                   105     },
-                   106     getUserUpdate(req, res) {
-                   107       const user = req.body;
-                   108       User.update(user, (err, data) => {
-                   109         if (err) {
-                   110           return res.status(501).json({
-                   111             success: false,
-                   112             message: 'Error al actualizar el usuario',
-                   113             error: err
-                   114           });
-                   115         }
-                   116         return res.status(200).json({
-                   117           success: true,
-                   118           message: 'Usuario actualizado',
-                   119           data: data
-                   120         });
-                   121       });
-                   122     },
-                   123     getUserDelete(req, res) {
-                   124       const id = req.params.id;
-                   125       User.delete(id, (err, data) => {
-                   126         if (err) {
-                   127           return res.status(501).json({
-                   128             success: false,
-                   129             message: 'Error al eliminar el usuario',
-                   130             error: err
-                   131           });
-                   132         }
-                   133         return res.status(200).json({
-                   134           success: true,
-                   135           message: 'Usuario eliminado',
-                   136           data: data
-                   137         });
-                   138       });
-                   139     }
-                   140   }
+                    001 const User = require('../models/user');
+                    002 const bcrypt = require('bcryptjs');
+                    003 const jwt = require('jsonwebtoken');
+                    004 const keys = require('../config/keys');
+                    005
+                    006 module.exports = {
+                    007   login(req, res) {
+                    008     const email = req.body.email;
+                    009     const password = req.body.password;
+                    010
+                    011     User.findByEmail(email, async (err, myUser) => {
+                    012       if (err) {
+                    013         return res.status(501).json({
+                    014           success: false,
+                    015           message: 'Error al consultar el usuario',
+                    016           error: err
+                    017         });
+                    018       }
+                    019
+                    020       if (!myUser) {
+                    021         return res.status(401).json({
+                    022           success: false,
+                    023           message: 'El email no existe en la base de datos'
+                    024         });
+                    025       }
+                    026
+                    027       const isPasswordValid = await bcrypt.compare(password, myUser.password);
+                    028
+                    029       if (isPasswordValid) {
+                    030         const token = jwt.sign(
+                    031           { id: myUser.id, email: myUser.email, role: myUser.role },
+                    032           keys.secretOrKey,
+                    033           { expiresIn: '1h' }
+                    034         );
+                    035
+                    036         const data = {
+                    037           id: myUser.id,
+                    038           email: myUser.email,
+                    039           name: myUser.name,
+                    040           lastname: myUser.lastname,
+                    041           image: myUser.image,
+                    042           phone: myUser.phone,
+                    043           role: myUser.role,
+                    044           session_token: `JWT ${token}`
+                    045         };
+                    046
+                    047         return res.status(201).json({
+                    048           success: true,
+                    049           message: 'Usuario autenticado',
+                    050           data: data
+                    051         });
+                    052       } else {
+                    053         return res.status(401).json({
+                    054           success: false,
+                    055           message: 'Contraseña o correo incorrecto'
+                    056         });
+                    057       }
+                    058     });
+                    059   },
+                    060
+                    061   getAllUsers(req, res) {
+                    062     User.findAll((err, users) => {
+                    063       if (err) {
+                    064         return res.status(501).json({
+                    065           success: false,
+                    066           message: 'Error al listar usuarios',
+                    067           error: err
+                    068         });
+                    069       }
+                    070       return res.status(200).json({
+                    071         success: true,
+                    072         message: 'Lista de usuarios',
+                    073         data: users
+                    074       });
+                    075     });
+                    076   },
+                    077
+                    078   getUserById(req, res) {
+                    079     const id = req.params.id;
+                    080     User.findById(id, (err, user) => {
+                    081       if (err) {
+                    082         return res.status(501).json({
+                    083           success: false,
+                    084           message: 'Error al consultar el usuario',
+                    085           error: err
+                    086         });
+                    087       }
+                    088       if (!user) {
+                    089         return res.status(404).json({
+                    090           success: false,
+                    091           message: 'Usuario no encontrado'
+                    092         });
+                    093       }
+                    094       return res.status(200).json({
+                    095         success: true,
+                    096         message: 'Usuario encontrado',
+                    097         data: user
+                    098       });
+                    099     });
+                    100   },
+                    101
+                    102   register(req, res) {
+                    103     const user = req.body;
+                    104
+                    105     if (!user.role) {
+                    106       user.role = 'user';
+                    107     }
+                    108
+                    109     User.create(user, (err, data) => {
+                    110       if (err) {
+                    111         return res.status(501).json({
+                    112           success: false,
+                    113           message: 'Error al crear al usuario',
+                    114           error: err
+                    115         });
+                    116       } else {
+                    117         return res.status(201).json({
+                    118           success: true,
+                    119           message: 'Usuario creado correctamente',
+                    120           data: data
+                    121         });
+                    122       }
+                    123     });
+                    124   },
+                    125
+                    126   getUserUpdate(req, res) {
+                    127     const user = req.body;
+                    128     User.update(user, (err, data) => {
+                    129       if (err) {
+                    130         return res.status(501).json({
+                    131           success: false,
+                    132           message: 'Error al actualizar el usuario',
+                    133           error: err
+                    134         });
+                    135       }
+                    136       return res.status(200).json({
+                    137         success: true,
+                    138         message: 'Usuario actualizado',
+                    139         data: data
+                    140       });
+                    141     });
+                    142   },
+                    143
+                    144   getUserDelete(req, res) {
+                    145     const id = req.params.id;
+                    146     User.delete(id, (err, data) => {
+                    147       if (err) {
+                    148         return res.status(501).json({
+                    149           success: false,
+                    150           message: 'Error al eliminar el usuario',
+                    151           error: err
+                    152         });
+                    153       }
+                    154       return res.status(200).json({
+                    155         success: true,
+                    156         message: 'Usuario eliminado',
+                    157         data: data
+                    158       });
+                    159     });
+                    160   }
+                    161 };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
