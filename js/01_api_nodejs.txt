@@ -234,7 +234,8 @@
 
                         Is this OK? (yes) yes
 
-            05. Modificar el archivo 'package.json' y modificar la línea 8, quedando así:
+            05. Modificar el archivo 'package.json' en la línea 8, quedando así:
+            
                       1    {
                       2      "name": "mi-api-node",
                       3      "version": "1.0.0",
