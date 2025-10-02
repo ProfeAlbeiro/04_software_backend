@@ -1112,7 +1112,7 @@
 
             07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
               
-            08. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            08. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "customer@sistema.com",
@@ -1141,7 +1141,7 @@
                      13        }
                      14    }
 
-            10. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            10. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "seller@sistema.com",
@@ -1170,7 +1170,7 @@
                      13        }
                      14    }
             
-            12. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            12. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "admin@sistema.com",
@@ -1199,7 +1199,7 @@
                      13        }
                      14    }
             
-            14. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            14. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "other@sistema.com",
@@ -1227,6 +1227,16 @@
                      12            "password": "12345"
                      13        }
                      14    }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  NOTA:   
+                    
+                    ⦿  Note que 'http://localhost/phpmyadmin/', en la base de datos 'db_node' (tabla 'users'), en el registro creado, en la columna
+                        'role', aparece 'user' en lugar de 'other'; esto se debe a que en 'backend/models/user.js' en las líneas 48 y 49, se está 
+                        validando que únicamente los roles pueden ser: 'admin', 'seller', 'customer', 'user'; de lo contrario escribe 'user'
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1292,12 +1302,108 @@
 
             06. Dar click en 'Send'
 
-            05. En la parte inferior debe aparecer el siguiente código:
+            07. En la parte inferior debe aparecer el siguiente código:
 
                       1    {
                       2        "success": false,
                       3        "message": "Acceso denegado: se requiere rol admin o seller"
                       4    }
+            
+            08. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'customer':
+
+                      1    {
+                      2        "email": "customer@sistema.com",
+                      3        "password": "12345"
+                      4    }
+            
+            09. Repetir los pasos 5 y 6 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+
+                      1    {
+                      2        "success": false,
+                      3        "message": "Acceso denegado: se requiere rol admin o seller"
+                      4    }
+
+            10. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'customer':
+
+                      1    {
+                      2        "email": "seller@sistema.com",
+                      3        "password": "12345"
+                      4    }
+            
+            11. Repetir los pasos 5 y 6 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Lista de usuarios",
+                      4        "data": [
+                      5            {
+                      6                "id": 1,
+                      7                "email": "user@sistema.com",
+                      8                "name": "User",
+                      9                "lastname": "Sistema",
+                     10                "phone": "3103103101",
+                     11                "image": "yyyy",
+                     12                "role": "user",
+                     13                "created_at": "2025-10-02T09:15:59.000Z",
+                     14                "updated_at": "2025-10-02T09:15:59.000Z"
+                     15            },
+                     16            {
+                     17                "id": 2,
+                     18                "email": "customer@sistema.com",
+                     19                "name": "Customer",
+                     20                "lastname": "Sistema",
+                     21                "phone": "3113113111",
+                     22                "image": "yyyy",
+                     23                "role": "customer",
+                     24                "created_at": "2025-10-02T09:17:09.000Z",
+                     25                "updated_at": "2025-10-02T09:17:09.000Z"
+                     26            },
+                     27            {
+                     28                "id": 3,
+                     29                "email": "seller@sistema.com",
+                     30                "name": "Seller",
+                     31                "lastname": "Sistema",
+                     32                "phone": "3113113111",
+                     33                "image": "yyyy",
+                     34                "role": "seller",
+                     35                "created_at": "2025-10-02T09:26:11.000Z",
+                     36                "updated_at": "2025-10-02T09:26:11.000Z"
+                     37            },
+                     38            {
+                     39                "id": 4,
+                     40                "email": "admin@sistema.com",
+                     41                "name": "Admin",
+                     42                "lastname": "Sistema",
+                     43                "phone": "3133133131",
+                     44                "image": "yyyy",
+                     45                "role": "admin",
+                     46                "created_at": "2025-10-02T09:27:19.000Z",
+                     47                "updated_at": "2025-10-02T09:27:19.000Z"
+                     48            },
+                     49            {
+                     50                "id": 5,
+                     51                "email": "other@sistema.com",
+                     52                "name": "Other",
+                     53                "lastname": "Sistema",
+                     54                "phone": "3143143141",
+                     55                "image": "yyyy",
+                     56                "role": "user",
+                     57                "created_at": "2025-10-02T09:29:16.000Z",
+                     58                "updated_at": "2025-10-02T09:29:16.000Z"
+                     59            }
+                     60        ]
+                     61    }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  NOTA:   
+                    
+                    ⦿  Como puede notar, solo el 'seller' y el 'admin' pueden obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que 
+                        en 'backend/routes/userRoutes.js' en la línea 11, se está validando que únicamente los roles autorizados para esta acción sean:
+                        'admin' o 'seller'
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.07.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
