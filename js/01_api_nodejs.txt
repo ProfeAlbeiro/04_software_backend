@@ -47,7 +47,8 @@
 ||| --      04.07.  Codificar la autenticación por JWT y Roles en 'backend/middlewares/authMiddleware.js'                                                              |||
 ||| --      04.08.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js'                                                                                     |||
 ||| --      04.09.  Codificar el servidor en 'backend/server.js'                                                                                                       |||
-||| --      04.10.  Ejecutar el Servidor 'server.js'                                                                                                                   |||
+||| --      04.10.  Codificar el inicio del backend en 'backend/index.js'                                                                                              |||
+||| --      04.11.  Ejecutar el backend                                                                                                                                |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
 ||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
 ||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
@@ -284,21 +285,23 @@
 |-- 03.01. Codificar la base de datos 'database/db_node.sql': -----------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                      1     CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
-                      2     USE db_node;
-                      3
-                      4     CREATE TABLE users (
-                      5         id INT AUTO_INCREMENT PRIMARY KEY,
-                      6         name VARCHAR(1  ) NOT NULL,
-                      7         lastname VARCHAR(1  ) NOT NULL,
-                      8         email VARCHAR(150) NOT NULL UNIQUE,
-                      9         password VARCHAR(255) NOT NULL,
-                     10         phone VARCHAR(20),
-                     11         image VARCHAR(255),
-                     12         role VARCHAR(20),
-                     13         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                     14         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                     15     ) ENGINE=InnoDB;
+                      1    DROP DATABASE IF EXISTS db_node;
+                      2    
+                      3    CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
+                      4    USE db_node;
+                      5    
+                      6    CREATE TABLE users (
+                      7      id INT AUTO_INCREMENT PRIMARY KEY,
+                      8      name VARCHAR(100) NOT NULL,
+                      9      lastname VARCHAR(100) NOT NULL,
+                     10      email VARCHAR(150) NOT NULL UNIQUE,
+                     11      password VARCHAR(255) NOT NULL,
+                     12      phone VARCHAR(20),
+                     13      image VARCHAR(255),
+                     14      role VARCHAR(20),
+                     15      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                     16      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                     17    ) ENGINE=InnoDB;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -320,13 +323,13 @@
 
             01. Abrir el navegador y escribir http://localhost/phpmyadmin/
             
-            02. Dar click a 'Importar'
+            02. Dar click en 'Importar'
             
-            03. Dar click a 'Seleccionar archivo'
+            03. Dar click en 'Seleccionar archivo'
             
             04. Seleccionar el archivo 'C:\..\..\proyecto\database\db_node.sql'
             
-            05. Dar click a 'Importar'
+            05. Dar click en 'Importar'
 
 
 
@@ -999,7 +1002,7 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 04.09.  Ejecutar el backend: ----------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.11.  Ejecutar el backend: ----------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Iniciar el servidor 'backend' desde la terminal de Visual Studio Code.
@@ -1028,17 +1031,17 @@
 |-- 05.01.  Crear la Colección 'USUARIOS': ------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Dar click a 'New / Collection'
+            01. Dar click en 'New / Collection'
             
-            02. Dar click a 'New Collection' y escribir 'USUARIOS'
+            02. Dar click en 'New Collection' y escribir 'USUARIOS'
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS': ---------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            01. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
             
-            02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
+            02. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
             
             03. Repetir los pasos 01 y 02 para el método: 'userCreate', 'login', 'usersAll', 'userById', 'userCreate', 'userUpdate' y 'userDelete'
 
@@ -1060,7 +1063,7 @@
             
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API: 'localhost:3000'
 
-            03. Dar click a 'Send'
+            03. Dar click en 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1075,20 +1078,20 @@
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users/create): 'localhost:3000/api/users/create'
 
-            03. Dar click a 'Body / raw / JSON'
+            03. Dar click en 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
                       1   {
-                      2     "email": "user@gmail.com",
+                      2     "email": "user@sistema.com",
                       3     "name": "Usuario",
                       4     "lastname": "Sistema",
-                      5     "phone": "3103103101",
+                      5     "phone": "3113113111",
                       6     "image": "yyyy",
                       7     "password": "12345"
                       8   }
             
-            05. Dar click a 'Send'
+            05. Dar click en 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1097,7 +1100,7 @@
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
                       5            "id": 1,
-                      6            "email": "user@gmail.com",
+                      6            "email": "user@sistema.com",
                       7            "name": "Usuario",
                       8            "lastname": "Sistema",
                       9            "phone": "3103103101",
@@ -1107,7 +1110,124 @@
                      13        }
                      14    }
 
-              7. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
+              
+            08. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+
+                      1    {
+                      2        "email": "customer@sistema.com",
+                      3        "name": "Customer",
+                      4        "lastname": "Sistema",
+                      5        "phone": "3103103101",
+                      6        "image": "yyyy",
+                      7        "role": "customer",
+                      8        "password": "12345"
+                      9    }              
+              
+            09. Verificar que la parte inferior aparezca el siguiente código:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario creado correctamente",
+                      4        "data": {
+                      5            "id": 2,
+                      6            "email": "customer@sistema.com",
+                      7            "name": "Customer",
+                      8            "lastname": "Sistema",
+                      9            "phone": "3103103101",
+                     10            "image": "yyyy",
+                     11            "role": "customer",
+                     12            "password": "12345"
+                     13        }
+                     14    }
+
+            10. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+
+                      1    {
+                      2        "email": "seller@sistema.com",
+                      3        "name": "Seller",
+                      4        "lastname": "Sistema",
+                      5        "phone": "3103103101",
+                      6        "image": "yyyy",
+                      7        "role": "seller",
+                      8        "password": "12345"
+                      9    }              
+              
+            11. Verificar que la parte inferior aparezca el siguiente código:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario creado correctamente",
+                      4        "data": {
+                      5            "id": 3,
+                      6            "email": "seller@sistema.com",
+                      7            "name": "Seller",
+                      8            "lastname": "Sistema",
+                      9            "phone": "3103103101",
+                     10            "image": "yyyy",
+                     11            "role": "seller",
+                     12            "password": "12345"
+                     13        }
+                     14    }
+            
+            12. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+
+                      1    {
+                      2        "email": "admin@sistema.com",
+                      3        "name": "Admin",
+                      4        "lastname": "Sistema",
+                      5        "phone": "3103103101",
+                      6        "image": "yyyy",
+                      7        "role": "admin",
+                      8        "password": "12345"
+                      9    }              
+              
+            13. Verificar que la parte inferior aparezca el siguiente código:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario creado correctamente",
+                      4        "data": {
+                      5            "id": 4,
+                      6            "email": "admin@sistema.com",
+                      7            "name": "Admin",
+                      8            "lastname": "Sistema",
+                      9            "phone": "3103103101",
+                     10            "image": "yyyy",
+                     11            "role": "admin",
+                     12            "password": "12345"
+                     13        }
+                     14    }
+            
+            14. Repetir los pasos del 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+
+                      1    {
+                      2        "email": "other@sistema.com",
+                      3        "name": "Other",
+                      4        "lastname": "Sistema",
+                      5        "phone": "3103103101",
+                      6        "image": "yyyy",
+                      7        "role": "other",
+                      8        "password": "12345"
+                      9    }              
+              
+            15. Verificar que la parte inferior aparezca el siguiente código:
+
+                      1    {
+                      2        "success": true,
+                      3        "message": "Usuario creado correctamente",
+                      4        "data": {
+                      5            "id": 4,
+                      6            "email": "other@sistema.com",
+                      7            "name": "Other",
+                      8            "lastname": "Sistema",
+                      9            "phone": "3103103101",
+                     10            "image": "yyyy",
+                     11            "role": "user",
+                     12            "password": "12345"
+                     13        }
+                     14    }
+
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.05.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
@@ -1118,16 +1238,16 @@
             02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users/login): 'localhost:3000/api/users/login'
 
-            03. Dar click a 'Body / raw / JSON'
+            03. Dar click en 'Body / raw / JSON'
             
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
-                      2        "email": "user@gmail.com",
+                      2        "email": "user@sistema.com",
                       3        "password": "12345"
                       4    }
             
-            05. Dar click a 'Send'
+            05. Dar click en 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1148,7 +1268,7 @@
                      13        }
                      14    }
 
-            07. Copiar todo el código que está entre comillas del "session_token"
+            07. Copiar todo el código que está entre comillas del "session_token" de la línea 12
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.06.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
@@ -1159,15 +1279,25 @@
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users): 'localhost:3000/api/users'
 
-            03. Dar click a 'Send'
+            03. Dar click en 'Send'
             
-            04. Verificar que la parte inferior aparezca el siguiente código:
+            04. En la parte inferior debe aparecer el siguiente código:
 
                       1    {
                       2        "success": false,
                       3        "message": "No se proporcionó un token"
                       4    }
 
+            05. Dar click en 'Headers' y en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+
+            06. Dar click en 'Send'
+
+            05. En la parte inferior debe aparecer el siguiente código:
+
+                      1    {
+                      2        "success": false,
+                      3        "message": "Acceso denegado: se requiere rol admin o seller"
+                      4    }
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 05.07.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
@@ -1178,7 +1308,7 @@
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users/:id): 'http://192.168.1.77:3000/api/users/1'
 
-            03. Dar click a 'Send'
+            03. Dar click en 'Send'
             
             04. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1204,7 +1334,7 @@
             02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
                 (ENDPOINT: /api/users/update): 'http://192.168.1.77:3000/api/users/update'
 
-            03. Dar click a 'Body / raw / JSON'
+            03. Dar click en 'Body / raw / JSON'
 
             04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
@@ -1218,7 +1348,7 @@
                     08     "password": "12345"
                     09   }
             
-            05. Dar click a 'Send'
+            05. Dar click en 'Send'
             
             06. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1247,9 +1377,9 @@
                 (ENDPOINT: /api/users/delete/:id): 'http://192.168.1.77:3000/api/users/delete/1'
 
 
-            03. Dar click a 'Body / raw / JSON'
+            03. Dar click en 'Body / raw / JSON'
 
-            04. Dar click a 'Send'
+            04. Dar click en 'Send'
             
             05. Verificar que la parte inferior aparezca el siguiente código:
 
@@ -1293,7 +1423,7 @@
 
                          PS C:\..\..> echo "protocol=https`nhost=github.com`n" | git credential-manager erase
             
-            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. Dar click a 'New'.
+            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. Dar click en 'New'.
                 En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'proyecto'. La carpeta raíz no debe 
                 tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar click en 'Create Repository'.
 
@@ -1342,7 +1472,7 @@
 
             02. Dar click al proyecto que desea clonar, en el caso del ejemplo es 'proyecto'.
 
-            03. Dar click a la opción '<> Code / Copy url to clipboard'.
+            03. Dar click en la opción '<> Code / Copy url to clipboard'.
 
             04. Ir a una carpeta de Windows, por ejemplo, en el 'C:\xampp\htdocs' (en el caso del ejemplo, 'proyecto').
 
@@ -1364,11 +1494,11 @@
 |-- AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP': -----------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                          
-            01. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (httpd.conf)'.
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click en 'Config / Apache (httpd.conf)'.
             
-            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            02. Se abrirá un 'Bloc de Notas'. Dar click en la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
             
-            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '80' y dar click a 'Buscar siguiente'.
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '80' y dar click en 'Buscar siguiente'.
             
             04. Reemplazar todos los valores donde se encentre el puerto '80' con el puerto nuevo de trabajo, por ejemplo, '8080'. Dar click en 
                 'cancelar' y guardar los cambios en el archivo.
@@ -1384,25 +1514,25 @@
 |-- AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP': ------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. En el Panel de control de XAMPP y en la misma línea del servicio 'MySQL' dar click a 'Config / my.ini'.
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'MySQL' dar click en 'Config / my.ini'.
 
-            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            02. Se abrirá un 'Bloc de Notas'. Dar click en la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
             
-            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click en 'Buscar siguiente'.
 
             04. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
                 'cancelar' y guardar los cambios en el archivo.
 
-            05. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (php.ini)'.
+            05. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click en 'Config / Apache (php.ini)'.
 
-            06. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            06. Se abrirá un 'Bloc de Notas'. Dar click en la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
 
-            07. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+            07. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click en 'Buscar siguiente'.
 
             08. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
                 'cancelar' y guardar los cambios en el archivo.
         
-            09. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / phpMyAdmin (config.inc.php)'.
+            09. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click en 'Config / phpMyAdmin (config.inc.php)'.
 
             10. Buscar la línea '$cfg['Servers'][$i]['host'] = '127.0.0.1;' y agregar el puerto nuevo '3308' de la siguiente forma:
                          

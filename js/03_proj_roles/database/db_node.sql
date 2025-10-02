@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS db_node;
+
 CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
 USE db_node;
 
