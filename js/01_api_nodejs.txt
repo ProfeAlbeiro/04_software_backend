@@ -205,7 +205,7 @@
 |-- 02.02.  Crear el 'package.json': ------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01.  Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
+            01. Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
 
             02. Cambiar el nombre de la terminal a 'backend', seleccionándola en la parte inferior derecha y presionando F2 / Rename...
             
@@ -229,7 +229,7 @@
                         package name: (backend) mi-api-node
                         version: (1.0.0)
                         description: API en Node.js con Express y JWT
-                        entry point: (server.js) index.js
+                        entry point: (index.js)
                         test command:
                         git repository:
                         keywords: NodeJs
@@ -253,6 +253,25 @@
                         }
 
                         Is this OK? (yes) yes
+
+            05. Modificar el archivo 'package.json' y modificar la línea 8, quedando así:
+
+                      1    {
+                      2      "name": "mi-api-node",
+                      3      "version": "1.0.0",
+                      4      "description": "API en Node.js con Express y JWT",
+                      5      "main": "index.js",
+                      6      "scripts": {
+                      7        "test": "echo \"Error: no test specified\" && exit 1",
+                      8        "start": "node index.js"
+                      9      },
+                     10      "keywords": [
+                     11        "NodeJs"
+                     12      ],
+                     13      "author": "Albeiro Ramos",
+                     14      "license": "MIT"
+                     15    }
+
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
