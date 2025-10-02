@@ -366,20 +366,20 @@
 |-- 04.02.  Codificar la cadena de conexión en 'backend/config/config.js': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   require('dotenv').config();
-                    02   const mysql = require('mysql');
-                    03   const db = mysql.createConnection({
-                    04     host: process.env.DB_HOST,
-                    05     user: process.env.DB_USER,
-                    06     password: process.env.DB_PASSWORD,
-                    07     database: process.env.DB_NAME,
-                    08     port: process.env.DB_PORT
-                    09   });
-                    10   db.connect(function(err) {
-                    11     if (err) throw err;
-                    12     console.log('Base de datos conectada')
-                    13   });
-                    14   module.exports = db;
+                    001     require('dotenv').config();
+                    002     const mysql = require('mysql');
+                    003     const db = mysql.createConnection({
+                    004         host: process.env.DB_HOST,
+                    005         user: process.env.DB_USER,
+                    006         password: process.env.DB_PASSWORD,
+                    007         database: process.env.DB_NAME,
+                    008         port: process.env.DB_PORT
+                    009     });
+                    010     db.connect(function(err) {
+                    011         if (err) throw err;
+                    012         console.log('Base de datos conectada')
+                    013     });
+                    014     module.exports = db;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -399,155 +399,155 @@
 |-- 04.03.  Codificar el modelo usuarios en 'backend/models/user.js': ---------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   const db = require('../config/config');
-                    02   const bcrypt = require('bcryptjs');
-                    03   const User = {};
-                    04 
-                    05   User.findAll = (result) => {
-                    06     const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
-                    07     db.query(sql, (err, users) => {
-                    08       if (err) {
-                    09         console.log('Error al listar usuarios: ', err);
-                    10         result(err, null);
-                    11       } else {
-                    12         console.log('Usuarios encontrados: ', users.length);
-                    13         result(null, users);
-                    14       }
-                    15     });
-                    16   };
-                    17 
-                    18   User.findById = (id, result) => {
-                    19     const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
-                    20     db.query(sql, [id], (err, user) => {
-                    21       if (err) {
-                    22         console.log('Error al consultar: ', err);
-                    23         result(err, null);
-                    24       }
-                    25       else {
-                    26         console.log('Usuario consultado: ',  user[0] );
-                    27         result(null, user[0]);
-                    28       }
-                    29     });
-                    30   };
-                    31 
-                    32   User.findByEmail = (email, result) => {
-                    33     const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
-                    34     db.query(sql, [email], (err, user) => {
-                    35       if (err) {
-                    36         console.log('Error al consultar: ', err);
-                    37         result(err, null);
-                    38       }
-                    39       else {
-                    40         console.log('Usuario consultado: ',  user[0] );
-                    41         result(null, user[0]);
-                    42       }
-                    43     });
-                    44   };
-                    45 
-                    46   User.create = async (user, result) => {
-                    47     const hash = await bcrypt.hash(user.password, 10)  
-                    48     const validRoles = ['admin', 'seller', 'customer', 'user'];
-                    49     const role = validRoles.includes(user.role) ? user.role : 'user';
-                    50     const sql = `INSERT INTO users(
-                    51                   name, 
-                    52                   lastname,
-                    53                   email, 
-                    54                   password,
-                    55                   phone,
-                    56                   image,
-                    57                   role,
-                    58                   created_at,
-                    59                   updated_at
-                    60                 ) VALUES (?,?,?,?,?,?,?,?,?)`;
-                    61     db.query(sql,
-                    62       [
-                    63         user.name,
-                    64         user.lastname,
-                    65         user.email,
-                    66         hash,
-                    67         user.phone,
-                    68         user.image,
-                    69         role,
-                    70         new Date(),
-                    71         new Date()
-                    72       ], (err, res) => {
-                    73         if (err) {
-                    74           console.log('Error al crear al Usuario: ', err);
-                    75           result(err, null);
-                    76         } else {
-                    77           console.log('Usuario creado: ', {id: res.insertId, ...user});
-                    78           result(null, {id: res.insertId, ...user});
-                    79         }
-                    80       }
-                    81     );
-                    82   };
-                    83 
-                    84   User.update = async (user, result) => {
-                    85     let fields = [];
-                    86     let values = [];
-                    87 
-                    88     if (user.password) {
-                    89       const hash = await bcrypt.hash(user.password, 10);
-                    90       fields.push("password = ?");
-                    91       values.push(hash);
-                    92     }
-                    93 
-                    94     if (user.email) {
-                    95       fields.push("email = ?");
-                    96       values.push(user.email);
-                    97     }
-                    98     if (user.name) {
-                    99       fields.push("name = ?");
-                   100       values.push(user.name);
-                   101     }
-                   102     if (user.lastname) {
-                   103       fields.push("lastname = ?");
-                   104       values.push(user.lastname);
-                   105     }
-                   106     if (user.phone) {
-                   107       fields.push("phone = ?");
-                   108       values.push(user.phone);
-                   109     }
-                   110     if (user.image) {
-                   111       fields.push("image = ?");
-                   112       values.push(user.image);
-                   113     }
-                   114     if (user.role) {
-                   115       fields.push("role = ?");
-                   116       values.push(user.role);
-                   117     }
-                   118
-                   119     fields.push("updated_at = ?");
-                   120     values.push(new Date());
-                   121
-                   122     const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
-                   123     values.push(user.id);
-                   124
-                   125     db.query(sql, values, (err, res) => {
-                   126       if (err) {
-                   127         console.log('Error al actualizar usuario: ', err);
-                   128         result(err, null);
-                   129       } else {
-                   130         console.log('Usuario actualizado: ', { id: user.id, ...user });
-                   131         result(null, { id: user.id, ...user });
-                   132       }
-                   133     });
-                   134   };
-                   135
-                   136   User.delete = (id, result) => {
-                   137     const sql = `DELETE FROM users WHERE id = ?`;
-                   138     db.query(sql, [id], (err, res) => {
-                   139       if (err) {
-                   140         console.log('Error al eliminar usuario: ', err);
-                   141         result(err, null);
-                   142       } else {
-                   143         console.log('Usuario eliminado con id: ', id);
-                   144         result(null, res);
-                   145       }
-                   146    });
-                   147   };
-                   148
-                   149   module.exports = User;
+                    001     const db = require('../config/config');
+                    002     const bcrypt = require('bcryptjs');
+                    003     const User = {};
+                    004
+                    005     User.findAll = (result) => {
+                    006         const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
+                    007         db.query(sql, (err, users) => {
+                    008             if (err) {
+                    009                 console.log('Error al listar usuarios: ', err);
+                    010                 result(err, null);
+                    011             } else {
+                    012                 console.log('Usuarios encontrados: ', users.length);
+                    013                 result(null, users);
+                    014             }
+                    015         });
+                    016     };
+                    017
+                    018     User.findById = (id, result) => {
+                    019         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
+                    020         db.query(sql, [id], (err, user) => {
+                    021             if (err) {
+                    022                 console.log('Error al consultar: ', err);
+                    023                 result(err, null);
+                    024             }
+                    025             else {
+                    026                 console.log('Usuario consultado: ',  user[0] );
+                    027                 result(null, user[0]);
+                    028             }
+                    029         });
+                    030     };
+                    031
+                    032     User.findByEmail = (email, result) => {
+                    033         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
+                    034         db.query(sql, [email], (err, user) => {
+                    035             if (err) {
+                    036                 console.log('Error al consultar: ', err);
+                    037                 result(err, null);
+                    038             }
+                    039             else {
+                    040                 console.log('Usuario consultado: ',  user[0] );
+                    041                 result(null, user[0]);
+                    042             }
+                    043         });
+                    044     };
+                    045
+                    046     User.create = async (user, result) => {
+                    047         const hash = await bcrypt.hash(user.password, 10)  
+                    048         const validRoles = ['admin', 'seller', 'customer', 'user'];
+                    049         const role = validRoles.includes(user.role) ? user.role : 'user';
+                    050         const sql = `INSERT INTO users(
+                    051                         name, 
+                    052                         lastname,
+                    053                         email, 
+                    054                         password,
+                    055                         phone,
+                    056                         image,
+                    057                         role,
+                    058                         created_at,
+                    059                         updated_at
+                    060                     ) VALUES (?,?,?,?,?,?,?,?,?)`;
+                    061         db.query(sql,
+                    062             [
+                    063                 user.name,
+                    064                 user.lastname,
+                    065                 user.email,
+                    066                 hash,
+                    067                 user.phone,
+                    068                 user.image,
+                    069                 role,
+                    070                 new Date(),
+                    071                 new Date()
+                    072             ], (err, res) => {
+                    073                 if (err) {
+                    074                     console.log('Error al crear al Usuario: ', err);
+                    075                     result(err, null);
+                    076                 } else {
+                    077                     console.log('Usuario creado: ', {id: res.insertId, ...user});
+                    078                     result(null, {id: res.insertId, ...user});
+                    079                 }
+                    080             }
+                    081         );
+                    082     };
+                    083
+                    084     User.update = async (user, result) => {
+                    085         let fields = [];
+                    086         let values = [];
+                    087
+                    088         if (user.password) {
+                    089             const hash = await bcrypt.hash(user.password, 10);
+                    090             fields.push("password = ?");
+                    091             values.push(hash);
+                    092         }
+                    093
+                    094         if (user.email) {
+                    095             fields.push("email = ?");
+                    096             values.push(user.email);
+                    097         }
+                    098         if (user.name) {
+                    099             fields.push("name = ?");
+                    100             values.push(user.name);
+                    101         }
+                    102         if (user.lastname) {
+                    103             fields.push("lastname = ?");
+                    104             values.push(user.lastname);
+                    105         }
+                    106         if (user.phone) {
+                    107             fields.push("phone = ?");
+                    108             values.push(user.phone);
+                    109         }
+                    110         if (user.image) {
+                    111             fields.push("image = ?");
+                    112             values.push(user.image);
+                    113         }
+                    114         if (user.role) {
+                    115             fields.push("role = ?");
+                    116             values.push(user.role);
+                    117         }
+                    118
+                    119         fields.push("updated_at = ?");
+                    120         values.push(new Date());
+                    121
+                    122         const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+                    123         values.push(user.id);
+                    124
+                    125         db.query(sql, values, (err, res) => {
+                    126             if (err) {
+                    127                 console.log('Error al actualizar usuario: ', err);
+                    128                 result(err, null);
+                    129             } else {
+                    130                 console.log('Usuario actualizado: ', { id: user.id, ...user });
+                    131                 result(null, { id: user.id, ...user });
+                    132             }
+                    133         });
+                    134     };
+                    135
+                    136     User.delete = (id, result) => {
+                    137         const sql = `DELETE FROM users WHERE id = ?`;
+                    138         db.query(sql, [id], (err, res) => {
+                    139             if (err) {
+                    140                 console.log('Error al eliminar usuario: ', err);
+                    141                 result(err, null);
+                    142             } else {
+                    143                 console.log('Usuario eliminado con id: ', id);
+                    144                 result(null, res);
+                    145             }
+                    146         });
+                    147     };
+                    148
+                    149     module.exports = User;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -570,11 +570,11 @@
                 bit de forma aleatoria) para generar una clave de 256 bits; cópiela y péguela en el archivo 'backend/config/keys.js', quedando de la 
                 siguiente forma:
 
-                    01   require('dotenv').config();
-                    02 
-                    03   module.exports = {
-                    04     secretOrKey: process.env.JWT_SECRET
-                    05   };
+                    001     require('dotenv').config();
+                    002
+                    003     module.exports = {
+                    004         secretOrKey: process.env.JWT_SECRET
+                    005     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -593,32 +593,32 @@
 |-- 04.05.  Codificar el Jason Web Token con la key en 'backend/config/passport.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                    01   const JwtStrategy = require('passport-jwt').Strategy;
-                    02   const ExtractJwt = require('passport-jwt').ExtractJwt;
-                    03   const passport = require('passport');
-                    04   const Keys = require('./keys');
-                    05   const User = require('../models/user');
-                    06 
-                    07   const opts = {
-                    08     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                    09     secretOrKey: Keys.secretOrKey
-                    10   };
-                    11     
-                    12   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-                    13     User.findById(jwt_payload.id, (err, user) => {
-                    14       if (err) {
-                    15         return done(err, false);
-                    16       }
-                    17       if (user) {
-                    18         return done(null, user);
-                    19       }
-                    20       else{
-                    21         return done(null, false);
-                    22       }
-                    23     });
-                    24   }));
-                    25 
-                    26   module.exports = passport; 
+                    001     const JwtStrategy = require('passport-jwt').Strategy;
+                    002     const ExtractJwt = require('passport-jwt').ExtractJwt;
+                    003     const passport = require('passport');
+                    004     const Keys = require('./keys');
+                    005     const User = require('../models/user');
+                    006
+                    007     const opts = {
+                    008         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+                    009         secretOrKey: Keys.secretOrKey
+                    010     };
+                    011
+                    012     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+                    013         User.findById(jwt_payload.id, (err, user) => {
+                    014             if (err) {
+                    015                 return done(err, false);
+                    016             }
+                    017             if (user) {
+                    018                 return done(null, user);
+                    019             }
+                    020             else{
+                    021                 return done(null, false);
+                    022             }
+                    023         });
+                    024     }));
+                    025
+                    026     module.exports = passport;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
