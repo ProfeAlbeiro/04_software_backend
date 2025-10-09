@@ -312,10 +312,10 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                       1    DROP DATABASE IF EXISTS db_node;
-                      2    
+                      2
                       3    CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
                       4    USE db_node;
-                      5    
+                      5
                       6    CREATE TABLE users (
                       7      id INT AUTO_INCREMENT PRIMARY KEY,
                       8      name VARCHAR(100) NOT NULL,
@@ -328,6 +328,19 @@
                      15      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                      16      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                      17    ) ENGINE=InnoDB;
+                     18
+                     19    INSERT INTO users VALUES (
+                     20      null,
+                     21      "Albeiro",
+                     22      "Ramos",
+                     23      "profealbeiro2020@gmail.com",
+                     24      "$2b$10$NR8eRuuAB12JoHe81ZYnG.i2/5k/D5TKrxc7Pk74W4rgzADdABM9G",
+                     25      "3103103101",
+                     26      "profile",
+                     27      "admin",
+                     28      null,
+                     29      null
+                     30    );
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
