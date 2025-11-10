@@ -1724,29 +1724,23 @@
 
             01. Garantizar el ambiente de desarrollo (Ver apartado 01. ENTORNO DE DESARROLLO).
             
-            02. Clonar el proyecto desde github en 'C:\xampp\htdocs' (Ver apartado AX_02. Clonar un proyecto 'Github').
+            02. Clonar el proyecto desde github (Ver apartado AX_02. Clonar un proyecto 'Github').            
             
             03. Abrir el proyecto en Visual Studio Code.
+
+                    ⦿   PS C:\..> cd backend
+
+            05. Modificar el archivo 'index.js' en la línea 5 para incluir dirección IPv4 (Ver apartado 04.10.  Codificar el inicio del backend en 'backend/index.js')                
+
+            06. Abrir 'XAMPP' y ejecutar los servicios de 'Apache' y 'MySQL'.
+
+            07. Crear la base de datos (Ver apartado 03. BASE DE DATOS)
+
+            08. En la terminal en 'Visual Studio Code' ejecutar los siguientes comandos:
+
+                    ⦿   PS C:\..\backend> npm install
+                    ⦿   PS C:\..\backend> node index.js                            
             
-            04. Abrir 'XAMPP' y ejecutar los servicios de 'Apache' y 'MySQL'.
-
-            05. Abrir un navegador (preferiblemente Google Chrome) a través de los siguientes enlaces:
+            09. Comprobar que se ejecute correctamente la aplicación.
             
-                    http://localhost/proyecto/
-
-                    http://localhost/phpmyadmin/            
-            
-                    ⦿  Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
-                         Cambiar los puertos de 'Apache' en 'XAMPP'); si no es posible, agregar el puerto al 'localhost', por ejemplo, si el puerto 
-                         es '8080' entonces debería quedar así:
-
-                         http://localhost:8080/proyecto/
-
-                         http://localhost:8080/phpmyadmin/            
-            
-                    ⦿  Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
-                         Cambiar los puertos de 'MySQL' en 'XAMPP').
-                                    
-            06. Subir la base de datos (Ver el apartado 03. BASE DE DATOS).
-
-            07. Comprobar que se ejecute correctamente la aplicación.
+            10. Abrir POSTMAN y comprobar los 'Endpoints'.
