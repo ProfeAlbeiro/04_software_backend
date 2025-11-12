@@ -1,6 +1,7 @@
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
-|||------------------------------------------------------------------------ APIREST EN NODEJS -------------------------------------------------------------------------|||
+|||----------------------------------------------------------------------------- APIREST ------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------- NODEJS - EXPRESS -------------------------------------------------------------------------|||
 |||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 |||                                                                                                                                                                    |||
@@ -9,6 +10,7 @@
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
 ||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+||| --  06. DOCUMENTACIÓN CON SWAGGER                                                                                                                                  |||
 |||                                                                                                                                                                    |||
 ||| --  ANEXOS: TENER EN CUENTA                                                                                                                                        |||
 ||| --          AX_01.  Subir el Proyecto a Github                                                                                                                     |||
@@ -29,9 +31,9 @@
 ||| --      01.07.  Instalar Postman                                                                                                                                   |||
 ||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
 ||| --      02.01.  Crear la carpeta raíz del proeycto                                                                                                                 |||
-||| --      02.02.  Crear el archivo para manejar las dependencias 'package.json'                                                                                      |||
-||| --      02.03.  Instalar dependencias en el 'backend/'                                                                                                             |||
-||| --      02.04.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
+||| --      02.02.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
+||| --      02.03.  Crear el archivo para manejar las dependencias 'package.json'                                                                                      |||
+||| --      02.04.  Instalar dependencias en el 'backend/'                                                                                                             |||
 ||| --  03. BASE DE DATOS                                                                                                                                              |||
 ||| --      03.01.  Codificar la base de datos 'database/db_node.sql'                                                                                                  |||
 ||| --      03.02.  Ejecutar la base de datos 'database/db_node.sql'                                                                                                   |||
@@ -48,15 +50,22 @@
 ||| --      04.10.  Codificar el inicio del backend en 'backend/index.js'                                                                                              |||
 ||| --      04.11.  Ejecutar el backend                                                                                                                                |||
 ||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
-||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
-||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
-||| --      05.03.  Configurar 'GET raiz'                                                                                                                              |||
-||| --      05.04.  Configurar 'POST userCreate'                                                                                                                       |||
-||| --      05.05.  Configurar 'POST login'                                                                                                                            |||
-||| --      05.06.  Configurar 'GET usersAll'                                                                                                                          |||
-||| --      05.07.  Configurar 'GET userById'                                                                                                                          |||
-||| --      05.08.  Configurar 'POST userUpdate'                                                                                                                       |||
-||| --      05.09.  Configurar 'DELETE userDelete'                                                                                                                     |||
+||| --      05.01.  Crear la Colección 'PROYECTO'                                                                                                                      |||
+||| --      05.02.  Crear los variables el Proyecto                                                                                                                    |||
+||| --      05.03.  Crear los Módulos del proyecto, ejemplo 'USUARIOS'                                                                                                 |||
+||| --      05.04.  Crear los métodos HTTP (GET, POST, PUT, DELETE) del Módulo 'USUARIOS'                                                                              |||
+||| --      05.05.  Configurar 'GET raiz'                                                                                                                              |||
+||| --      05.06.  Configurar 'POST userCreate'                                                                                                                       |||
+||| --      05.07.  Configurar 'POST login'                                                                                                                            |||
+||| --      05.08.  Configurar 'GET usersAll'                                                                                                                          |||
+||| --      05.09.  Configurar 'GET userById'                                                                                                                          |||
+||| --      05.10.  Configurar 'PUT userUpdate'                                                                                                                        |||
+||| --      05.11.  Configurar 'DELETE userDelete'                                                                                                                     |||
+||| --  06. DOCUMENTACIÓN CON SWAGGER                                                                                                                                  |||
+||| --      06.01.  Codificar swagger en 'backend/config/swagger.js'                                                                                                   |||
+||| --      06.02.  Modificar el código servidor en 'backend/server.js'                                                                                                |||
+||| --      06.03.  Modificar la ruta de usuario en 'backend/routes/userRoutes.js' con JSDoc                                                                           |||
+||| --      06.04.  Ejecutar el backend con swagger                                                                                                                    |||
 |||                                                                                                                                                                    |||
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
 
@@ -76,14 +85,14 @@
 
             02. Instalar Visual Studio Code.
 
-                    ⦿  En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.                    
+                    ⦿  En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.
 
             03. Abrir Visual Studio Code.
 
             04. Instalar las siguientes extensiones en Visual Studio Code:
 
-                    ⦿  Material Icon Theme                    
-                    ⦿  Live Server  
+                    ⦿  Material Icon Theme
+                    ⦿  Live Server
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 01.02.  Instalar Node Js: -------------------------------------------------------------------------------------------------------------------------------------------|
@@ -134,7 +143,6 @@
 
             02. Seguir los pasos de creación de la cuenta.
 
-
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 01.06.  Instalar XAMPP: ---------------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -147,12 +155,11 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  NOTA:   
+                  NOTA:
                     
                     ⦿  Verificar que los puertos sean: En Apache (:80) y de MySQL (:3306).
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
-
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 01.07.  Instalar Postman: -------------------------------------------------------------------------------------------------------------------------------------------|
@@ -182,7 +189,40 @@
             03. Abrir la carpeta 'proyecto' con 'Visual Studio Code'
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.02.  Crear el archivo para manejar las dependencias 'package.json': ----------------------------------------------------------------------------------------------|
+|-- 02.02.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
+                                                                                                                                                      
+                                                                                                                                                      # C = Carpetas
+                                                                                                                                                      # A = Archivos
+
+                        proyecto/                                             # C. Backend y Frontend de un proyecto software (web o móvil).
+                        ├── backend/                                          # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        │   ├── config/                                       # C. Configuración del backend (base de datos, claves, autenticación).
+                        │   │   ├── config.js                                 # A. Configuración principal del backend (variables de entorno, BD, etc.).
+                        │   │   ├── keys.js                                   # A. Claves secretas para seguridad (JWT, OAuth, servicios externos).
+                        │   │   ├── passport.js                               # A. Configuración de la estrategia de autenticación con Passport.js.
+                        │   │   └── swagger.js                                # A. Documentación con swagger.
+                        │   ├── controllers/                                  # C. Manejan la lógica de negocio y conexión entre rutas y modelos.
+                        │   │   └── userController.js                         # A. Controlador para las operaciones relacionadas con los usuarios (CRUD, login).
+                        │   ├── middlewares/                                  # C. Funciones que interceptan las peticiones HTTP (autenticación, validaciones).
+                        │   │   └── authMiddleware.js                         # A. Middleware para verificar autenticación/autorización de usuarios.
+                        │   ├── models/                                       # C. Definición de modelos de datos que representan tablas en la base de datos.
+                        │   │   └── user.js                                   # A. Esquema del modelo de usuario (campos, validaciones, consultas SQL).
+            (NO CREAR)  │   ├── node_modules/                                 # C. Dependencias externas instaladas vía NPM.
+                        │   ├── routes/                                       # C. Define las rutas de la API que conectan con los controladores.
+                        │   │   └── userRoutes.js                             # A. Endpoints relacionados con usuarios (registro, login, CRUD).
+                        │   ├── .env                                          # A. Cadena de conexión a la base de datos.
+                        │   ├── .gitignore                                    # A. Ignorar archivos y carpetas del proyecto
+                        │   ├── index.js                                      # A. Punto principal de entrada del backend. Carga 'server.js' y arranca la app.
+            (NO CREAR)  │   ├── package-lock.json                             # A. Versiones exactas de las dependencias instaladas.
+            (NO CREAR)  │   ├── package.json                                  # A. Manifest del backend (nombre del proyecto, scripts, dependencias).
+                        │   └── server.js                                     # A. Configuración del servidor Express (middlewares, rutas, DB, etc.).
+                        └── database/                                         # C. Archivos relacionados con la base de datos.
+                            └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.03.  Crear el archivo para manejar las dependencias 'package.json': ----------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
@@ -206,13 +246,13 @@
                         save it as a dependency in the package.json file.
 
                         Press ^C at any time to quit.
-                        package name: (backend) mi-api-node
+                        package name: (backend) api_nodejs_express
                         version: (1.0.0)
                         description: API en Node.js con Express y JWT
                         entry point: (index.js)
                         test command:
                         git repository:
-                        keywords: NodeJs
+                        keywords: api nodejs express
                         author: Albeiro Ramos
                         license: (ISC) MIT
                         About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
@@ -234,27 +274,11 @@
 
                         Is this OK? (yes) yes
 
-            05. Modificar el archivo 'package.json' en la línea 8, quedando así:
-            
-                      1    {
-                      2      "name": "mi-api-node",
-                      3      "version": "1.0.0",
-                      4      "description": "API en Node.js con Express y JWT",
-                      5      "main": "index.js",
-                      6      "scripts": {
-                      7        "test": "echo \"Error: no test specified\" && exit 1",
-                      8        "start": "node index.js"
-                      9      },
-                     10      "keywords": [
-                     11        "NodeJs"
-                     12      ],
-                     13      "author": "Albeiro Ramos",
-                     14      "license": "MIT"
-                     15    }
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.04.  Instalar dependencias en el 'backend/': ---------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.03.  Instalar dependencias en el 'backend/': ---------------------------------------------------------------------------------------------------------------------|
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+            01. En la Terminal de 'Visual Studio Code' digitar lo siguiente:
 
                     ⦿  PS C:\..\backend> npm i bcryptjs@3.0.2
                     ⦿  PS C:\..\backend> npm i cors@2.8.5
@@ -266,39 +290,49 @@
                     ⦿  PS C:\..\backend> npm i mysql@2.18.1
                     ⦿  PS C:\..\backend> npm i passport@0.4.1
                     ⦿  PS C:\..\backend> npm i passport-jwt@4.0.1
+                    ⦿  PS C:\..\backend> npm i swagger-jsdoc
+                    ⦿  PS C:\..\backend> npm i swagger-ui-express
+                    ⦿  PS C:\..\backend> npm i -D nodemon
                     ⦿  PS C:\..\backend> npm audit fix
                     ⦿  PS C:\..\backend> npm audit fix --force
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 02.04.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
-                                                                                                                                                      
-                                                                                                                                                      # C = Carpetas
-                                                                                                                                                      # A = Archivos
+            02. Modificar el archivo 'package.json' para que quede así:
 
-                        proyecto/                                             # C. Backend y Frontend de un proyecto software (web o móvil).
-                        ├── backend/                                          # C. Lógica del servidor Node.js para la gestión de datos y API.
-                        │   ├── config/                                       # C. Configuración del backend (base de datos, claves, autenticación).
-                        │   │   ├── config.js                                 # A. Configuración principal del backend (variables de entorno, BD, etc.).
-                        │   │   ├── keys.js                                   # A. Claves secretas para seguridad (JWT, OAuth, servicios externos).
-                        │   │   └── passport.js                               # A. Configuración de la estrategia de autenticación con Passport.js.
-                        │   ├── controllers/                                  # C. Manejan la lógica de negocio y conexión entre rutas y modelos.
-                        │   │   └── userController.js                         # A. Controlador para las operaciones relacionadas con los usuarios (CRUD, login).
-                        │   ├── middlewares/                                  # C. Funciones que interceptan las peticiones HTTP (autenticación, validaciones).
-                        │   │   └── authMiddleware.js                         # A. Middleware para verificar autenticación/autorización de usuarios.
-                        │   ├── models/                                       # C. Definición de modelos de datos que representan tablas en la base de datos.
-                        │   │   └── user.js                                   # A. Esquema del modelo de usuario (campos, validaciones, consultas SQL).
-            (NO CREAR)  │   ├── node_modules/                                 # C. Dependencias externas instaladas vía NPM.
-                        │   ├── routes/                                       # C. Define las rutas de la API que conectan con los controladores.
-                        │   │   └── userRoutes.js                             # A. Endpoints relacionados con usuarios (registro, login, CRUD).
-                        │   ├── .env                                          # A. Cadena de conexión a la base de datos.
-                        │   ├── index.js                                      # A. Punto principal de entrada del backend. Carga 'server.js' y arranca la app.
-            (NO CREAR)  │   ├── package-lock.json                             # A. Versiones exactas de las dependencias instaladas.
-            (NO CREAR)  │   ├── package.json                                  # A. Manifest del backend (nombre del proyecto, scripts, dependencias).
-                        │   └── server.js                                     # A. Configuración del servidor Express (middlewares, rutas, DB, etc.).
-                        └── database/                                         # C. Archivos relacionados con la base de datos.
-                            └── db_node.sql                                   # A. Script SQL para crear y poblar la base de datos del proyecto.
-
+                      1    {
+                      2      "name": "api_nodejs_express",
+                      3      "version": "1.0.0",
+                      4      "description": "",
+                      5      "main": "index.js",
+                      6      "scripts": {
+                      7        "start": "node server.js",
+                      8        "dev": "nodemon index.js",
+                      9        "test": "echo \"Error: no test specified\" && exit 1"
+                     10      },
+                     11      "keywords": [
+                     12        "api",
+                     13        "nodejs",
+                     14        "express"
+                     15      ],
+                     16      "author": "Albeiro Ramos",
+                     17      "license": "MIT",
+                     18      "dependencies": {
+                     19        "bcryptjs": "^3.0.2",
+                     20        "cors": "^2.8.5",
+                     21        "dotenv": "^17.2.3",
+                     22        "express": "^4.21.2",
+                     23        "http": "^0.0.1-security",
+                     24        "jsonwebtoken": "^9.0.2",
+                     25        "morgan": "^1.10.0",
+                     26        "mysql": "^2.18.1",
+                     27        "passport": "^0.7.0",
+                     28        "passport-jwt": "^4.0.1",
+                     29        "swagger-jsdoc": "^6.2.8",
+                     30        "swagger-ui-express": "^5.0.1"
+                     31      },
+                     32      "devDependencies": {
+                     33        "nodemon": "^3.1.11"
+                     34      }
+                     35    }
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
@@ -344,17 +378,19 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
-
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 03.02. Ejecutar la base de datos 'database/db_node.sql': ------------------------------------------------------------------------------------------------------------|
@@ -369,7 +405,6 @@
             04. Seleccionar el archivo 'C:\..\..\proyecto\database\db_node.sql'
             
             05. Dar click en 'Importar'
-
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
@@ -393,14 +428,17 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -411,28 +449,31 @@
                       1     require('dotenv').config();
                       2     const mysql = require('mysql');
                       3     const db = mysql.createConnection({
-                      4         host: process.env.DB_HOST,
-                      5         user: process.env.DB_USER,
-                      6         password: process.env.DB_PASSWORD,
-                      7         database: process.env.DB_NAME,
-                      8         port: process.env.DB_PORT
+                      4       host: process.env.DB_HOST,
+                      5       user: process.env.DB_USER,
+                      6       password: process.env.DB_PASSWORD,
+                      7       database: process.env.DB_NAME,
+                      8       port: process.env.DB_PORT
                       9     });
                      10     db.connect(function(err) {
-                     11         if (err) throw err;
-                     12         console.log('Base de datos conectada')
+                     11       if (err) throw err;
+                     12       console.log('Base de datos conectada')
                      13     });
                      14     module.exports = db;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -444,163 +485,166 @@
                       1     const db = require('../config/config');
                       2     const bcrypt = require('bcryptjs');
                       3     const User = {};
-                      4
+                      4     
                       5     User.findAll = (result) => {
-                      6         const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
-                      7         db.query(sql, (err, users) => {
-                      8             if (err) {
-                      9                 console.log('Error al listar usuarios: ', err);
-                     10                 result(err, null);
-                     11             } else {
-                     12                 console.log('Usuarios encontrados: ', users.length);
-                     13                 result(null, users);
-                     14             }
-                     15         });
+                      6       const sql = `SELECT id, email, name, lastname, phone, image, role, created_at, updated_at FROM users`;
+                      7       db.query(sql, (err, users) => {
+                      8         if (err) {
+                      9           console.log('Error al listar usuarios: ', err);
+                     10           result(err, null);
+                     11         } else {
+                     12           console.log('Usuarios encontrados: ', users.length);
+                     13           result(null, users);
+                     14         }
+                     15       });
                      16     };
-                     17
+                     17     
                      18     User.findById = (id, result) => {
-                     19         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
-                     20         db.query(sql, [id], (err, user) => {
-                     21             if (err) {
-                     22                 console.log('Error al consultar: ', err);
-                     23                 result(err, null);
-                     24             }
-                     25             else {
-                     26                 console.log('Usuario consultado: ',  user[0] );
-                     27                 result(null, user[0]);
-                     28             }
-                     29         });
+                     19       const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE id = ?`;
+                     20       db.query(sql, [id], (err, user) => {
+                     21         if (err) {
+                     22           console.log('Error al consultar: ', err);
+                     23           result(err, null);
+                     24         }
+                     25         else {
+                     26           console.log('Usuario consultado: ',  user[0] );
+                     27           result(null, user[0]);
+                     28         }
+                     29       });
                      30     };
-                     31
+                     31     
                      32     User.findByEmail = (email, result) => {
-                     33         const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
-                     34         db.query(sql, [email], (err, user) => {
-                     35             if (err) {
-                     36                 console.log('Error al consultar: ', err);
-                     37                 result(err, null);
-                     38             }
-                     39             else {
-                     40                 console.log('Usuario consultado: ',  user[0] );
-                     41                 result(null, user[0]);
-                     42             }
-                     43         });
+                     33       const sql = `SELECT id, email, name, lastname, image, phone, role, password FROM users WHERE email = ?`;
+                     34       db.query(sql, [email], (err, user) => {
+                     35         if (err) {
+                     36           console.log('Error al consultar: ', err);
+                     37           result(err, null);
+                     38         }
+                     39         else {
+                     40           console.log('Usuario consultado: ',  user[0] );
+                     41           result(null, user[0]);
+                     42         }
+                     43       });
                      44     };
-                     45
+                     45     
                      46     User.create = async (user, result) => {
-                     47         const hash = await bcrypt.hash(user.password, 10)  
-                     48         const validRoles = ['admin', 'seller', 'customer', 'user'];
-                     49         const role = validRoles.includes(user.role) ? user.role : 'user';
-                     50         const sql = `INSERT INTO users(
-                     51                         name, 
-                     52                         lastname,
-                     53                         email, 
-                     54                         password,
-                     55                         phone,
-                     56                         image,
-                     57                         role,
-                     58                         created_at,
-                     59                         updated_at
-                     60                     ) VALUES (?,?,?,?,?,?,?,?,?)`;
-                     61         db.query(sql,
-                     62             [
-                     63                 user.name,
-                     64                 user.lastname,
-                     65                 user.email,
-                     66                 hash,
-                     67                 user.phone,
-                     68                 user.image,
-                     69                 role,
-                     70                 new Date(),
-                     71                 new Date()
-                     72             ], (err, res) => {
-                     73                 if (err) {
-                     74                     console.log('Error al crear al Usuario: ', err);
-                     75                     result(err, null);
-                     76                 } else {
-                     77                     console.log('Usuario creado: ', {id: res.insertId, ...user});
-                     78                     result(null, {id: res.insertId, ...user});
-                     79                 }
-                     80             }
-                     81         );
+                     47       const hash = await bcrypt.hash(user.password, 10);  
+                     48       const validRoles = ['admin', 'seller', 'customer', 'user'];
+                     49       const role = validRoles.includes(user.role) ? user.role : 'user';
+                     50       const sql = `INSERT INTO users(
+                     51                     name, 
+                     52                     lastname,
+                     53                     email, 
+                     54                     password,
+                     55                     phone,
+                     56                     image,
+                     57                     role,
+                     58                     created_at,
+                     59                     updated_at
+                     60                 ) VALUES (?,?,?,?,?,?,?,?,?)`;
+                     61       db.query(sql,
+                     62         [
+                     63           user.name,
+                     64           user.lastname,
+                     65           user.email,
+                     66           hash,
+                     67           user.phone,
+                     68           user.image,
+                     69           role,
+                     70           new Date(),
+                     71           new Date()
+                     72         ], (err, res) => {
+                     73           if (err) {
+                     74             console.log('Error al crear al Usuario: ', err);
+                     75             result(err, null);
+                     76           } else {
+                     77             console.log('Usuario creado: ', {id: res.insertId, ...user});
+                     78             result(null, {id: res.insertId, ...user});
+                     79           }
+                     80         }
+                     81       );
                      82     };
-                     83
+                     83     
                      84     User.update = async (user, result) => {
-                     85         let fields = [];
-                     86         let values = [];
-                     87
-                     88         if (user.password) {
-                     89             const hash = await bcrypt.hash(user.password, 10);
-                     90             fields.push("password = ?");
-                     91             values.push(hash);
-                     92         }
-                     93
-                     94         if (user.email) {
-                     95             fields.push("email = ?");
-                     96             values.push(user.email);
-                     97         }
-                     98         if (user.name) {
-                     99             fields.push("name = ?");
-                    100             values.push(user.name);
-                    101         }
-                    102         if (user.lastname) {
-                    103             fields.push("lastname = ?");
-                    104             values.push(user.lastname);
-                    105         }
-                    106         if (user.phone) {
-                    107             fields.push("phone = ?");
-                    108             values.push(user.phone);
-                    109         }
-                    110         if (user.image) {
-                    111             fields.push("image = ?");
-                    112             values.push(user.image);
-                    113         }
-                    114         if (user.role) {
-                    115             fields.push("role = ?");
-                    116             values.push(user.role);
-                    117         }
-                    118
-                    119         fields.push("updated_at = ?");
-                    120         values.push(new Date());
-                    121
-                    122         const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
-                    123         values.push(user.id);
-                    124
-                    125         db.query(sql, values, (err, res) => {
-                    126             if (err) {
-                    127                 console.log('Error al actualizar usuario: ', err);
-                    128                 result(err, null);
-                    129             } else {
-                    130                 console.log('Usuario actualizado: ', { id: user.id, ...user });
-                    131                 result(null, { id: user.id, ...user });
-                    132             }
-                    133         });
+                     85       let fields = [];
+                     86       let values = [];
+                     87     
+                     88       if (user.password) {
+                     89         const hash = await bcrypt.hash(user.password, 10);
+                     90         fields.push("password = ?");
+                     91         values.push(hash);
+                     92       }
+                     93     
+                     94       if (user.email) {
+                     95         fields.push("email = ?");
+                     96         values.push(user.email);
+                     97       }
+                     98       if (user.name) {
+                     99         fields.push("name = ?");
+                    100         values.push(user.name);
+                    101       }
+                    102       if (user.lastname) {
+                    103         fields.push("lastname = ?");
+                    104         values.push(user.lastname);
+                    105       }
+                    106       if (user.phone) {
+                    107         fields.push("phone = ?");
+                    108         values.push(user.phone);
+                    109       }
+                    110       if (user.image) {
+                    111         fields.push("image = ?");
+                    112         values.push(user.image);
+                    113       }
+                    114       if (user.role) {
+                    115         fields.push("role = ?");
+                    116         values.push(user.role);
+                    117       }
+                    118     
+                    119       fields.push("updated_at = ?");
+                    120       values.push(new Date());
+                    121     
+                    122       const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+                    123       values.push(user.id);
+                    124     
+                    125       db.query(sql, values, (err, res) => {
+                    126         if (err) {
+                    127           console.log('Error al actualizar usuario: ', err);
+                    128           result(err, null);
+                    129         } else {
+                    130           console.log('Usuario actualizado: ', { id: user.id, ...user });
+                    131           result(null, { id: user.id, ...user });
+                    132         }
+                    133       });
                     134     };
-                    135
+                    135     
                     136     User.delete = (id, result) => {
-                    137         const sql = `DELETE FROM users WHERE id = ?`;
-                    138         db.query(sql, [id], (err, res) => {
-                    139             if (err) {
-                    140                 console.log('Error al eliminar usuario: ', err);
-                    141                 result(err, null);
-                    142             } else {
-                    143                 console.log('Usuario eliminado con id: ', id);
-                    144                 result(null, res);
-                    145             }
-                    146         });
+                    137       const sql = `DELETE FROM users WHERE id = ?`;
+                    138       db.query(sql, [id], (err, res) => {
+                    139         if (err) {
+                    140           console.log('Error al eliminar usuario: ', err);
+                    141           result(err, null);
+                    142         } else {
+                    143           console.log('Usuario eliminado con id: ', id);
+                    144           result(null, res);
+                    145         }
+                    146       });
                     147     };
-                    148
+                    148     
                     149     module.exports = User;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -615,19 +659,22 @@
                       1     require('dotenv').config();
                       2
                       3     module.exports = {
-                      4         secretOrKey: process.env.JWT_SECRET
+                      4       secretOrKey: process.env.JWT_SECRET
                       5     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
                     
@@ -640,38 +687,41 @@
                       3     const passport = require('passport');
                       4     const Keys = require('./keys');
                       5     const User = require('../models/user');
-                      6
+                      6     
                       7     const opts = {
-                      8         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                      9         secretOrKey: Keys.secretOrKey
+                      8       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+                      9       secretOrKey: Keys.secretOrKey
                      10     };
-                     11
+                     11     
                      12     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-                     13         User.findById(jwt_payload.id, (err, user) => {
-                     14             if (err) {
-                     15                 return done(err, false);
-                     16             }
-                     17             if (user) {
-                     18                 return done(null, user);
-                     19             }
-                     20             else{
-                     21                 return done(null, false);
-                     22             }
-                     23         });
+                     13       User.findById(jwt_payload.id, (err, user) => {
+                     14         if (err) {
+                     15           return done(err, false);
+                     16         }
+                     17         if (user) {
+                     18           return done(null, user);
+                     19         }
+                     20         else{
+                     21           return done(null, false);
+                     22         }
+                     23       });
                      24     }));
-                     25
+                     25     
                      26     module.exports = passport;
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -679,178 +729,181 @@
 |-- 04.06.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                      1     const User = require('../models/user');
-                      2     const bcrypt = require('bcryptjs');
-                      3     const jwt = require('jsonwebtoken');
-                      4     const keys = require('../config/keys');
-                      5
+                      1     const User = require("../models/user");
+                      2     const bcrypt = require("bcryptjs");
+                      3     const jwt = require("jsonwebtoken");
+                      4     const keys = require("../config/keys");
+                      5     
                       6     module.exports = {
-                      7         login(req, res) {
-                      8             const email = req.body.email;
-                      9             const password = req.body.password;
-                     10
-                     11             User.findByEmail(email, async (err, myUser) => {
-                     12                 if (err) {
-                     13                     return res.status(501).json({
-                     14                         success: false,
-                     15                         message: 'Error al consultar el usuario',
-                     16                         error: err
-                     17                     });
-                     18                 }
-                     19
-                     20                 if (!myUser) {
-                     21                     return res.status(401).json({
-                     22                         success: false,
-                     23                         message: 'El email no existe en la base de datos'
-                     24                     });
-                     25                 }
-                     26
-                     27                 const isPasswordValid = await bcrypt.compare(password, myUser.password);
-                     28
-                     29                 if (isPasswordValid) {
-                     30                     const token = jwt.sign(
-                     31                         { id: myUser.id, email: myUser.email, role: myUser.role },
-                     32                         keys.secretOrKey,
-                     33                         { expiresIn: '1h' }
-                     34                     );
-                     35
-                     36                     const data = {
-                     37                         id: myUser.id,
-                     38                         email: myUser.email,
-                     39                         name: myUser.name,
-                     40                         lastname: myUser.lastname,
-                     41                         image: myUser.image,
-                     42                         phone: myUser.phone,
-                     43                         role: myUser.role,
-                     44                         session_token: `JWT ${token}`
-                     45                     };
-                     46
-                     47                     return res.status(201).json({
-                     48                         success: true,
-                     49                         message: 'Usuario autenticado',
-                     50                         data: data
-                     51                     });
-                     52                 } else {
-                     53                     return res.status(401).json({
-                     54                         success: false,
-                     55                         message: 'Contraseña o correo incorrecto'
-                     56                     });
-                     57                 }
-                     58             });
-                     59         },
-                     60
-                     61         getAllUsers(req, res) {
-                     62             User.findAll((err, users) => {
-                     63                 if (err) {
-                     64                     return res.status(501).json({
-                     65                         success: false,
-                     66                         message: 'Error al listar usuarios',
-                     67                         error: err
-                     68                     });
-                     69                 }
-                     70                 return res.status(200).json({
-                     71                     success: true,
-                     72                     message: 'Lista de usuarios',
-                     73                     data: users
-                     74                 });
-                     75             });
-                     76         },
-                     77
-                     78         getUserById(req, res) {
-                     79             const id = req.params.id;
-                     80             User.findById(id, (err, user) => {
-                     81                 if (err) {
-                     82                     return res.status(501).json({
-                     83                         success: false,
-                     84                         message: 'Error al consultar el usuario',
-                     85                         error: err
-                     86                     });
-                     87                 }
-                     88                 if (!user) {
-                     89                     return res.status(404).json({
-                     90                         success: false,
-                     91                         message: 'Usuario no encontrado'
-                     92                     });
-                     93                 }
-                     94                 return res.status(200).json({
-                     95                     success: true,
-                     96                     message: 'Usuario encontrado',
-                     97                     data: user
-                     98                 });
-                     99             });
-                    100         },
-                    101
-                    102         register(req, res) {
-                    103             const user = req.body;
-                    104
-                    105             if (!user.role) {
-                    106                 user.role = 'user';
-                    107             }
-                    108
-                    109             User.create(user, (err, data) => {
-                    110                 if (err) {
-                    111                     return res.status(501).json({
-                    112                         success: false,
-                    113                         message: 'Error al crear al usuario',
-                    114                         error: err
-                    115                     });
-                    116                 } else {
-                    117                     return res.status(201).json({
-                    118                         success: true,
-                    119                         message: 'Usuario creado correctamente',
-                    120                         data: data
-                    121                     });
-                    122                 }
-                    123             });
-                    124         },
-                    125
-                    126         getUserUpdate(req, res) {
-                    127             const user = req.body;
-                    128             User.update(user, (err, data) => {
-                    129                 if (err) {
-                    130                     return res.status(501).json({
-                    131                         success: false,
-                    132                         message: 'Error al actualizar el usuario',
-                    133                         error: err
-                    134                     });
-                    135                 }
-                    136                 return res.status(200).json({
-                    137                     success: true,
-                    138                     message: 'Usuario actualizado',
-                    139                     data: data
-                    140                 });
-                    141             });
-                    142         },
-                    143
-                    144         getUserDelete(req, res) {
-                    145             const id = req.params.id;
-                    146             User.delete(id, (err, data) => {
-                    147                 if (err) {
-                    148                     return res.status(501).json({
-                    149                         success: false,
-                    150                         message: 'Error al eliminar el usuario',
-                    151                         error: err
-                    152                     });
-                    153                 }
-                    154                 return res.status(200).json({
-                    155                     success: true,
-                    156                     message: 'Usuario eliminado',
-                    157                     data: data
-                    158                 });
-                    159             });
-                    160         }
+                      7       login(req, res) {
+                      8         const email = req.body.email;
+                      9         const password = req.body.password;
+                     10     
+                     11         User.findByEmail(email, async (err, myUser) => {
+                     12           if (err) {
+                     13             return res.status(501).json({
+                     14               success: false,
+                     15               message: "Error al consultar el usuario",
+                     16               error: err,
+                     17             });
+                     18           }
+                     19     
+                     20           if (!myUser) {
+                     21             return res.status(401).json({
+                     22               success: false,
+                     23               message: "El email no existe en la base de datos",
+                     24             });
+                     25           }
+                     26     
+                     27           const isPasswordValid = await bcrypt.compare(password, myUser.password);
+                     28     
+                     29           if (isPasswordValid) {
+                     30             const token = jwt.sign(
+                     31               { id: myUser.id, email: myUser.email, role: myUser.role },
+                     32               keys.secretOrKey,
+                     33               { expiresIn: "1h" }
+                     34             );
+                     35     
+                     36             const data = {
+                     37               id: myUser.id,
+                     38               email: myUser.email,
+                     39               name: myUser.name,
+                     40               lastname: myUser.lastname,
+                     41               image: myUser.image,
+                     42               phone: myUser.phone,
+                     43               role: myUser.role,
+                     44               session_token: `JWT ${token}`,
+                     45             };
+                     46     
+                     47             return res.status(201).json({
+                     48               success: true,
+                     49               message: "Usuario autenticado",
+                     50               data: data,
+                     51             });
+                     52           } else {
+                     53             return res.status(401).json({
+                     54               success: false,
+                     55               message: "Contraseña o correo incorrecto",
+                     56             });
+                     57           }
+                     58         });
+                     59       },
+                     60     
+                     61       getAllUsers(req, res) {
+                     62         User.findAll((err, users) => {
+                     63           if (err) {
+                     64             return res.status(501).json({
+                     65               success: false,
+                     66               message: "Error al listar usuarios",
+                     67               error: err,
+                     68             });
+                     69           }
+                     70           return res.status(200).json({
+                     71             success: true,
+                     72             message: "Lista de usuarios",
+                     73             data: users,
+                     74           });
+                     75         });
+                     76       },
+                     77     
+                     78       getUserById(req, res) {
+                     79         const id = req.params.id;
+                     80         User.findById(id, (err, user) => {
+                     81           if (err) {
+                     82             return res.status(501).json({
+                     83               success: false,
+                     84               message: "Error al consultar el usuario",
+                     85               error: err,
+                     86             });
+                     87           }
+                     88           if (!user) {
+                     89             return res.status(404).json({
+                     90               success: false,
+                     91               message: "Usuario no encontrado",
+                     92             });
+                     93           }
+                     94           return res.status(200).json({
+                     95             success: true,
+                     96             message: "Usuario encontrado",
+                     97             data: user,
+                     98           });
+                     99         });
+                    100       },
+                    101     
+                    102       register(req, res) {
+                    103         const user = req.body;
+                    104     
+                    105         if (!user.role) {
+                    106           user.role = "user";
+                    107         }
+                    108     
+                    109         User.create(user, (err, data) => {
+                    110           if (err) {
+                    111             return res.status(501).json({
+                    112               success: false,
+                    113               message: "Error al crear al usuario",
+                    114               error: err,
+                    115             });
+                    116           } else {
+                    117             return res.status(201).json({
+                    118               success: true,
+                    119               message: "Usuario creado correctamente",
+                    120               data: data,
+                    121             });
+                    122           }
+                    123         });
+                    124       },
+                    125     
+                    126       getUserUpdate(req, res) {
+                    127         const user = req.body;
+                    128         User.update(user, (err, data) => {
+                    129           if (err) {
+                    130             return res.status(501).json({
+                    131               success: false,
+                    132               message: "Error al actualizar el usuario",
+                    133               error: err,
+                    134             });
+                    135           }
+                    136           return res.status(200).json({
+                    137             success: true,
+                    138             message: "Usuario actualizado",
+                    139             data: data,
+                    140           });
+                    141         });
+                    142       },
+                    143     
+                    144       getUserDelete(req, res) {
+                    145         const id = req.params.id;
+                    146         User.delete(id, (err, data) => {
+                    147           if (err) {
+                    148             return res.status(501).json({
+                    149               success: false,
+                    150               message: "Error al eliminar el usuario",
+                    151               error: err,
+                    152             });
+                    153           }
+                    154           return res.status(200).json({
+                    155             success: true,
+                    156             message: "Usuario eliminado",
+                    157             data: data,
+                    158           });
+                    159         });
+                    160       },
                     161     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -859,66 +912,69 @@
 |-- 04.07.  Codificar la autenticación por JWT y Roles en 'backend/middlewares/authMiddleware.js': ----------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                      1     const jwt = require('jsonwebtoken');
-                      2     const keys = require('../config/keys');
-                      3
+                      1     const jwt = require("jsonwebtoken");
+                      2     const keys = require("../config/keys");
+                      3     
                       4     function verifyToken(req, res, next) {
-                      5         const authHeader = req.headers['authorization'];
-                      6         if (!authHeader) {
-                      7             return res.status(403).json({
-                      8                 success: false,
-                      9                 message: 'No se proporcionó un token'
-                     10             });
-                     11         }
-                     12
-                     13         const token = authHeader.split(' ')[1];
-                     14         if (!token) {
-                     15             return res.status(403).json({
-                     16                 success: false,
-                     17                 message: 'Formato de token inválido'
-                     18             });
-                     19         }
-                     20
-                     21         jwt.verify(token, keys.secretOrKey, (err, decoded) => {
-                     22             if (err) {
-                     23                 return res.status(401).json({
-                     24                     success: false,
-                     25                     message: 'Token inválido o expirado',
-                     26                     error: err
-                     27                 });
-                     28             }
-                     29             req.user = decoded;
-                     30             next();
-                     31         });
+                      5       const authHeader = req.headers["authorization"];
+                      6       if (!authHeader) {
+                      7         return res.status(403).json({
+                      8           success: false,
+                      9           message: "No se proporcionó un token",
+                     10         });
+                     11       }
+                     12     
+                     13       const token = authHeader.split(" ")[1];
+                     14       if (!token) {
+                     15         return res.status(403).json({
+                     16           success: false,
+                     17           message: "Formato de token inválido",
+                     18         });
+                     19       }
+                     20     
+                     21       jwt.verify(token, keys.secretOrKey, (err, decoded) => {
+                     22         if (err) {
+                     23           return res.status(401).json({
+                     24             success: false,
+                     25             message: "Token inválido o expirado",
+                     26             error: err,
+                     27           });
+                     28         }
+                     29         req.user = decoded;
+                     30         next();
+                     31       });
                      32     }
-                     33
+                     33     
                      34     function authorizeRoles(roles) {
-                     35         return (req, res, next) => {
-                     36             if (!req.user || !roles.includes(req.user.role)) {
-                     37                 return res.status(403).json({
-                     38                     success: false,
-                     39                     message: `Acceso denegado: se requiere rol ${roles.join(' o ')}`
-                     40                 });
-                     41             }
-                     42             next();
-                     43         };
+                     35       return (req, res, next) => {
+                     36         if (!req.user || !roles.includes(req.user.role)) {
+                     37           return res.status(403).json({
+                     38             success: false,
+                     39             message: `Acceso denegado: se requiere rol ${roles.join(" o ")}`,
+                     40           });
+                     41         }
+                     42         next();
+                     43       };
                      44     }
-                     45
+                     45     
                      46     module.exports = {
-                     47         verifyToken,
-                     48         authorizeRoles
+                     47       verifyToken,
+                     48       authorizeRoles,
                      49     };
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -945,14 +1001,17 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -979,17 +1038,17 @@
                      17
                      18     // Endpoints de prueba
                      19     app.get('/', (req, res) => {
-                     20         res.send('Ruta raíz del Backend');
+                     20       res.send('Ruta raíz del Backend');
                      21     });
                      22
                      23     app.get('/test', (req, res) => {
-                     24         res.send('Ruta TEST');
+                     24       res.send('Ruta TEST');
                      25     });
                      26
                      27     // Manejo de errores
                      28     app.use((err, req, res, next) => {
-                     29         console.log(err);
-                     30         res.status(err.status || 500).send(err.stack);
+                     29       console.log(err);
+                     30       res.status(err.status || 500).send(err.stack);
                      31     });
                      32
                      33     // Exportamos la app para que la use index.js
@@ -997,14 +1056,17 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  EXPLICACIÓN:   
+                  EXPLICACIÓN:
                     
-                    ⦿  XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    ⦿   [nombre_archivo]: [En este espacio, se deben responder 2 preguntas: ¿Qué hace el archivo? y ¿Qué función cumple el archivo 
+                                            en el proyecto?].
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
@@ -1012,19 +1074,20 @@
 |-- 04.10.  Codificar el inicio del backend en 'backend/index.js': ------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-                      1     const http = require('http');
-                      2     const app = require('./server');
-                      3     
-                      4     const port = process.env.PORT || 3000;
-                      5     const host = process.env.HOST || 'localhost';
-                      6     
-                      7     app.set('port', port);
-                      8     
-                      9     const server = http.createServer(app);
-                     10     
-                     11     server.listen(port, host, () => {
-                     12       console.log(`Servidor corriendo en http://${host}:${port}`);
-                     13     });
+                      1    const http = require('http');
+                      2    const app = require('./server');
+                      3    const cors = require('cors');
+                      4    const port = process.env.PORT || 3000;
+                      5    const host = process.env.HOST || '192.168.1.77';
+                      6    
+                      7    app.use(cors({ origin: ['localhost', '127.0.0.1', '192.168.1.77'] }));
+                      8    app.set('port', port);
+                      9    
+                     10    const server = http.createServer(app);
+                     11    
+                     12    server.listen(port, host, () => {
+                     13      console.log(`Servidor corriendo en http://${host}:${port}`);
+                     14    });
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
@@ -1034,11 +1097,31 @@
 
                 |---------------------------------------------------------------------------------------------------------------------------------------- |
                 
-                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
-                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    A.   [Explicar qué hace cada línea de código, por ejemplo: Desde la línea 1 hasta la 5 'export const MyColors = {}', hace que 
+                          'MyColors' sea accesible desde otros archivos del proyecto (importable)].
+                    B.   [Explicar qué hace cada línea de código, por ejemplo: En la línea 2 'background: '#EEEEEE',', se está colocando un color 
+                          de fondo gris claro, al elemento reutilizable en el proyecto].
+                    X.   En la línea 5 se coloca la 'Dirección IPv4' del computador, para saberla, se debe escribir lo siguiente:
+                            
+                          ⦿   PS C:\..\backend> ipconfig
+
+                                    Configuración IP de Windows
+
+                                    Adaptador de Ethernet Ethernet:
+
+                                      Sufijo DNS específico para la conexión. . : 
+                                      Vínculo: dirección IPv6 local. . . : fe80::dd0d:b7b6:203:30a5%6
+                                      Dirección IPv4. . . . . . . . . . . . . . : 192.168.1.77               <------ Seleccionar y copiar la IPv4
+                                      Máscara de subred . . . . . . . . . . . . : 255.255.255.0      
+                                      Puerta de enlace predeterminada . . . . . : fe80::1%6
+                                                                          192.168.1.1
+
+                                    Adaptador de Ethernet Bluetooth Network Connection:
+
+                                      Estado de los medios. . . . . . . . . . . : medios desconectados
+                                      Sufijo DNS específico para la conexión. . :
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
-
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |-- 04.11.  Ejecutar el backend: ----------------------------------------------------------------------------------------------------------------------------------------|
@@ -1067,40 +1150,88 @@
 
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.01.  Crear la Colección 'USUARIOS': ------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.01.  Crear la Colección 'PROYECTO': ------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Dar click en 'New / Collection'
             
-            02. Dar click en 'New Collection' y escribir 'USUARIOS'
+            02. Dar click en 'New Collection' y escribir 'PROYECTO'
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS': ---------------------------------------------------------------------------------|
+|-- 05.02.  Crear los variables el Proyecto: ----------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            01. Dar click en la colección 'PROYECTO'
             
+            02. Dar click en 'variables'
+            
+            03. Dar click en 'Add variable' de la columna 'variable' y escribir 'baseUrl'; mientras que en 'value', la dirección IPv4 del computador (Ver apartado 
+                '04.10.  Codificar el inicio del backend en 'backend/index.js'')
+            
+            04. Crear las demás variables del Proyecto, quedando así:
+
+                        ┌──────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────┐
+                        |   Variable               |    Value                                                                                |
+                        |──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+                        |   baseUrl                |    172.22.112.1                                                                         |
+                        |──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+                        |   port                   |    3000                                                                                 |
+                        |──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+                        |   admin                  |                                                                                         |
+                        |──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+                        |   seller                 |                                                                                         |
+                        |──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+                        |   customer               |                                                                                         |                        
+                        └──────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────┘
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  NOTA:
+                    
+                    ⦿  Los 'Value' de 'admin', 'seller' y 'customer', corresponden a los 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' que se van 
+                        creando en la medida que se inicia sesión.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.03.  Crear los Módulos del proyecto, ejemplo 'USUARIOS': ---------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'PROYECTO' (En el Panel Lateral Izquierdo) y seleccionar 'Add folder'
+            
+            02. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'New Folder' (En el Panel Lateral Izquierdo) y seleccionar 'Rename'
+            
+            03. Escribir 'USUARIOS'
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.04.  Crear los métodos HTTP (GET, POST, PUT, DELETE) del Módulo 'USUARIOS': --------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'PROYECTO' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+                        
             02. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
             
-            03. Repetir los pasos 01 y 02 para el método: 'userCreate', 'login', 'usersAll', 'userById', 'userCreate', 'userUpdate' y 'userDelete'
+            03. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
 
-            04. Seleccionar el método 'userCreate' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
-            
-            05. Seleccionar el método 'login' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
-            
-            06. Seleccionar el método 'userUpdate' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
-            
-            07. Seleccionar el método 'userDelete' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
-           
-            
+            04. Dar click en los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'userCreate'
 
+            05. Repetir los pasos 03 y 04 para los métodos: 'login', 'usersAll', 'userById', 'userUpdate' y 'userDelete'
+
+            06. Seleccionar el método 'userCreate' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            07. Seleccionar el método 'login' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            08. Seleccionar el método 'userUpdate' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
+            
+            09. Seleccionar el método 'userDelete' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
+            
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.03.  Configurar 'GET raiz': --------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.05.  Configurar 'GET raiz': --------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'GET raiz'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API: 'localhost:3000'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or paste text |) la URL de la API: {{baseUrl}}:{{port}}
 
             03. Dar click en 'Send'
             
@@ -1109,13 +1240,13 @@
                       1   Ruta raíz del Backend
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.04.  Configurar 'POST userCreate': -------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.06.  Configurar 'POST userCreate': -------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'POST userCreate'
             
-            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/create): 'localhost:3000/api/users/create'
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users/create): {{baseUrl}}:{{port}}/api/users/create
 
             03. Dar click en 'Body / raw / JSON'
             
@@ -1132,13 +1263,13 @@
             
             05. Dar click en 'Send'
             
-            06. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
-                      5            "id": 1,
+                      5            "id": 2,
                       6            "email": "user@sistema.com",
                       7            "name": "Usuario",
                       8            "lastname": "Sistema",
@@ -1149,9 +1280,9 @@
                      13        }
                      14    }
 
-            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
+            06. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
               
-            08. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            07. Repetir los pasos 4, 5 y 6 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "customer@sistema.com",
@@ -1161,15 +1292,15 @@
                       6        "image": "yyyy",
                       7        "role": "customer",
                       8        "password": "12345"
-                      9    }              
+                      9    }
               
-            09. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
-                      5            "id": 2,
+                      5            "id": 3,
                       6            "email": "customer@sistema.com",
                       7            "name": "Customer",
                       8            "lastname": "Sistema",
@@ -1180,7 +1311,7 @@
                      13        }
                      14    }
 
-            10. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            08. Repetir los pasos 4, 5 y 6 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "seller@sistema.com",
@@ -1190,15 +1321,15 @@
                       6        "image": "yyyy",
                       7        "role": "seller",
                       8        "password": "12345"
-                      9    }              
+                      9    }
               
-            11. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
-                      5            "id": 3,
+                      5            "id": 4,
                       6            "email": "seller@sistema.com",
                       7            "name": "Seller",
                       8            "lastname": "Sistema",
@@ -1209,36 +1340,7 @@
                      13        }
                      14    }
             
-            12. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
-
-                      1    {
-                      2        "email": "admin@sistema.com",
-                      3        "name": "Admin",
-                      4        "lastname": "Sistema",
-                      5        "phone": "3133133131",
-                      6        "image": "yyyy",
-                      7        "role": "admin",
-                      8        "password": "12345"
-                      9    }              
-              
-            13. Verificar que la parte inferior aparezca el siguiente código:
-
-                      1    {
-                      2        "success": true,
-                      3        "message": "Usuario creado correctamente",
-                      4        "data": {
-                      5            "id": 4,
-                      6            "email": "admin@sistema.com",
-                      7            "name": "Admin",
-                      8            "lastname": "Sistema",
-                      9            "phone": "3133133131",
-                     10            "image": "yyyy",
-                     11            "role": "admin",
-                     12            "password": "12345"
-                     13        }
-                     14    }
-            
-            14. Repetir los pasos 4, 5 y 7 con el siguiente arreglo (clave: valor) en formato JSON:
+            09. Repetir los pasos 4, 5 y 6 con el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
                       2        "email": "other@sistema.com",
@@ -1248,15 +1350,15 @@
                       6        "image": "yyyy",
                       7        "role": "other",
                       8        "password": "12345"
-                      9    }              
+                      9    }
               
-            15. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
                       3        "message": "Usuario creado correctamente",
                       4        "data": {
-                      5            "id": 5,
+                      5            "id": 6,
                       6            "email": "other@sistema.com",
                       7            "name": "Other",
                       8            "lastname": "Sistema",
@@ -1269,7 +1371,7 @@
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  NOTA:   
+                  NOTA:
                     
                     ⦿  Note que 'http://localhost/phpmyadmin/', en la base de datos 'db_node' (tabla 'users'), en el registro creado, en la columna
                         'role', aparece 'user' en lugar de 'other'; esto se debe a que en 'backend/models/user.js' en las líneas 48 y 49, se está 
@@ -1277,15 +1379,14 @@
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
-
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.05.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.07.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'POST login'
             
-            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/login): 'localhost:3000/api/users/login'
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users/login): {{baseUrl}}:{{port}}/api/users/login
 
             03. Dar click en 'Body / raw / JSON'
             
@@ -1312,21 +1413,21 @@
                      10            "phone": "3103103101",
                      11            "role": "user",
                      12            "session_token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-                                                     eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU5MzcwNTE4LCJleHAiOjE3NTkzNzQxMTh9.
-                                                     2oJDO0HIsol2TKHD4JBzsrRuXFeCv76e7eqJCzKOpEY"
+                                     eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU5MzcwNTE4LCJleHAiOjE3NTkzNzQxMTh9.
+                                     2oJDO0HIsol2TKHD4JBzsrRuXFeCv76e7eqJCzKOpEY"
                      13        }
                      14    }
 
             07. Copiar todo el código que está entre comillas del "session_token" de la línea 12
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.06.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.08.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'GET usersAll'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users): 'localhost:3000/api/users'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users): {{baseUrl}}:{{port}}/api/users
 
             03. Dar click en 'Send'
             
@@ -1348,94 +1449,108 @@
                       3        "message": "Acceso denegado: se requiere rol admin o seller"
                       4    }
             
-            08. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'customer':
+            08. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.07.  Configurar 'POST login', para loguearse como 'customer':
 
                       1    {
                       2        "email": "customer@sistema.com",
                       3        "password": "12345"
                       4    }
             
-            09. Repetir los pasos 5 y 6 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+            09. Dar click en la colección 'PROYECTO / variables', pegar en 'customer' el 'value': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...', retornar a
+                'GET usersAll'
+
+            10. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{customer}}' y dar click al check ☑ de esa misma línea.
+
+            11. Dar click en 'Send'
+            
+                NOTA: En la parte inferior debe aparecer el siguiente código:
 
                       1    {
                       2        "success": false,
                       3        "message": "Acceso denegado: se requiere rol admin o seller"
                       4    }
 
-            10. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'seller':
+            12. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.07.  Configurar 'POST login', para loguearse como 'seller':
 
                       1    {
                       2        "email": "seller@sistema.com",
                       3        "password": "12345"
                       4    }
             
-            11. Repetir los pasos 5 y 6 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+            13. Dar click en la colección 'PROYECTO / variables', pegar en 'seller' el 'value': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...', retornar a
+                'GET usersAll'
+
+            14. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{seller}}' y dar click al check ☑ de esa misma línea.
+
+            15. Dar click en 'Send'
+
+                NOTA: En la parte inferior debe aparecer el siguiente código:
 
                       1    {
-                      2        "success": true,
-                      3        "message": "Lista de usuarios",
-                      4        "data": [
-                      5            {
-                      6                "id": 1,
-                      7                "email": "user@sistema.com",
-                      8                "name": "User",
-                      9                "lastname": "Sistema",
-                     10                "phone": "3103103101",
-                     11                "image": "yyyy",
-                     12                "role": "user",
-                     13                "created_at": "2025-10-02T09:15:59.000Z",
-                     14                "updated_at": "2025-10-02T09:15:59.000Z"
-                     15            },
-                     16            {
-                     17                "id": 2,
-                     18                "email": "customer@sistema.com",
-                     19                "name": "Customer",
-                     20                "lastname": "Sistema",
-                     21                "phone": "3113113111",
-                     22                "image": "yyyy",
-                     23                "role": "customer",
-                     24                "created_at": "2025-10-02T09:17:09.000Z",
-                     25                "updated_at": "2025-10-02T09:17:09.000Z"
-                     26            },
-                     27            {
-                     28                "id": 3,
-                     29                "email": "seller@sistema.com",
-                     30                "name": "Seller",
-                     31                "lastname": "Sistema",
-                     32                "phone": "3113113111",
-                     33                "image": "yyyy",
-                     34                "role": "seller",
-                     35                "created_at": "2025-10-02T09:26:11.000Z",
-                     36                "updated_at": "2025-10-02T09:26:11.000Z"
-                     37            },
-                     38            {
-                     39                "id": 4,
-                     40                "email": "admin@sistema.com",
-                     41                "name": "Admin",
-                     42                "lastname": "Sistema",
-                     43                "phone": "3133133131",
-                     44                "image": "yyyy",
-                     45                "role": "admin",
-                     46                "created_at": "2025-10-02T09:27:19.000Z",
-                     47                "updated_at": "2025-10-02T09:27:19.000Z"
-                     48            },
-                     49            {
-                     50                "id": 5,
-                     51                "email": "other@sistema.com",
-                     52                "name": "Other",
-                     53                "lastname": "Sistema",
-                     54                "phone": "3143143141",
-                     55                "image": "yyyy",
-                     56                "role": "user",
-                     57                "created_at": "2025-10-02T09:29:16.000Z",
-                     58                "updated_at": "2025-10-02T09:29:16.000Z"
-                     59            }
-                     60        ]
+                      2      "success": true,
+                      3      "message": "Lista de usuarios",
+                      4      "data": [
+                      5        {
+                      6          "id": 1,
+                      7          "email": "profealbeiro2020@gmail.com",
+                      8          "name": "Albeiro",
+                      9          "lastname": "Ramos",
+                     10          "phone": "3103103101",
+                     11          "image": "profile",
+                     12          "role": "admin",
+                     13          "created_at": "2025-11-12T13:27:02.000Z",
+                     14          "updated_at": "2025-11-12T13:27:02.000Z"
+                     15        },
+                     16        {
+                     17          "id": 2,
+                     18          "email": "user@sistema.com",
+                     19          "name": "Usuario",
+                     20          "lastname": "Sistema",
+                     21          "phone": "3103103101",
+                     22          "image": "yyyy",
+                     23          "role": "user",
+                     24          "created_at": "2025-11-12T13:27:29.000Z",
+                     25          "updated_at": "2025-11-12T13:27:29.000Z"
+                     26        },
+                     27        {
+                     28          "id": 3,
+                     29          "email": "customer@sistema.com",
+                     30          "name": "Customer",
+                     31          "lastname": "Sistema",
+                     32          "phone": "3113113111",
+                     33          "image": "yyyy",
+                     34          "role": "customer",
+                     35          "created_at": "2025-11-12T13:28:20.000Z",
+                     36          "updated_at": "2025-11-12T13:28:20.000Z"
+                     37        },
+                     38        {
+                     39          "id": 4,
+                     40          "email": "seller@sistema.com",
+                     41          "name": "Seller",
+                     42          "lastname": "Sistema",
+                     43          "phone": "3123123121",
+                     44          "image": "yyyy",
+                     45          "role": "seller",
+                     46          "created_at": "2025-11-12T13:28:53.000Z",
+                     47          "updated_at": "2025-11-12T13:28:53.000Z"
+                     48        },
+                     49        {
+                     50          "id": 5,
+                     51          "email": "other@sistema.com",
+                     52          "name": "Other",
+                     53          "lastname": "Sistema",
+                     54          "phone": "3143143141",
+                     55          "image": "yyyy",
+                     56          "role": "user",
+                     57          "created_at": "2025-11-12T13:29:28.000Z",
+                     58          "updated_at": "2025-11-12T13:29:28.000Z"
+                     59        }
+                     60      ]
                      61    }
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
-                  NOTA:   
+                  NOTA:
                     
                     ⦿  Como puede notar, el 'seller' puede obtener todos los usuarios del sistema 'GET usersAll'. esto se debe a que en
                         'backend/routes/userRoutes.js' en la línea 11, se está validando que únicamente los roles autorizados para esta acción sean:
@@ -1443,29 +1558,26 @@
                 |                                                                                                                                         |
                 └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
 
-
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.07.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.09.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
             01. Seleccionar el método 'GET userById'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/:id): 'localhost:3000/api/users/2'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users/:id): {{baseUrl}}:{{port}}/api/users/3            
 
-            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
-            
-            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+            03. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{seller}}' y dar click al check ☑ de esa misma línea.
 
-            05. Dar click en 'Send'
+            04. Dar click en 'Send'
             
-            06. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
                       3        "message": "Usuario encontrado",
                       4        "data": {
-                      5            "id": 2,
+                      5            "id": 3,
                       6            "email": "customer@sistema.com",
                       7            "name": "Customer",
                       8            "lastname": "Sistema",
@@ -1476,26 +1588,23 @@
                      13        }
                      14    }
 
-
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.08.  Configurar 'put userUpdate': -------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.10.  Configurar 'PUT userUpdate': --------------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            01. Seleccionar el método 'put userUpdates'
+            01. Seleccionar el método 'PUT userUpdate'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/update): 'localhost:3000/api/users/update'
-
-            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users/update): {{baseUrl}}:{{port}}/api/users/update
             
-            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+            03. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{seller}}' y dar click al check ☑ de esa misma línea.
 
-            05. Dar click en 'Body / raw / JSON'
+            04. Dar click en 'Body / raw / JSON'
 
-            06. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+            05. Escribir el siguiente arreglo (clave: valor) en formato JSON:
 
                       1    {
-                      2      "id": "2",
+                      2      "id": "3",
                       3      "email": "customer_modified@modificado.com",
                       4      "name": "Customer",
                       5      "lastname": "Modified",
@@ -1504,9 +1613,9 @@
                       8      "password": "12345"
                       9    }
             
-            07. Dar click en 'Send'
+            06. Dar click en 'Send'
             
-            08. Verificar que la parte inferior aparezca el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": true,
@@ -1522,38 +1631,43 @@
                      12        }
                      13    }
 
-            09. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|-- 05.09.  Configurar 'DELETE userDelete': -----------------------------------------------------------------------------------------------------------------------------|
+|-- 05.11.  Configurar 'DELETE userDelete': -----------------------------------------------------------------------------------------------------------------------------|
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
             
             01. Seleccionar el método 'DELETE userDelete'
             
-            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
-                (ENDPOINT: /api/users/delete/:id): 'localhost:3000/api/users/delete/5'
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or paste text |) la URL de la API 
+                (ENDPOINT: /api/users/delete/:id): {{baseUrl}}:{{port}}/api/users/delete/5
 
-            03. Copiar todo el código que está entre comillas del "session_token" de la línea 12, de 'POST login'
-            
-            04. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' pegar el 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
+            03. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{seller}}' y dar click al check ☑ de esa misma línea.
 
-            05. Dar click en 'Send'
+            04. Dar click en 'Send'
             
-            07. En la parte inferior aparece el siguiente código:
+                NOTA: Verificar que la parte inferior aparezca el siguiente código:
 
                       1    {
                       2        "success": false,
                       3        "message": "Acceso denegado: se requiere rol admin"
                       4    }
 
-            07. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.05.  Configurar 'POST login'' para loguearse como 'admin':
+            05. Repetir los pasos 4, 5, 6 y 7 del apartado: '05.07.  Configurar 'POST login', para loguearse como 'admin':
 
                       1    {
-                      2        "email": "admin@sistema.com",
+                      2        "email": "profealbeiro2020@gmail.com",
                       3        "password": "12345"
                       4    }
             
-            08. Repetir los pasos 3, 4 y 5 de este mismo apartado. En la parte inferior debe aparecer el siguiente còdigo:
+            06. Dar click en la colección 'PROYECTO / variables', pegar en 'admin' el 'value': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...', retornar a
+                'DELETE userDelete'
+
+            07. Dar click en 'Headers', en 'Key' escribir 'Authorization' y en 'Value' escribir '{{admin}}' y dar click al check ☑ de esa misma línea.
+
+            08. Dar click en 'Send'
+
+                NOTA: En la parte inferior debe aparecer el siguiente código:
 
                       1    {
                       2        "success": true,
@@ -1572,6 +1686,437 @@
 
 
             09. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya eliminado el registro
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------ 06. DOCUMENTACIÓN CON SWAGGER -------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 06.01.  Codificar swagger en 'backend/config/swagger.js': -----------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                      1    const swaggerJsdoc = require('swagger-jsdoc');
+                      2
+                      3    const options = {
+                      4      definition: {
+                      5        openapi: '3.0.0',
+                      6        info: {
+                      7          title: 'API Mi Proyecto',
+                      8          version: '1.0.0',
+                      9          description: 'Documentación completa de la API REST',
+                     10          contact: {
+                     11            name: 'Albeiro Ramos',
+                     12            email: 'profealbeiro2020@gmail.com'
+                     13          }
+                     14        },
+                     15        servers: [
+                     16          {
+                     17            url: 'http://192.168.1.77:3000',
+                     18            description: 'Servidor local'
+                     19          }
+                     20        ],
+                     21        components: {
+                     22          securitySchemes: {
+                     23            bearerAuth: {
+                     24              type: 'http',
+                     25              scheme: 'bearer',
+                     26              bearerFormat: 'JWT'
+                     27            }
+                     28          },
+                     29          schemas: {
+                     30            User: {
+                     31              type: 'object',
+                     32              properties: {
+                     33                id: {
+                     34                  type: 'integer',
+                     35                  description: 'ID auto-generado'
+                     36                },
+                     37                email: {
+                     38                  type: 'string',
+                     39                  format: 'email',
+                     40                  description: 'Email del usuario'
+                     41                },
+                     42                name: {
+                     43                  type: 'string',
+                     44                  description: 'Nombre del usuario'
+                     45                },
+                     46                lastname: {
+                     47                  type: 'string',
+                     48                  description: 'Apellido del usuario'
+                     49                },
+                     50                role: {
+                     51                  type: 'string',
+                     52                  enum: ['admin', 'seller', 'user'],
+                     53                  description: 'Rol del usuario'
+                     54                }
+                     55              },
+                     56              example: {
+                     57                email: "juan@example.com",
+                     58                name: "Juan",
+                     59                lastname: "Pérez",
+                     60                role: "user"
+                     61              }
+                     62            },
+                     63            Login: {
+                     64              type: 'object',
+                     65              required: ['email', 'password'],
+                     66              properties: {
+                     67                email: {
+                     68                  type: 'string',
+                     69                  format: 'email'
+                     70                },
+                     71                password: {
+                     72                  type: 'string'
+                     73                }
+                     74              },
+                     75              example: {
+                     76                email: "usuario@example.com",
+                     77                password: "miContraseña123"
+                     78              }
+                     79            },
+                     80            Error: {
+                     81              type: 'object',
+                     82              properties: {
+                     83                error: {
+                     84                  type: 'string'
+                     85                },
+                     86                message: {
+                     87                  type: 'string'
+                     88                }
+                     89              }
+                     90            }
+                     91          }
+                     92        }
+                     93      },
+                     94      apis: ['./routes/*.js'], // Ruta de tus archivos de rutas
+                     95    };
+                     96
+                     97    module.exports = swaggerJsdoc(options);
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 06.02.  Modificar el código servidor en 'backend/server.js': --------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                      1    // server.js
+                      2    const express = require('express');
+                      3    const logger = require('morgan');
+                      4    const cors = require('cors');
+                      5    const swaggerUi = require('swagger-ui-express');
+                      6    const swaggerSpec = require('./config/swagger');
+                      7    const usersRoutes = require('./routes/userRoutes');
+                      8
+                      9    const app = express();
+                     10
+                     11    // Middlewares globales
+                     12    app.use(logger('dev'));
+                     13    app.use(express.json());
+                     14    app.use(express.urlencoded({ extended: true }));
+                     15    app.use(cors());
+                     16
+                     17    // Documentación de swagger
+                     18    const swaggerOptions = {  
+                     19      swaggerOptions: {
+                     20        docExpansion: 'list',           
+                     21        defaultModelsExpandDepth: -1,   
+                     22        defaultModelExpandDepth: 1,     
+                     23        displayRequestDuration: true,   
+                     24        filter: false,                  
+                     25        layout: 'BaseLayout',  
+                     26        showExtensions: true,
+                     27        showCommonExtensions: true,
+                     28        deepLinking: true,         
+                     29        persistAuthorization: true,
+                     30        tagsSorter: 'alpha',       
+                     31        operationsSorter: function(a, b) {
+                     32          const methodOrder = { 'post': 1, 'get': 2, 'put': 3, 'delete': 4 };
+                     33          return methodOrder[a.get('method')] - methodOrder[b.get('method')];
+                     34        }  
+                     35      }  
+                     36    };
+                     37
+                     38    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
+                     39
+                     40    // Rutas
+                     41    app.use('/api/users', usersRoutes);
+                     42
+                     43    // Endpoints de prueba
+                     44    app.get('/', (req, res) => {
+                     45        res.send('Ruta raíz del Backend');
+                     46    });
+                     47
+                     48    app.get('/test', (req, res) => {
+                     49        res.send('Ruta TEST');
+                     50    });
+                     51
+                     52    // Manejo de errores
+                     53    app.use((err, req, res, next) => {
+                     54        console.log(err);
+                     55        res.status(err.status || 500).send(err.stack);
+                     56    });
+                     57
+                     58    console.log('📚 Swagger disponible en: http://192.168.1.77:3000/api-docs');
+                     59
+                     60    module.exports = app;
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 06.03.  Modificar la ruta de usuario en 'backend/routes/userRoutes.js' con JSDoc: -----------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                      1    const express = require('express');
+                      2    const router = express.Router();
+                      3    const userController = require('../controllers/userController');
+                      4    const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
+                      5
+                      6    /**
+                      7     * @swagger
+                      8     * tags:
+                      9     *   name: Users
+                     10     *   description: Gestión de usuarios
+                     11     */
+                     12
+                     13    /**
+                     14     * @swagger
+                     15     * /api/users/create:
+                     16     *   post:
+                     17     *     tags: [Users]
+                     18     *     summary: Autoregistro
+                     19     *     requestBody:
+                     20     *       required: true
+                     21     *       content:
+                     22     *         application/json:
+                     23     *           schema:
+                     24     *             type: object
+                     25     *             required:
+                     26     *               - email
+                     27     *               - password
+                     28     *             properties:
+                     29     *               email:
+                     30     *                 type: string
+                     31     *                 format: email
+                     32     *                 description: Email del usuario
+                     33     *               name:
+                     34     *                 type: string
+                     35     *                 description: Nombre del usuario
+                     36     *               lastname:
+                     37     *                 type: string
+                     38     *                 description: Apellido del usuario
+                     39     *               role:
+                     40     *                 type: string
+                     41     *                 enum: [admin, seller, user]
+                     42     *                 default: user
+                     43     *               password:
+                     44     *                 type: string
+                     45     *                 format: password
+                     46     *                 description: Contraseña del usuario
+                     47     *             example:
+                     48     *               email: "maria@example.com"
+                     49     *               name: "María"
+                     50     *               lastname: "García"
+                     51     *               password: "password123"
+                     52     *     responses:
+                     53     *       201:
+                     54     *         description: Usuario creado exitosamente
+                     55     *         content:
+                     56     *           application/json:
+                     57     *             schema:
+                     58     *               $ref: '#/components/schemas/User'
+                     59     *       400:
+                     60     *         description: Error en los datos de entrada
+                     61     *         content:
+                     62     *           application/json:
+                     63     *             schema:
+                     64     *               $ref: '#/components/schemas/Error'
+                     65     */
+                     66    router.post('/create', userController.register);
+                     67
+                     68    /**
+                     69     * @swagger
+                     70     * /api/users/login:
+                     71     *   post:
+                     72     *     tags: [Users]
+                     73     *     summary: Iniciar sesión
+                     74     *     requestBody:
+                     75     *       required: true
+                     76     *       content:
+                     77     *         application/json:
+                     78     *           schema:
+                     79     *             $ref: '#/components/schemas/Login'
+                     80     *     responses:
+                     81     *       200:
+                     82     *         description: Login exitoso
+                     83     *         content:
+                     84     *           application/json:
+                     85     *             schema:
+                     86     *               type: object
+                     87     *               properties:
+                     88     *                 token:
+                     89     *                   type: string
+                     90     *                 user:
+                     91     *                   $ref: '#/components/schemas/User'
+                     92     *       401:
+                     93     *         description: Credenciales inválidas
+                     94     *         content:
+                     95     *           application/json:
+                     96     *             schema:
+                     97     *               $ref: '#/components/schemas/Error'
+                     98     */
+                     99    router.post('/login', userController.login);
+                    100
+                    101    /**
+                    102     * @swagger
+                    103     * /api/users:
+                    104     *   get:
+                    105     *     tags: [Users]
+                    106     *     summary: Obtener todos los usuarios
+                    107     *     security:
+                    108     *       - bearerAuth: []
+                    109     *     responses:
+                    110     *       200:
+                    111     *         description: Lista de usuarios obtenida exitosamente
+                    112     *         content:
+                    113     *           application/json:
+                    114     *             schema:
+                    115     *               type: array
+                    116     *               items:
+                    117     *                 $ref: '#/components/schemas/User'
+                    118     *       401:
+                    119     *         description: No autorizado
+                    120     *       403:
+                    121     *         description: Prohibido - Sin permisos suficientes
+                    122     */
+                    123    router.get('/', verifyToken, authorizeRoles(['admin', 'seller']), userController.getAllUsers);
+                    124
+                    125    /**
+                    126     * @swagger
+                    127     * /api/users/{id}:
+                    128     *   get:
+                    129     *     tags: [Users]
+                    130     *     summary: Obtener usuario por ID
+                    131     *     security:
+                    132     *       - bearerAuth: []
+                    133     *     parameters:
+                    134     *       - in: path
+                    135     *         name: id
+                    136     *         required: true
+                    137     *         schema:
+                    138     *           type: integer
+                    139     *         description: ID del usuario
+                    140     *     responses:
+                    141     *       200:
+                    142     *         description: Usuario encontrado
+                    143     *         content:
+                    144     *           application/json:
+                    145     *             schema:
+                    146     *               $ref: '#/components/schemas/User'
+                    147     *       404:
+                    148     *         description: Usuario no encontrado
+                    149     *       401:
+                    150     *         description: No autorizado
+                    151     */
+                    152    router.get('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserById);
+                    153
+                    154    /**
+                    155     * @swagger
+                    156     * /api/users:
+                    157     *   put:
+                    158     *     tags: [Users]
+                    159     *     summary: Actualizar usuario
+                    160     *     security:
+                    161     *       - bearerAuth: [] 
+                    162     *     requestBody:
+                    163     *       required: true
+                    164     *       content:
+                    165     *         application/json:
+                    166     *           schema:
+                    167     *             type: object
+                    168     *             properties:
+                    169     *               name:
+                    170     *                 type: string
+                    171     *               email:
+                    172     *                 type: string
+                    173     *                 format: email
+                    174     *               password:
+                    175     *                 type: string
+                    176     *                 format: password
+                    177     *             example:
+                    178     *               id: "2"
+                    179     *               email: "marinita@modificado.com"
+                    180     *               name: "Marinita"
+                    181     *               lastname: "Rodríguez"
+                    182     *               phone: "3163163161"
+                    183     *               image: "yyyy"
+                    184     *               password: "12345"
+                    185     *     responses:
+                    186     *       200:
+                    187     *         description: Usuario actualizado exitosamente 
+                    188     *       404:
+                    189     *         description: Usuario no encontrado
+                    190     *       401:
+                    191     *         description: No autorizado
+                    192     */
+                    193    router.put('/:id', verifyToken, authorizeRoles(['admin', 'seller']), userController.getUserUpdate);
+                    194
+                    195    /**
+                    196     * @swagger
+                    197     * /api/users/delete/{id}:
+                    198     *   delete:
+                    199     *     tags: [Users]
+                    200     *     summary: Eliminar usuario
+                    201     *     security:
+                    202     *       - bearerAuth: []
+                    203     *     parameters:
+                    204     *       - in: path
+                    205     *         name: id
+                    206     *         required: true
+                    207     *         schema:
+                    208     *           type: integer
+                    209     *         description: ID del usuario a eliminar
+                    210     *     responses:
+                    211     *       200:
+                    212     *         description: Usuario eliminado exitosamente
+                    213     *       404:
+                    214     *         description: Usuario no encontrado
+                    215     *       401:
+                    216     *         description: No autorizado
+                    217     *       403:
+                    218     *         description: Prohibido - Solo administradores pueden eliminar
+                    219     */
+                    220    router.delete('/delete/:id', verifyToken, authorizeRoles(['admin']), userController.getUserDelete);
+                    221
+                    222    module.exports = router;
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 06.04.  Ejecutar el backend con swagger: ----------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Iniciar el servidor 'backend' desde la terminal de Visual Studio Code.
+
+                    ⦿  PS C:\..\backend> npm run dev
+            
+            02. Debe aparecer en la terminal, texto similar a lo siguiente:            
+
+                    > api_nodejs_express@1.0.0 dev
+                    > nodemon index.js
+
+                    [nodemon] 3.1.11
+                    [nodemon] to restart at any time, enter `rs`  
+                    [nodemon] watching path(s): *.*
+                    [nodemon] watching extensions: js,mjs,cjs,json
+                    [nodemon] starting `node index.js`
+                    [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+                    [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+                    📚 Swagger disponible en: http://192.168.1.77:3000/api-docs
+                    Servidor corriendo en http://192.168.1.77:3000
+                    Base de datos conectada
+
+                    ⦿  Para detener el servidor, ubíquese en la terminal de Visual Studio Code y presione 'CTRL + C'.
+
+            03. En Swagger 'http://192.168.1.77:3000/api-docs' explorar la funcionalidad de los endpoints
 
 
 |||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
