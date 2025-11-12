@@ -2290,7 +2290,8 @@
 
                     ⦿   PS C:\..> cd backend
 
-            05. Modificar el archivo 'index.js' en la línea 5 para incluir dirección IPv4 (Ver apartado 04.10.  Codificar el inicio del backend en 'backend/index.js')                
+            05. Modificar los archivos 'index.js', 'server.js' e 'index.js' para incluir dirección IPv4 (Ver apartado 04.10.  Codificar el inicio del backend en 
+                'backend/index.js')
 
             06. Abrir 'XAMPP' y ejecutar los servicios de 'Apache' y 'MySQL'.
 
@@ -2299,7 +2300,8 @@
             08. En la terminal en 'Visual Studio Code' ejecutar los siguientes comandos:
 
                     ⦿   PS C:\..\backend> npm install
-                    ⦿   PS C:\..\backend> node index.js                            
+                    ⦿   PS C:\..\backend> node index.js       <---- Solamente el servidor
+                    ⦿   PS C:\..\backend> npm run dev         <---- Servidor y Swagger
             
             09. Comprobar que se ejecute correctamente la aplicación.
             
