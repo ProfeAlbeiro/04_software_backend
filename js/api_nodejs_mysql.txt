@@ -1075,34 +1075,33 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
                       1    const http = require('http');
+                      1    const http = require('http');
                       2    const app = require('./server');
                       3    const cors = require('cors');
                       4    const port = process.env.PORT || 3000;
                       5    const host = process.env.HOST || '192.168.1.77';
-                      6
+                      6    
                       7    // Configuración CORS
                       8    app.use(cors({
                       9      origin: [
                      10        'http://192.168.1.77',
                      11        'http://localhost', 
-                     12        'http://127.0.0.1',
-                     13        'http://192.168.1.77',
-                     14        'http://localhost'
-                     15      ],
-                     16      credentials: true,
-                     17      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-                     18      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-                     19    }));
-                     20
-                     21    // Manejar preflight CORS
-                     22    app.options('*', cors());
-                     23    app.set('port', port);
-                     24
-                     25    const server = http.createServer(app);
-                     26
-                     27    server.listen(port, host, () => {
-                     28      console.log(`Servidor corriendo en http://${host}:${port}`);
-                     29    });
+                     12        'http://127.0.0.1'    
+                     13      ],
+                     14      credentials: true,
+                     15      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+                     16      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+                     17    }));
+                     18    
+                     19    // Manejar preflight CORS
+                     20    app.options('*', cors());
+                     21    app.set('port', port);
+                     22    
+                     23    const server = http.createServer(app);
+                     24    
+                     25    server.listen(port, host, () => {
+                     26      console.log(`Servidor corriendo en http://${host}:${port}`);
+                     27    });
 
                 ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
                 |                                                                                                                                         |
